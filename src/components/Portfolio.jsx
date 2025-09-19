@@ -45,11 +45,11 @@ const Portfolio = () => {
   ]
 
   return (
-    <section id="portfolio" className="min-h-screen xl:w-[220vh] xl:mx-auto pt-20 bg-white">
+    <section id="portfolio" className="min-h-screen xl:w-[220vh] xl:mx-auto pt-20 bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Portfólio</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Portfólio</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Projetos desenvolvidos com foco em qualidade e experiência do usuário
           </p>
         </div>
@@ -71,10 +71,10 @@ const Portfolio = () => {
                   </div>
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {project.title}
               </h3>
-              <p className="text-gray-600 text-sm">{project.description}</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">{project.description}</p>
             </div>
           ))}
         </div>

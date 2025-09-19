@@ -34,11 +34,11 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="min-h-screen xl:w-[220vh] xl:mx-auto pt-20 bg-gray-900 text-white w-full">
+    <section id="contact" className="min-h-screen xl:w-[220vh] xl:mx-auto pt-20 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white w-full transition-colors duration-300">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Entre em Contato</h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Vamos conversar sobre seu próximo projeto! Estou sempre aberto a novas oportunidades.
           </p>
         </div>
@@ -78,21 +78,21 @@ const Contact = () => {
                 <input
                   type="text"
                   placeholder="Seu Nome"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none text-white"
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300"
                 />
               </div>
               <div>
                 <input
                   type="email"
                   placeholder="Seu Email"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none text-white"
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300"
                 />
               </div>
               <div>
                 <textarea
                   rows="5"
                   placeholder="Sua Mensagem"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none text-white"
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300"
                 ></textarea>
               </div>
               <button
