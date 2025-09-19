@@ -88,39 +88,51 @@ const Navbar = ({ activeSection, navigateToSection }) => {
         </div>
 
         {/* Mobile Navigation Sidebar */}
-        <div className={`fixed inset-y-0 right-0 z-50 w-64 bg-white dark:bg-gray-900 shadow-xl dark:shadow-gray-800/50 transform transition-transform duration-300 ease-in-out ${
+        <div className={`fixed inset-y-0 right-0 z-[60] w-80 bg-white dark:bg-gray-900 shadow-2xl dark:shadow-gray-800/50 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        } md:hidden`}>
-          <div className="flex items-center justify-between h-16 px-4 border-b dark:border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Menu</h2>
+        } md:hidden border-l border-gray-200 dark:border-gray-700`}>
+          
+          {/* Header do Menu */}
+          <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Menu</h2>
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
+              className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
             >
               <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                  activeSection === item.id
-                    ? 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-900/50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-800'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
+          
+          {/* Links de Navegação */}
+          <div className="px-4 pt-6 pb-4 bg-gray-50 dark:bg-gray-800">
+            <div className="space-y-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`block w-full text-left px-4 py-3 rounded-xl text-lg font-medium transition-all duration-200 ${
+                    activeSection === item.id
+                      ? 'text-white bg-blue-600 shadow-lg transform scale-105'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:transform hover:scale-105'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
             
-            {/* Theme Toggle for Mobile */}
-            <div className="pt-4 border-t dark:border-gray-700 mt-4">
-              <div className="flex items-center justify-between px-3">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Tema</span>
+            {/* Separador */}
+            <div className="my-6 border-t border-gray-200 dark:border-gray-700"></div>
+            
+            {/* Theme Toggle Section */}
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-base font-medium text-gray-900 dark:text-white">Tema</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">Alternar modo escuro</span>
+                </div>
                 <ThemeToggle />
               </div>
             </div>
@@ -130,7 +142,7 @@ const Navbar = ({ activeSection, navigateToSection }) => {
         {/* Overlay */}
         {isMenuOpen && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/90 z-[55] md:hidden transition-all duration-300"
             onClick={toggleMenu}
           ></div>
         )}
