@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import { ThemeProvider } from './contexts/ThemeContext'
 
 // Importando todos os componentes de forma centralizada
 import {
@@ -124,12 +125,13 @@ function App() {
   }
 
   return (
-    <div 
-      className="min-h-screen bg-white"
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-    >
+    <ThemeProvider>
+      <div 
+        className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
       <Navbar activeSection={activeSection} navigateToSection={navigateToSection} />
       
       {/* Indicadores de navegação lateral - ocultos no mobile */}
@@ -181,7 +183,8 @@ function App() {
       
       {/* Footer apenas na seção de contato */}
       {activeSection === 'contact' && <Footer />}
-    </div>
+      </div>
+    </ThemeProvider>
   )
 }
 
