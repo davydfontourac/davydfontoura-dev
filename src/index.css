@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* View Transitions API support */
+:root {
+  view-transition-name: root;
+}
+
 /* Reset básico */
 * {
   margin: 0;

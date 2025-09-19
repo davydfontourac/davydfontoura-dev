@@ -1,36 +1,74 @@
 import { useTheme } from '../hooks/useTheme'
 import { Sun, Moon } from 'lucide-react'
+import { useCallback } from 'react'
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme()
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     console.log('Current theme:', theme)
-    toggleTheme()
+    
+    // Inject circle-blur animation styles
+    const styleId = `theme-transition-${Date.now()}`
+    const style = document.createElement('style')
+    style.id = styleId
+    
+    // Circle blur animation CSS - diagonal from top-right
+    const css = `
+      @supports (view-transition-name: root) {
+        ::view-transition-old(root) { 
+          animation: none;
+        }
+        ::view-transition-new(root) {
+          animation: circle-blur-expand 0.6s ease-out;
+          transform-origin: top right;
+          filter: blur(0);
+        }
+        @keyframes circle-blur-expand {
+          from {
+            clip-path: circle(0% at 85% 15%);
+            filter: blur(6px);
+          }
+          to {
+            clip-path: circle(150% at 85% 15%);
+            filter: blur(0);
+          }
+        }
+      }
+    `
+    
+    style.textContent = css
+    document.head.appendChild(style)
+    
+    // Clean up animation styles after transition
+    setTimeout(() => {
+      const styleEl = document.getElementById(styleId)
+      if (styleEl) {
+        styleEl.remove()
+      }
+    }, 3000)
+    
+    // Execute theme change with View Transition API if available
+    if ('startViewTransition' in document) {
+      document.startViewTransition(() => {
+        toggleTheme()
+      })
+    } else {
+      // Fallback for browsers without View Transitions
+      toggleTheme()
+    }
+    
     console.log('Theme after toggle:', theme === 'light' ? 'dark' : 'light')
-  }
+  }, [theme, toggleTheme])
 
   return (
     <button
       onClick={handleClick}
-      className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 transition-colors duration-300 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none"
+      className="p-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-700 transition-all duration-300 shadow-sm hover:shadow-md"
       aria-label="Toggle theme"
     >
-      {/* Animação circle blur */}
-      <div 
-        className={`absolute inset-0 bg-gradient-to-br from-orange-400 to-yellow-400 dark:from-blue-600 dark:to-purple-600 rounded-full transition-all duration-500 ease-in-out ${
-          theme === 'dark' 
-            ? 'scale-100 opacity-100' 
-            : 'scale-0 opacity-0'
-        }`}
-        style={{
-          transformOrigin: 'top right',
-          filter: theme === 'dark' ? 'blur(0px)' : 'blur(20px)'
-        }}
-      />
-      
       {/* Ícones */}
-      <div className="relative z-10 flex items-center justify-center w-full h-full">
+      <div className="relative flex items-center justify-center w-5 h-5">
         <Sun 
           className={`absolute w-5 h-5 text-yellow-600 transition-all duration-300 ${
             theme === 'light' 
