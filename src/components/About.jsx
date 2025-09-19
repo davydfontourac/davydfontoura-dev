@@ -1,0 +1,55 @@
+const About = () => {
+  const skills = ['JavaScript', 'HTML', 'CSS', 'React', 'Vite', 'Tailwind CSS', 'Python']
+
+  return (
+    <section id="about" className="min-h-screen xl:w-[220vh] xl:mx-auto pt-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Sobre Mim</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Conheça um pouco mais sobre minha trajetória e paixão por tecnologia
+          </p>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg h-96 flex items-center justify-center">
+              <div className="text-white text-center">
+                <div className="w-32 h-32 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p className="text-xl font-semibold">Davyd Fontoura</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Minha História</h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              Sou um profissional formado pelo SENAI em Programação Front-End e atualmente estou 
+              cursando Análise e Desenvolvimento de Sistemas. Com paixão por criar interfaces 
+              modernas e funcionais, venho desenvolvendo projetos pessoais e realizando freelances na área.
+            </p>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              Minha especialidade é criação de páginas web utilizando principalmente HTML, CSS e JavaScript, 
+              sempre focando em entregar soluções que combinam design atrativo com funcionalidade excepcional.
+            </p>
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              Acredito que a tecnologia deve ser acessível e que cada projeto é uma oportunidade 
+              de criar experiências digitais que realmente façam a diferença na vida das pessoas.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {skills.map((skill) => (
+                <span key={skill} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default About
