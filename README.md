@@ -51,32 +51,6 @@ git clone https://github.com/davydfontourac/my-react-app.git
 cd my-react-app
 ```
 
-### Instalando dependências
-
-```bash
-npm install
-```
-
-### Executando em modo de desenvolvimento
-
-```bash
-npm run dev
-```
-
-O projeto estará disponível em `http://localhost:5173`
-
-### Build para produção
-
-```bash
-npm run build
-```
-
-### Preview da build de produção
-
-```bash
-npm run preview
-```
-
 ## 🗂️ Estrutura do Projeto
 
 ```
@@ -134,12 +108,6 @@ O projeto inclui um sistema completo de temas com:
 - Animações suaves de transição
 - Ícones animados no toggle
 
-## 🧪 Scripts Disponíveis
-
-- `npm run dev` - Inicia servidor de desenvolvimento
-- `npm run build` - Gera build de produção
-- `npm run preview` - Visualiza build de produção
-- `npm run lint` - Executa ESLint
 
 ## 📄 Licença
 
