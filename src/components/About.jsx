@@ -1,3 +1,5 @@
+import profileImage from '../assets/profile.jpg'
+
 const About = () => {
   const skills = ['JavaScript', 'HTML', 'CSS', 'React', 'Vite', 'Tailwind CSS', 'Python']
 
@@ -14,10 +16,12 @@ const About = () => {
           <div>
             <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg h-96 flex items-center justify-center">
               <div className="text-white text-center">
-                <div className="w-32 h-32 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                  </svg>
+                <div className="w-56 h-56 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={profileImage} 
+                    alt="Davyd Fontoura" 
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <p className="text-xl font-semibold">Davyd Fontoura</p>
               </div>
