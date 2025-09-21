@@ -23,7 +23,7 @@ const About = () => {
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
-                <p className="text-xl font-semibold">Davyd Fontoura</p>
+                <p className="text-xl font-semibold">Davyd Fontoura - Desenvolvedor Front-End</p>
               </div>
             </div>
           </div>
