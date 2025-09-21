@@ -13,7 +13,7 @@ const Services = () => {
     {
       title: 'Landing Pages',
       description: 'Páginas otimizadas para conversão e performance',
-      icon: '�'
+      icon: '🚀'
     },
     {
       title: 'Redesign de Sites',
@@ -23,7 +23,7 @@ const Services = () => {
     {
       title: 'Freelances',
       description: 'Projetos personalizados para suas necessidades',
-      icon: '�'
+      icon: '💼'
     },
     {
       title: 'Manutenção',
