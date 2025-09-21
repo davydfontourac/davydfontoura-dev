@@ -1,41 +1,56 @@
+import { useState } from 'react'
+
 const Portfolio = () => {
+  const [expandedItems, setExpandedItems] = useState({})
+
+  const toggleExpanded = (id) => {
+    setExpandedItems(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }))
+  }
   const projects = [
     {
       id: 1,
-      title: "Page Corporativa",
-      description: "Site responsivo desenvolvido com HTML, CSS e JavaScript",
-      tech: ["HTML", "CSS", "JavaScript"],
+      title: "Página Corporativa - Treis Tecnologia",
+      description: "Desenvolvimento do site institucional da empresa TREIS – Soluções em Tecnologia, com foco em apresentar serviços, reforçar a identidade visual e garantir navegação responsiva. Fui responsável pela implementação do front-end, utilizando HTML, Tailwind CSS e JavaScript.",
+      shortDesc: "Site responsivo desenvolvido com HTML, CSS e JavaScript",
+      tech: ["HTML", "Tailwind CSS", "CSS Puro", "JavaScript"],
       gradient: "from-blue-400 to-blue-600",
       status: "concluido"
     },
     {
       id: 2,
-      title: "Dashboard React",
-      description: "Interface administrativa moderna com React e Tailwind",
-      tech: ["React", "Tailwind CSS", "Vite"],
+      title: "Klin – E-commerce infantil",
+      description: "Atuei no desenvolvimento do sistema B2B da marca Klin, com foco em experiência do usuário e responsividade. Atuei na implementação de interfaces e adaptação de componentes para diferentes dispositivos. Tecnologias: HTML, CSS, JavaScript. Projeto realizado em parceria com a empresa TREIS – Soluções em Tecnologia.",
+      shortDesc: "Desenvolvimento de páginas do sistema B2B da marca Klin",
+      tech: ["HTML", "Tailwind CSS", "CSS Puro", "JavaScript"],
       gradient: "from-purple-400 to-purple-600",
       status: "concluido"
     },
     {
       id: 3,
-      title: "E-commerce Front-end",
+      title: "Capodarte – Moda e estilo",
+      description: "Atuei no desenvolvimento do sistema B2B da marca Capodarte, com foco em performance, usabilidade e fidelidade ao design da marca. Fui responsável pela implementação da interface front-end, utilizando Tailwind CSS, HTML e JavaScript. O projeto foi realizado em parceria com a empresa TREIS – Soluções em Tecnologia.",
+      shortDesc: "Desenvolvimento de páginas do sistema B2B da marca Capodarte",
+      tech: ["React", "CSS Modules", "JavaScript"],
+      gradient: "from-green-400 to-green-600",
+      status: "concluido"
+    },
+    {
+      id: 4,
+     title: "E-commerce Front-end",
       description: "Interface de loja virtual com carrinho e checkout",
+      shortDesc: "Interface de loja virtual com carrinho e checkout",
       tech: ["React", "CSS Modules", "JavaScript"],
       gradient: "from-green-400 to-green-600",
       status: "em-producao"
     },
     {
-      id: 4,
-      title: "Portfolio Freelance",
-      description: "Site pessoal para cliente da área criativa",
-      tech: ["HTML", "CSS", "JavaScript"],
-      gradient: "from-orange-400 to-red-500",
-      status: "concluido"
-    },
-    {
       id: 5,
       title: "Aplicação Web Responsiva",
       description: "Sistema web com design mobile-first",
+      shortDesc: "Sistema web com design mobile-first",
       tech: ["React", "Tailwind CSS", "Python"],
       gradient: "from-indigo-400 to-indigo-600",
       status: "em-producao"
@@ -44,9 +59,10 @@ const Portfolio = () => {
       id: 6,
       title: "Interface Interativa",
       description: "Projeto com animações e efeitos visuais",
+      shortDesc: "Projeto com animações e efeitos visuais",
       tech: ["JavaScript", "CSS3", "HTML5"],
       gradient: "from-pink-400 to-pink-600",
-      status: "concluido"
+      status: "em-producao"
     }
   ]
 
@@ -94,7 +110,8 @@ const Portfolio = () => {
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-6">
                   <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                     <h4 className="text-xl font-bold mb-3">{project.title}</h4>
-                    <p className="text-sm mb-4 leading-relaxed">{project.description}</p>
+                    {/* Mostra apenas a primeira linha (shortDesc) no hover */}
+                    <p className="text-sm mb-4 leading-relaxed">{project.shortDesc}</p>
                     <div className="flex flex-wrap gap-2 justify-center">
                       {project.tech.map((tech, index) => (
                         <span key={index} className="bg-white/25 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/20">
@@ -116,7 +133,34 @@ const Portfolio = () => {
                     {getStatusTag(project.status).text}
                   </span>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{project.description}</p>
+                
+                {/* Sistema de descrição com "Saiba mais" */}
+                <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  {(() => {
+                    const words = project.description.split(' ')
+                    const firstTwoLines = words.slice(0, 15).join(' ') // Aproximadamente 2 linhas
+                    const isExpanded = expandedItems[project.id]
+                    const needsExpansion = words.length > 15
+                    
+                    if (!needsExpansion) {
+                      return <p>{project.description}</p>
+                    }
+                    
+                    return (
+                      <div>
+                        <p className={`${isExpanded ? '' : 'line-clamp-2'}`}>
+                          {isExpanded ? project.description : `${firstTwoLines}...`}
+                        </p>
+                        <button
+                          onClick={() => toggleExpanded(project.id)}
+                          className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-xs mt-1 transition-colors"
+                        >
+                          {isExpanded ? '↑ Ver menos' : '↓ Saiba mais'}
+                        </button>
+                      </div>
+                    )
+                  })()}
+                </div>
               </div>
             </div>
           ))}
