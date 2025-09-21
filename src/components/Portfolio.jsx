@@ -101,8 +101,8 @@ const Portfolio = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <div key={project.id} className="group cursor-pointer card-hover transform transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 hover:rotate-1">
-              <div className={`bg-gradient-to-br ${project.gradient} h-48 rounded-lg mb-4 relative overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-300 ring-0 group-hover:ring-4 group-hover:ring-blue-200 dark:group-hover:ring-blue-800`}>
+            <div key={project.id} className="group cursor-pointer card-hover transform transition-all duration-300 hover:scale-105  active:scale-95 hover:rotate-1">
+              <div className={`bg-gradient-to-br ${project.gradient} h-48 rounded-lg mb-4 relative overflow-hidden shadow-lg  transition-all duration-300 ring-0 group-hover:ring-4 group-hover:ring-blue-200 dark:group-hover:ring-blue-800`}>
                 {/* Tag de Status */}
                 <div className="absolute top-3 right-3 z-10 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusTag(project.status).classes} shadow-sm`}>
