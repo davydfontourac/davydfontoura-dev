@@ -40,7 +40,7 @@ const Navbar = ({ activeSection, navigateToSection }) => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">Seja Bem-Vindo(a)</h1>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">Seja Bem-Vindo(a)</span>
             </div>
 
             {/* Desktop Navigation */}
@@ -94,7 +94,7 @@ const Navbar = ({ activeSection, navigateToSection }) => {
           
           {/* Header do Menu */}
           <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Menu</h2>
+            <span className="text-xl font-bold text-gray-900 dark:text-white">Menu</span>
             <button
               onClick={toggleMenu}
               className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"

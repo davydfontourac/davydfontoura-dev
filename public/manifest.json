@@ -1,0 +1,31 @@
+{
+  "name": "Davyd Fontoura - Desenvolvedor Front-End",
+  "short_name": "Davyd Portfolio",
+  "description": "Portfólio de Davyd Fontoura, desenvolvedor Front-End especializado em React, JavaScript e criação de experiências digitais modernas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["portfolio", "developer", "business"],
+  "lang": "pt-BR"
+}
