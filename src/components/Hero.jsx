@@ -1,7 +1,16 @@
+import { useContext } from 'react'
+import { ThemeContext } from '../contexts/ThemeContext'
+import ParticlesBackground from './ParticlesBackground'
+
 const Hero = ({ navigateToSection }) => {
+  const { theme } = useContext(ThemeContext)
+  
   return (
-    <section id="home" className="min-h-screen xl:w-[220vh] xl:mx-auto pt-16 flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 w-full transition-colors duration-300">
-      <div className="w-full px-4 sm:px-6 lg:px-8 text-center">
+    <section id="home" className="min-h-screen xl:w-[220vh] xl:mx-auto pt-16 flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 w-full transition-colors duration-300 relative overflow-hidden">
+      {/* Partículas apenas no modo claro */}
+      <ParticlesBackground isDarkMode={theme === 'dark'} />
+      
+      <div className="w-full px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
             Olá, eu sou
