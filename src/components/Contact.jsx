@@ -78,21 +78,21 @@ const Contact = () => {
                 <input
                   type="text"
                   placeholder="Seu Nome"
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
                 />
               </div>
               <div>
                 <input
                   type="email"
                   placeholder="Seu Email"
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
                 />
               </div>
               <div>
                 <textarea
                   rows="5"
                   placeholder="Sua Mensagem"
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300"
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
                 ></textarea>
               </div>
               <button

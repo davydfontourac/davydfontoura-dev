@@ -58,3 +58,35 @@ body {
   font-family: system-ui, -apple-system, sans-serif;
   min-height: 100vh;
 }
+
+/* Animação de borda colorida para inputs */
+@keyframes rainbow-border {
+  0% {
+    border-color: #3b82f6; /* Azul */
+  }
+  16.66% {
+    border-color: #8b5cf6; /* Roxo */
+  }
+  33.33% {
+    border-color: #ec4899; /* Rosa */
+  }
+  50% {
+    border-color: #f59e0b; /* Laranja */
+  }
+  66.66% {
+    border-color: #10b981; /* Verde */
+  }
+  83.33% {
+    border-color: #06b6d4; /* Ciano */
+  }
+  100% {
+    border-color: #3b82f6; /* Azul */
+  }
+}
+
+/* Classe para inputs com animação colorida */
+.rainbow-border-focus:focus {
+  border-width: 2px;
+  animation: rainbow-border 2s linear infinite;
+  outline: none;
+}
