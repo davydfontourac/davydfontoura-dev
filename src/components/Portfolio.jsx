@@ -92,13 +92,17 @@ const Portfolio = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Portfólio</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Projetos desenvolvidos com foco em qualidade e experiência do usuário
+            Projetos desenvolvidos com foco em qualidade e experiência do usuário.
+            <span className="block mt-2 text-blue-600 dark:text-blue-400 font-medium">
+              <span className="hidden md:inline">✨ Passe o mouse nos cards para mais detalhes</span>
+              <span className="md:hidden">📱 Toque nos cards para mais detalhes</span>
+            </span>
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <div key={project.id} className="group cursor-pointer card-hover">
-              <div className={`bg-gradient-to-br ${project.gradient} h-48 rounded-lg mb-4 relative overflow-hidden`}>
+            <div key={project.id} className="group cursor-pointer card-hover transform transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 hover:rotate-1">
+              <div className={`bg-gradient-to-br ${project.gradient} h-48 rounded-lg mb-4 relative overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-300 ring-0 group-hover:ring-4 group-hover:ring-blue-200 dark:group-hover:ring-blue-800`}>
                 {/* Tag de Status */}
                 <div className="absolute top-3 right-3 z-10 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusTag(project.status).classes} shadow-sm`}>
