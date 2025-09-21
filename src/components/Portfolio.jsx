@@ -15,16 +15,16 @@ const Portfolio = () => {
       title: "Página Corporativa - Treis Tecnologia",
       description: "Desenvolvimento do site institucional da empresa TREIS – Soluções em Tecnologia, com foco em apresentar serviços, reforçar a identidade visual e garantir navegação responsiva. Fui responsável pela implementação do front-end, utilizando HTML, Tailwind CSS e JavaScript.",
       shortDesc: "Site responsivo desenvolvido com HTML, CSS e JavaScript",
-      tech: ["HTML", "Tailwind CSS", "CSS Puro", "JavaScript"],
+      tech: ["HTML", "Tailwind CSS", "CSS Modules", "JavaScript"],
       gradient: "from-blue-400 to-blue-600",
       status: "concluido"
     },
     {
       id: 2,
-      title: "Klin – E-commerce infantil",
+      title: "Klin – Ecommerce infantil",
       description: "Atuei no desenvolvimento do sistema B2B da marca Klin, com foco em experiência do usuário e responsividade. Atuei na implementação de interfaces e adaptação de componentes para diferentes dispositivos. Tecnologias: HTML, CSS, JavaScript. Projeto realizado em parceria com a empresa TREIS – Soluções em Tecnologia.",
       shortDesc: "Desenvolvimento de páginas do sistema B2B da marca Klin",
-      tech: ["HTML", "Tailwind CSS", "CSS Puro", "JavaScript"],
+      tech: ["HTML", "Tailwind CSS", "CSS Modules", "JavaScript"],
       gradient: "from-purple-400 to-purple-600",
       status: "concluido"
     },
@@ -33,7 +33,7 @@ const Portfolio = () => {
       title: "Capodarte – Moda e estilo",
       description: "Atuei no desenvolvimento do sistema B2B da marca Capodarte, com foco em performance, usabilidade e fidelidade ao design da marca. Fui responsável pela implementação da interface front-end, utilizando Tailwind CSS, HTML e JavaScript. O projeto foi realizado em parceria com a empresa TREIS – Soluções em Tecnologia.",
       shortDesc: "Desenvolvimento de páginas do sistema B2B da marca Capodarte",
-      tech: ["React", "CSS Modules", "JavaScript"],
+      tech: ["HTML", "Tailwind CSS", "CSS Modules", "JavaScript"],
       gradient: "from-green-400 to-green-600",
       status: "concluido"
     },
@@ -100,7 +100,7 @@ const Portfolio = () => {
             <div key={project.id} className="group cursor-pointer card-hover">
               <div className={`bg-gradient-to-br ${project.gradient} h-48 rounded-lg mb-4 relative overflow-hidden`}>
                 {/* Tag de Status */}
-                <div className="absolute top-3 right-3 z-10">
+                <div className="absolute top-3 right-3 z-10 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusTag(project.status).classes} shadow-sm`}>
                     {getStatusTag(project.status).text}
                   </span>
