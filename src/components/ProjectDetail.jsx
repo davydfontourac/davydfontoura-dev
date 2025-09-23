@@ -554,6 +554,7 @@ const ProjectDetail = () => {
               onClick={() => setIsImageModalOpen(false)}
               className="absolute top-4 right-4 text-white hover:text-gray-300 z-10 bg-black bg-opacity-70 rounded-full p-3 transition-colors"
               title="Fechar (ESC)"
+              aria-label="Fechar modal de imagem"
             >
               <X size={28} />
             </button>

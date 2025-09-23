@@ -167,6 +167,7 @@ const MainPage = () => {
                 : 'bg-gray-300 hover:bg-gray-400'
             }`}
             title={sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}
+            aria-label={`Navegar para seção ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`}
           />
         ))}
       </div>

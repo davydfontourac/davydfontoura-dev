@@ -68,6 +68,8 @@ const Navbar = ({ activeSection, navigateToSection }) => {
               <button
                 onClick={toggleMenu}
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-300"
+                aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+                aria-expanded={isMenuOpen}
               >
                 <svg
                   className={`h-6 w-6 transform transition-transform ${isMenuOpen ? 'rotate-90' : ''}`}
@@ -98,6 +100,7 @@ const Navbar = ({ activeSection, navigateToSection }) => {
             <button
               onClick={toggleMenu}
               className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+              aria-label="Fechar menu"
             >
               <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
