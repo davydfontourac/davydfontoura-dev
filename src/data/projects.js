@@ -10,7 +10,7 @@ export const projects = [
             <br />
             <h3>Objetivos do Projeto</h3>
             
-            <ul style="list-style-type: disc; color: black; padding-left: 1.5em;">
+            <ul style="list-style-type: disc; padding-left: 1.5em;">
                 <li>Criar uma identidade visual moderna e profissional</li>
                 <li>Desenvolver uma interface responsiva para todos os dispositivos</li>
                 <li>Apresentar os serviços da empresa de forma clara e atrativa</li>

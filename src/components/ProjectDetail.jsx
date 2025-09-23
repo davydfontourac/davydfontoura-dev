@@ -66,6 +66,11 @@ const ProjectDetail = () => {
     setIsImageModalOpen(true)
   }
 
+  const handleBackToPortfolio = () => {
+    // Usa hash para navegar diretamente para a seção portfólio
+    window.location.href = '/#portfolio'
+  }
+
   const handleThumbnailClick = (index) => {
     if (index !== currentImageIndex) {
       setIsTransitioning(true)
@@ -122,7 +127,7 @@ const ProjectDetail = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             <button
-              onClick={() => navigate('/')}
+              onClick={() => handleBackToPortfolio()}
               className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
             >
               <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
@@ -131,9 +136,12 @@ const ProjectDetail = () => {
             
             {/* Breadcrumb */}
             <nav className="hidden md:flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-              <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <button 
+                onClick={() => handleBackToPortfolio()}
+                className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+              >
                 Portfólio
-              </Link>
+              </button>
               <span>/</span>
               <span className="text-gray-900 dark:text-white font-medium">{project.title}</span>
             </nav>
@@ -341,16 +349,46 @@ const ProjectDetail = () => {
           </h2>
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
             <div 
-              className="prose prose-lg max-w-none dark:prose-invert prose-blue 
-                        prose-headings:text-gray-900 dark:prose-headings:text-white
-                        prose-headings:font-bold prose-headings:mb-4 prose-headings:mt-8 first:prose-headings:mt-0
-                        prose-h3:text-xl prose-h3:text-blue-600 dark:prose-h3:text-blue-400
-                        prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
-                        prose-ul:my-4 prose-li:text-gray-700 dark:prose-li:text-gray-300 
-                        prose-li:mb-2 prose-li:leading-relaxed
-                        prose-strong:text-gray-900 dark:prose-strong:text-white"
-              dangerouslySetInnerHTML={{ __html: project.fullDescription }}
-            />
+              className="prose prose-lg max-w-none prose-blue"
+              style={{
+                colorScheme: 'light dark'
+              }}
+            >
+              <style>{`
+                .dark .project-content * {
+                  color: rgb(209 213 219) !important; /* gray-300 */
+                }
+                .dark .project-content h3 {
+                  color: rgb(96 165 250) !important; /* blue-400 */
+                }
+                .project-content * {
+                  color: rgb(55 65 81) !important; /* gray-700 */
+                }
+                .project-content h3 {
+                  color: rgb(37 99 235) !important; /* blue-600 */
+                  font-weight: bold;
+                  font-size: 1.25rem;
+                  margin-top: 2rem;
+                  margin-bottom: 1rem;
+                }
+                .project-content p {
+                  margin-bottom: 1rem;
+                  line-height: 1.7;
+                }
+                .project-content ul {
+                  margin: 1rem 0;
+                  padding-left: 1.5rem;
+                }
+                .project-content li {
+                  margin-bottom: 0.5rem;
+                  line-height: 1.6;
+                }
+              `}</style>
+              <div 
+                className="project-content"
+                dangerouslySetInnerHTML={{ __html: project.fullDescription }}
+              />
+            </div>
           </div>
         </div>
 

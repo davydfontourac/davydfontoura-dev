@@ -109,6 +109,25 @@ const MainPage = () => {
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [activeSection])
 
+  // Detectar hash na URL e navegar para a seção correspondente
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1) // Remove o #
+      const sections = ['home', 'about', 'services', 'portfolio', 'contact']
+      
+      if (sections.includes(hash)) {
+        setActiveSection(hash)
+      }
+    }
+
+    // Verifica hash inicial
+    handleHashChange()
+    
+    // Escuta mudanças no hash
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
   // Função para renderizar a seção ativa
   const renderActiveSection = () => {
     switch (activeSection) {
