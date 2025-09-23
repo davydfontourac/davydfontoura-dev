@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, ExternalLink, Github, Calendar, User, Clock, Tag, CheckCircle, Lightbulb, X } from 'lucide-react'
 import { getProjectBySlug, getRelatedProjects } from '../data/projects'
+import ThemeToggle from './ThemeToggle'
 
 const ProjectDetail = () => {
   const { slug } = useParams()
@@ -134,17 +135,23 @@ const ProjectDetail = () => {
               <span className="font-medium">Voltar ao portfólio</span>
             </button>
             
-            {/* Breadcrumb */}
-            <nav className="hidden md:flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-              <button 
-                onClick={() => handleBackToPortfolio()}
-                className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
-              >
-                Portfólio
-              </button>
-              <span>/</span>
-              <span className="text-gray-900 dark:text-white font-medium">{project.title}</span>
-            </nav>
+            {/* Breadcrumb e Theme Toggle */}
+            <div className="flex items-center space-x-6">
+              {/* Breadcrumb */}
+              <nav className="hidden md:flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                <button 
+                  onClick={() => handleBackToPortfolio()}
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+                >
+                  Portfólio
+                </button>
+                <span>/</span>
+                <span className="text-gray-900 dark:text-white font-medium">{project.title}</span>
+              </nav>
+              
+              {/* Theme Toggle */}
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>
