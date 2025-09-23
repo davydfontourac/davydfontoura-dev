@@ -144,10 +144,12 @@ export const projects = [
         role: "Front-end Developer",
         client: "Capodarte via TREIS Tecnologia",
         images: [
-            "/my-react-app/images/projects/capodarte/homepage.jpg",
-            "/my-react-app/images/projects/capodarte/catalog.jpg",
-            "/my-react-app/images/projects/capodarte/product-detail.jpg",
-            "/my-react-app/images/projects/capodarte/brand-style.jpg"
+            "/my-react-app/images/projects/capodarte/hero.png",
+            "/my-react-app/images/projects/capodarte/login.png",
+            "/my-react-app/images/projects/capodarte/listagem.png",
+            "/my-react-app/images/projects/capodarte/detalhes.png",
+            "/my-react-app/images/projects/capodarte/carrinho.png",
+            "/my-react-app/images/projects/capodarte/finalizar.png"
         ],
         links: {
             live: null,
