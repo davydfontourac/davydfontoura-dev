@@ -87,10 +87,14 @@ export const projects = [
         role: "Front-end Developer",
         client: "Klin via TREIS Tecnologia",
         images: [
-            "/my-react-app/images/projects/klin/dashboard.jpg",
-            "/my-react-app/images/projects/klin/products.jpg",
-            "/my-react-app/images/projects/klin/orders.jpg",
-            "/my-react-app/images/projects/klin/mobile.jpg"
+            "/my-react-app/images/projects/klin/hero.png",
+            "/my-react-app/images/projects/klin/login.png",
+            "/my-react-app/images/projects/klin/grade.png",
+            "/my-react-app/images/projects/klin/detalhes.png",
+            "/my-react-app/images/projects/klin/carrinho.png",
+            "/my-react-app/images/projects/klin/pedido.png",
+            "/my-react-app/images/projects/klin/posicao.png",
+            "/my-react-app/images/projects/klin/analise.png"
         ],
         links: {
             live: null,
