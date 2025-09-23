@@ -7,6 +7,8 @@ import autoprefixer from 'autoprefixer'
 export default defineConfig(({ mode }) => {
   const isProduction = mode === 'production'
   
+  // Para GitHub Pages, sempre usar o base path
+  // O Vercel vai sobrescrever isso automaticamente
   const base = '/davydfontoura-dev/'
   
   return {
