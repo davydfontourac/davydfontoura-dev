@@ -67,6 +67,7 @@ const ProjectDetail = () => {
 
   const handleImageClick = (index) => {
     setCurrentImageIndex(index)
+    setImageError(false) // Reset do erro da imagem ao abrir o modal
     setIsImageModalOpen(true)
   }
 
@@ -499,38 +500,50 @@ const ProjectDetail = () => {
       {/* Modal de imagem (se necessário) */}
       {isImageModalOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-2"
           onClick={() => setIsImageModalOpen(false)}
         >
           <div 
-            className="relative max-w-4xl max-h-full"
+            className="relative w-full h-full max-w-[95vw] max-h-[95vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Botão de fechar */}
             <button
               onClick={() => setIsImageModalOpen(false)}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 z-10 bg-black bg-opacity-50 rounded-full p-2 transition-colors"
+              className="absolute top-4 right-4 text-white hover:text-gray-300 z-10 bg-black bg-opacity-70 rounded-full p-3 transition-colors"
               title="Fechar (ESC)"
             >
-              <X size={24} />
+              <X size={28} />
             </button>
             
             {/* Conteúdo do modal */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center max-w-2xl">
-              <div className="mb-4">
-                <div className="w-16 h-16 bg-gray-300 dark:bg-gray-600 rounded-lg mx-auto flex items-center justify-center mb-4">
-                  <Lightbulb size={24} className="text-gray-500 dark:text-gray-400" />
+            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+              {!imageError ? (
+                <img 
+                  src={project.images[currentImageIndex]}
+                  alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
+                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                /* Placeholder apenas se a imagem falhar */
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center max-w-md">
+                  <div className="mb-4">
+                    <div className="w-16 h-16 bg-gray-300 dark:bg-gray-600 rounded-lg mx-auto flex items-center justify-center mb-4">
+                      <Lightbulb size={24} className="text-gray-500 dark:text-gray-400" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                      Erro ao carregar imagem
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      {project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Não foi possível carregar a imagem. Para fechar, clique no X ou pressione ESC.
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  Visualização da Imagem
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  {project.images[currentImageIndex].split('/').pop().replace('.jpg', '').replace('-', ' ')}
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Aqui seria exibida a imagem real do projeto. Para fechar, clique no X ou pressione ESC.
-                </p>
-              </div>
+              )}
             </div>
           </div>
         </div>
