@@ -317,6 +317,15 @@ const ProjectDetail = () => {
               <div 
                 className="relative rounded-lg overflow-hidden cursor-pointer group transition-all duration-300 ease-in-out min-h-[24rem] max-h-[32rem] h-auto flex items-center justify-center"
                 onClick={() => handleImageClick(currentImageIndex)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Ampliar imagem: ${project.images[currentImageIndex]?.split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handleImageClick(currentImageIndex)
+                  }
+                }}
               >
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-full p-2">
@@ -368,6 +377,15 @@ const ProjectDetail = () => {
                         : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600'
                     }`}
                     onClick={() => handleThumbnailClick(index)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Selecionar imagem ${index + 1}: ${image.split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        handleThumbnailClick(index)
+                      }
+                    }}
                   >
                     {/* Imagem miniatura real ou placeholder */}
                     {!thumbnailErrors[index] ? (
