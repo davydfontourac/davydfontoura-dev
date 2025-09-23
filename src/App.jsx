@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 import { ThemeProvider } from './contexts/ThemeContext'
 
@@ -10,10 +11,12 @@ import {
   Services,
   Portfolio,
   Contact,
-  Footer
+  Footer,
+  ProjectDetail
 } from './components'
 
-function App() {
+// Componente para a página principal
+const MainPage = () => {
   const [activeSection, setActiveSection] = useState('home')
   const [touchStart, setTouchStart] = useState(null)
   const [touchEnd, setTouchEnd] = useState(null)
@@ -125,13 +128,12 @@ function App() {
   }
 
   return (
-    <ThemeProvider>
-      <div 
-        className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300"
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      >
+    <div 
+      className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       <Navbar activeSection={activeSection} navigateToSection={navigateToSection} />
       
       {/* Indicadores de navegação lateral - ocultos no mobile */}
@@ -183,7 +185,37 @@ function App() {
       
       {/* Footer apenas na seção de contato */}
       {activeSection === 'contact' && <Footer />}
-      </div>
+    </div>
+  )
+}
+
+// Componente para detectar mudanças de rota e ajustar scroll
+const ScrollToTop = () => {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          {/* Rota principal */}
+          <Route path="/" element={<MainPage />} />
+          
+          {/* Rota para páginas individuais de projetos */}
+          <Route path="/projeto/:slug" element={<ProjectDetail />} />
+          
+          {/* Rota 404 - redireciona para a página principal */}
+          <Route path="*" element={<MainPage />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   )
 }
