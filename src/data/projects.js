@@ -273,7 +273,7 @@ export const projects = [
         gradient: "from-indigo-400 to-indigo-600",
         status: "em-producao",  
         year: "2024",
-        duration: "4 meses",
+        duration: "Em desenvolvimento",
         role: "Full-stack Developer",
         client: "Projeto Pessoal",
         images: [

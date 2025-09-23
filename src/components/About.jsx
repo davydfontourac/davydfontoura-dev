@@ -1,166 +1,260 @@
+import { Code, Palette, Rocket, Users, Award, TrendingUp } from 'lucide-react'
 import profileImage from '../assets/profile.jpg'
 
 const About = () => {
   const skills = ['JavaScript', 'HTML', 'CSS', 'React', 'Vite', 'Tailwind CSS', 'Python']
 
-  // Ícones de código como SVGs
-  const CodeIcon = ({ className, children }) => (
-    <div className={`bg-white/10 backdrop-blur-sm rounded-lg p-3 ${className}`}>
-      {children}
-    </div>
-  )
+  const stats = [
+    { icon: Code, label: 'Projetos Concluídos', value: '15+' },
+    { icon: Users, label: 'Clientes Satisfeitos', value: '8+' },
+    { icon: Award, label: 'Anos de Experiência', value: '2+' },
+    { icon: TrendingUp, label: 'Tecnologias Dominadas', value: '10+' }
+  ]
 
-  const BrowserIcon = () => (
-    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v2h16V5H4zm0 4v10h16V9H4zm2 2h2v2H6v-2zm4 0h2v2h-2v-2z"/>
-    </svg>
-  )
-
-  const CodeBracesIcon = () => (
-    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M8 3C7.44772 3 7 3.44772 7 4C7 4.55228 7.44772 5 8 5C8.55228 5 9 4.55228 9 4C9 3.44772 8.55228 3 8 3ZM16 3C15.4477 3 15 3.44772 15 4C15 4.55228 15.4477 5 16 5C16.5523 5 17 4.55228 17 4C17 3.44772 16.5523 3 16 3ZM7 8V16H9V8H7ZM15 8V16H17V8H15ZM3 7C3 6.44772 3.44772 6 4 6C4.55228 6 5 6.44772 5 7V17C5 17.5523 4.55228 18 4 18C3.44772 18 3 17.5523 3 17V7ZM19 7C19 6.44772 19.4477 6 20 6C20.5523 6 21 6.44772 21 7V17C21 17.5523 20.5523 18 20 18C19.4477 18 19 17.5523 19 17V7Z"/>
-    </svg>
-  )
-
-  const DatabaseIcon = () => (
-    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2C16.418 2 20 3.79086 20 6V18C20 20.2091 16.418 22 12 22C7.58172 22 4 20.2091 4 18V6C4 3.79086 7.58172 2 12 2ZM12 4C8.68629 4 6 5.34315 6 6C6 6.65685 8.68629 8 12 8C15.3137 8 18 6.65685 18 6C18 5.34315 15.3137 4 12 4ZM6 8.48528V12C6 12.6569 8.68629 14 12 14C15.3137 14 18 12.6569 18 12V8.48528C16.7 9.42805 14.4853 10 12 10C9.51472 10 7.3 9.42805 6 8.48528ZM6 14.4853V18C6 18.6569 8.68629 20 12 20C15.3137 20 18 18.6569 18 18V14.4853C16.7 15.428 14.4853 16 12 16C9.51472 16 7.3 15.428 6 14.4853Z"/>
-    </svg>
-  )
-
-  const MonitorIcon = () => (
-    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M2 3h20a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-7v2h3v2H6v-2h3v-2H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v10h18V5H3z"/>
-    </svg>
-  )
-
-  const SettingsIcon = () => (
-    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5a3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97c0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1c0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/>
-    </svg>
-  )
+  const highlights = [
+    {
+      icon: <Palette className="w-6 h-6" />,
+      title: "Design Moderno",
+      description: "Interfaces atrativas e funcionais com foco na experiência do usuário"
+    },
+    {
+      icon: <Code className="w-6 h-6" />,
+      title: "Código Limpo",
+      description: "Desenvolvimento seguindo as melhores práticas e padrões da indústria"
+    },
+    {
+      icon: <Rocket className="w-6 h-6" />,
+      title: "Performance",
+      description: "Sites otimizados para carregamento rápido e boa experiência"
+    }
+  ]
 
   return (
     <section id="about" className="min-h-screen xl:w-[220vh] xl:mx-auto pt-20 bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Sobre Mim</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
+            Sobre Mim
+          </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
             Conheça um pouco mais sobre minha trajetória e paixão por tecnologia
           </p>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="bg-gradient-to-br from-blue-500 via-purple-600 to-purple-700 rounded-lg h-96 relative overflow-hidden">
-              {/* Padrão de pontos de fundo */}
-              <div className="absolute inset-0 opacity-20">
-                <div className="grid grid-cols-8 gap-4 p-8 h-full">
-                  {Array.from({ length: 32 }).map((_, i) => (
-                    <div
-                      key={i}
-                      className="w-2 h-2 bg-white rounded-full animate-pulse"
-                      style={{
-                        animationDelay: `${i * 0.1}s`,
-                        animationDuration: '2s'
-                      }}
-                    />
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+          {/* Profile Card */}
+          <div className="lg:col-span-4">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 text-center border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="relative mb-6">
+                <div className="w-46 h-46  mx-auto rounded-full overflow-hidden border-4 border-white dark:border-gray-600 shadow-lg">
+                  <img 
+                    src={profileImage} 
+                    alt="Davyd Fontoura" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-green-500 w-6 h-6 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                Davyd Fontoura
+              </h3>
+              <p className="text-blue-600 dark:text-blue-400 font-medium mb-4">
+                Desenvolvedor Front-End
+              </p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                Especialista em criar experiências digitais modernas e funcionais
+              </p>
+            </div>
+          </div>
+
+          {/* Story Content */}
+          <div className="lg:col-span-8">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Minha História
+              </h3>
+              
+              <div className="prose prose-lg max-w-none">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                  Sou um profissional formado pelo SENAI em Programação Front-End e atualmente curso Análise e Desenvolvimento de Sistemas, o que me permite unir uma base sólida em fundamentos da tecnologia com a prática constante de desenvolvimento. Tenho grande paixão por criar interfaces modernas, funcionais e acessíveis, sempre buscando alinhar estética, usabilidade e performance.
+                </p>
+                
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                  Nos últimos anos, venho me dedicando a projetos pessoais e freelances que me proporcionaram experiência prática no desenvolvimento de sites e aplicações, do planejamento até a entrega final. Minha principal especialidade é a construção de páginas web utilizando HTML, CSS e JavaScript, além de frameworks e ferramentas que potencializam o resultado, como React e Tailwind CSS.
+                </p>
+                
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                  Acredito que a tecnologia deve ser uma ponte para aproximar pessoas e simplificar processos. Por isso, encaro cada projeto como uma oportunidade de criar experiências digitais que tragam impacto real para usuários e empresas. Tenho como objetivo evoluir constantemente, aprender novas tecnologias e colaborar em equipes que compartilhem essa visão de inovação e crescimento.
+                </p>
+              </div>
+
+              {/* Skills */}
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Tecnologias que domino
+                </h4>
+                <div className="flex flex-wrap gap-3">
+                  {skills.map((skill) => (
+                    <span 
+                      key={skill} 
+                      className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-4 py-2 rounded-lg text-sm font-medium border border-blue-200 dark:border-blue-700 hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors duration-300"
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
               </div>
-              
-              {/* Ícones espalhados */}
-              <div className="absolute inset-0 p-4 md:p-8">
-                {/* Estilos CSS para animação float */}
-                <style jsx>{`
-                  @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-10px); }
-                  }
-                  .float-animation {
-                    animation: float 3s ease-in-out infinite;
-                  }
-                `}</style>
-                
-                {/* Ícones nos cantos - visíveis apenas em telas médias e grandes */}
-                <CodeIcon className="absolute top-2 left-2 md:top-4 md:left-4 float-animation hover:scale-110 transition-transform duration-300 hidden md:block" style={{ animationDelay: '0s' }}>
-                  <BrowserIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute top-2 right-2 md:top-4 md:right-4 float-animation hover:scale-110 transition-transform duration-300 hidden md:block" style={{ animationDelay: '0.5s' }}>
-                  <CodeBracesIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute top-12 left-16 md:top-16 md:left-20 float-animation hover:scale-110 transition-transform duration-300 hidden lg:block" style={{ animationDelay: '1s' }}>
-                  <DatabaseIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute top-12 right-16 md:top-16 md:right-20 float-animation hover:scale-110 transition-transform duration-300 hidden lg:block" style={{ animationDelay: '1.5s' }}>
-                  <MonitorIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute bottom-2 left-2 md:bottom-4 md:left-4 float-animation hover:scale-110 transition-transform duration-300 hidden md:block" style={{ animationDelay: '2s' }}>
-                  <SettingsIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute bottom-2 right-2 md:bottom-4 md:right-4 float-animation hover:scale-110 transition-transform duration-300 hidden md:block" style={{ animationDelay: '2.5s' }}>
-                  <CodeBracesIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute bottom-12 left-16 md:bottom-16 md:left-20 float-animation hover:scale-110 transition-transform duration-300 hidden lg:block" style={{ animationDelay: '3s' }}>
-                  <BrowserIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute bottom-12 right-16 md:bottom-16 md:right-20 float-animation hover:scale-110 transition-transform duration-300 hidden lg:block" style={{ animationDelay: '3.5s' }}>
-                  <DatabaseIcon />
-                </CodeIcon>
+            </div>
+          </div>
+        </div>
 
-                {/* Ícones para mobile - posicionados de forma a não conflitar com a foto */}
-                <CodeIcon className="absolute top-4 left-1/2 transform -translate-x-1/2 float-animation hover:scale-110 transition-transform duration-300 md:hidden" style={{ animationDelay: '0s' }}>
-                  <BrowserIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute bottom-4 left-1/2 transform -translate-x-1/2 float-animation hover:scale-110 transition-transform duration-300 md:hidden" style={{ animationDelay: '1s' }}>
-                  <CodeBracesIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute top-1/2 left-4 transform -translate-y-1/2 float-animation hover:scale-110 transition-transform duration-300 md:hidden" style={{ animationDelay: '2s' }}>
-                  <DatabaseIcon />
-                </CodeIcon>
-                <CodeIcon className="absolute top-1/2 right-4 transform -translate-y-1/2 float-animation hover:scale-110 transition-transform duration-300 md:hidden" style={{ animationDelay: '3s' }}>
-                  <SettingsIcon />
-                </CodeIcon>
-              </div>
-              
-              {/* Conteúdo central */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-white text-center z-10">
-                  <div className="w-32 h-32 md:w-48 md:h-48 lg:w-56 lg:h-56 bg-white/20 backdrop-blur-sm rounded-full mx-auto mb-4 flex items-center justify-center border-2 border-white/30 overflow-hidden">
-                    <img 
-                      src={profileImage} 
-                      alt="Davyd Fontoura" 
-                      className="w-full h-full object-cover rounded-full"
-                    />
-                  </div>
-                  <p className="text-lg md:text-xl font-semibold drop-shadow-lg">Davyd Fontoura</p>
-                  <p className="text-xs md:text-sm opacity-90 drop-shadow">Desenvolvedor Front-End</p>
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          {stats.map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800 hover:shadow-lg transition-all duration-300">
+                <div className="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">
+                  {stat.label}
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Skills Section */}
+        <div className="mb-16">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Tecnologias & Ferramentas
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Principais tecnologias que utilizo no desenvolvimento de projetos modernos e eficientes
+            </p>
           </div>
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">Minha História</h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed transition-colors duration-300">
-              Sou um profissional formado pelo SENAI em Programação Front-End e atualmente estou 
-              cursando Análise e Desenvolvimento de Sistemas. Com paixão por criar interfaces 
-              modernas e funcionais, venho desenvolvendo projetos pessoais e realizando freelances na área.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed transition-colors duration-300">
-              Minha especialidade é criação de páginas web utilizando principalmente HTML, CSS e JavaScript, 
-              sempre focando em entregar soluções que combinam design atrativo com funcionalidade excepcional.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed transition-colors duration-300">
-              Acredito que a tecnologia deve ser acessível e que cada projeto é uma oportunidade 
-              de criar experiências digitais que realmente façam a diferença na vida das pessoas.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {skills.map((skill) => (
-                <span key={skill} className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300">
-                  {skill}
-                </span>
-              ))}
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6">
+            {/* JavaScript */}
+            <div className="group">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-2 text-center">
+                <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+                  <svg className="w-10 h-10" viewBox="0 0 24 24" fill="#F7DF1E">
+                    <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white text-sm">JavaScript</h4>
+              </div>
+            </div>
+
+            {/* React */}
+            <div className="group">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-2 text-center">
+                <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+                  <svg className="w-10 h-10" viewBox="0 0 24 24" fill="#61DAFB">
+                    <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.36-.034-.47 0-.92.014-1.36.034.44-.572.895-1.096 1.36-1.564zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.422.789-.606 1.188-.18-.398-.348-.797-.512-1.207-.16-.394-.312-.773-.45-1.141.572-.07 1.168-.128 1.792-.154.18-.02.368-.032.558-.046zm6.553.001c.195.016.38.032.555.047.635.025 1.235.086 1.81.152-.138.36-.89.747-.45 1.137-.18.418-.33.849-.51 1.207-.18-.397-.37-.797-.605-1.183-.225-.395-.455-.788-.713-1.16zm2.448 2.69c.18.25.346.5.486.748.14.25.272.5.382.75.114.25.214.498.302.747.018.05.032.098.05.147-.906.17-1.855.31-2.837.413-.18-.32-.338-.647-.472-.98.15-.292.302-.583.466-.869.18-.292.35-.594.537-.895.18-.298.35-.6.537-.9zm-9.77.02c.2.31.404.634.617.966.22.338.4.677.6 1.01-.12.334-.26.661-.41.984-.906-.097-1.858-.23-2.76-.398.18-.57.404-1.2.658-1.62.08-.14.162-.28.244-.42.185-.317.377-.635.588-.952.185-.303.366-.606.573-.906zm9.77 0c.18.295.346.6.486.906.14.305.272.61.382.906.114.295.214.59.302.894.018.058.032.117.05.175-.906.202-1.855.367-2.837.49-.18-.38-.338-.77-.472-1.167.15-.347.302-.694.466-1.03.18-.347.35-.704.537-1.06.18-.354.35-.714.537-1.07zm-9.94.88c.2.37.404.754.617 1.15.22.402.4.806.6 1.2-.12.397-.26.786-.41 1.17-.906-.115-1.858-.273-2.76-.473.18-.678.404-1.425.658-1.925.08-.166.162-.333.244-.5.185-.377.377-.754.588-1.13.185-.36.366-.72.573-1.078zm9.94 0c.18.35.346.714.486 1.078.14.363.272.726.382 1.078.114.35.214.7.302 1.063.018.069.032.139.05.208-.906.24-1.855.436-2.837.582-.18-.45-.338-.914-.472-1.39.15-.413.302-.826.466-1.226.18-.413.35-.838.537-1.26.18-.422.35-.85.537-1.26z"/>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white text-sm">React</h4>
+              </div>
+            </div>
+
+            {/* HTML */}
+            <div className="group">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-2 text-center">
+                <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+                  <svg className="w-10 h-10" viewBox="0 0 24 24" fill="#E34F26">
+                    <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white text-sm">HTML5</h4>
+              </div>
+            </div>
+
+            {/* CSS */}
+            <div className="group">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-2 text-center">
+                <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+                  <svg className="w-10 h-10" viewBox="0 0 24 24" fill="#1572B6">
+                    <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"/>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white text-sm">CSS3</h4>
+              </div>
+            </div>
+
+            {/* Tailwind CSS */}
+            <div className="group">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-2 text-center">
+                <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+                  <svg className="w-10 h-10" viewBox="0 0 24 24" fill="#06B6D4">
+                    <path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"/>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Tailwind</h4>
+              </div>
+            </div>
+
+            {/* Python */}
+            <div className="group">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-2 text-center">
+                <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+                  <svg className="w-10 h-10" viewBox="0 0 24 24" fill="#3776AB">
+                    <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Python</h4>
+              </div>
+            </div>
+
+            {/* Vite */}
+            <div className="group">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-2 text-center">
+                <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+                  <svg className="w-10 h-10" viewBox="0 0 24 24">
+                    <defs>
+                      <linearGradient id="viteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#41D1FF" />
+                        <stop offset="100%" stopColor="#BD34FE" />
+                      </linearGradient>
+                    </defs>
+                    <path fill="url(#viteGradient)" d="m8.286 10.578.512-8.657a.306.306 0 0 1 .247-.282L17.377.006a.306.306 0 0 1 .353.385l-1.558 5.403a.306.306 0 0 0 .352.385l2.388-.46a.306.306 0 0 1 .332.438l-6.79 13.55-.123.19a.294.294 0 0 1-.252.14.294.294 0 0 1-.26-.16L9.038 12.22a.294.294 0 0 1 .253-.439l2.595-.3a.294.294 0 0 0 .238-.49L8.572 6.354a.294.294 0 0 1 .178-.524l2.845-.456a.294.294 0 0 0 .24-.491L8.286 10.578Z"/>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Vite</h4>
+              </div>
             </div>
           </div>
+        </div>
+
+        {/* Highlights Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {highlights.map((highlight, index) => (
+            <div key={index} className="group">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-1">
+                <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {highlight.icon}
+                </div>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  {highlight.title}
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  {highlight.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
