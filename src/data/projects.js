@@ -49,7 +49,14 @@ export const projects = [
             "Design responsivo",
             "Animações CSS customizadas",
             "Otimização de performance",
-        ]
+        ],
+        // SEO specific fields
+        seo: {
+            title: "Página Corporativa TREIS Tecnologia - Davyd Fontoura | Portfolio",
+            description: "Desenvolvimento do site institucional da TREIS Tecnologia com design responsivo e moderno. Projeto realizado por Davyd Fontoura usando HTML5, Tailwind CSS e JavaScript.",
+            keywords: "treis tecnologia, site institucional, desenvolvimento web, html5, tailwind css, javascript, davyd fontoura, front-end developer",
+            ogImage: "https://davydfontourac.github.io/my-react-app/images/projects/treis/hero.png"
+        }
     },
     {
         id: 2,
@@ -106,7 +113,14 @@ export const projects = [
             "Componentes reutilizáveis",
             "Otimização de performance",
             "Experiência mobile otimizada",
-        ]
+        ],
+        // SEO specific fields
+        seo: {
+            title: "Sistema B2B Klin - E-commerce Infantil - Davyd Fontoura | Portfolio",
+            description: "Desenvolvimento de sistema B2B para a marca Klin, especializada em calçados infantis. Interface responsiva e otimizada desenvolvida por Davyd Fontoura usando React e Tailwind CSS.",
+            keywords: "klin ecommerce, sistema b2b, calçados infantis, desenvolvimento web, react, tailwind css, davyd fontoura, front-end developer, interface responsiva",
+            ogImage: "https://davydfontourac.github.io/my-react-app/images/projects/klin/hero.png"
+        }
     },
     {
         id: 3,
@@ -161,7 +175,14 @@ export const projects = [
             "Interface elegante e sofisticada",
             "Performance otimizada",
             "Design system robusto"
-        ]
+        ],
+        // SEO specific fields
+        seo: {
+            title: "Sistema B2B Capodarte - Moda e Estilo - Davyd Fontoura | Portfolio",
+            description: "Desenvolvimento de sistema B2B para a marca Capodarte, mantendo a elegância e sofisticação da marca. Projeto realizado por Davyd Fontoura com foco em performance e usabilidade.",
+            keywords: "capodarte moda, sistema b2b, desenvolvimento web, interface elegante, tailwind css, davyd fontoura, front-end developer, design system",
+            ogImage: "https://davydfontourac.github.io/my-react-app/images/projects/capodarte/hero.png"
+        }
     },
     {
         id: 4,
@@ -214,7 +235,14 @@ export const projects = [
             "Autenticação JWT",
             "Design responsivo",
             "PWA ready"
-        ]
+        ],
+        // SEO specific fields
+        seo: {
+            title: "E-commerce Front-end - Loja Virtual Moderna - Davyd Fontoura | Portfolio",
+            description: "Interface de loja virtual moderna com carrinho, checkout e autenticação. Projeto desenvolvido por Davyd Fontoura usando React, CSS Modules e design responsivo.",
+            keywords: "ecommerce frontend, loja virtual, react ecommerce, checkout, carrinho compras, davyd fontoura, desenvolvimento web, interface moderna",
+            ogImage: "https://davydfontourac.github.io/my-react-app/images/projects/ecommerce/homepage.jpg"
+        }
     },
     {
         id: 5,

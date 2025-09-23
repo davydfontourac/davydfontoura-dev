@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, ExternalLink, Github, Calendar, User, Clock, Tag, CheckCircle, Lightbulb, X } from 'lucide-react'
 import { getProjectBySlug, getRelatedProjects } from '../data/projects'
 import ThemeToggle from './ThemeToggle'
+import useSEO from '../hooks/useSEO'
 
 const ProjectDetail = () => {
   const { slug } = useParams()
@@ -37,6 +38,47 @@ const ProjectDetail = () => {
       navigate('/')
     }
   }, [slug, navigate])
+
+  // SEO Configuration
+  const currentUrl = window.location.href
+  const baseUrl = 'https://davydfontourac.github.io/my-react-app'
+  
+  useSEO({
+    title: project?.seo?.title || `${project?.title} - Davyd Fontoura | Portfolio`,
+    description: project?.seo?.description || project?.description,
+    keywords: project?.seo?.keywords || `${project?.title}, desenvolvimento web, davyd fontoura, front-end developer`,
+    ogTitle: project?.seo?.title || `${project?.title} - Davyd Fontoura`,
+    ogDescription: project?.seo?.description || project?.description,
+    ogImage: project?.seo?.ogImage || (project?.images?.[0] ? `${baseUrl}${project.images[0]}` : `${baseUrl}/og-image.jpg`),
+    ogUrl: currentUrl,
+    canonical: currentUrl,
+    structuredData: project ? {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": project.title,
+      "description": project.description,
+      "author": {
+        "@type": "Person",
+        "name": "Davyd Fontoura",
+        "jobTitle": "Desenvolvedor Front-End"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Davyd Fontoura"
+      },
+      "dateCreated": project.year,
+      "inLanguage": "pt-BR",
+      "keywords": project.categories.join(", "),
+      "image": project.images?.[0] ? `${baseUrl}${project.images[0]}` : undefined,
+      "url": currentUrl,
+      "workExample": {
+        "@type": "WebSite",
+        "name": project.title,
+        "description": project.description,
+        "url": project.links?.live || currentUrl
+      }
+    } : null
+  })
 
   // Reset imageLoaded quando trocar de imagem
   useEffect(() => {
