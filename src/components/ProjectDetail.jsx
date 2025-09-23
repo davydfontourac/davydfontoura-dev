@@ -11,7 +11,9 @@ const ProjectDetail = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
-  const [thumbnailsLoaded, setThumbnailsLoaded] = useState({})
+  const [imageError, setImageError] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [thumbnailErrors, setThumbnailErrors] = useState({})
 
   useEffect(() => {
     const foundProject = getProjectBySlug(slug)
@@ -22,8 +24,10 @@ const ProjectDetail = () => {
       setCurrentImageIndex(0)
       // Reset do estado de carregamento da imagem
       setImageLoaded(false)
+      setImageError(false)
+      setIsTransitioning(false)
       // Reset do estado de carregamento das miniaturas
-      setThumbnailsLoaded({})
+      setThumbnailErrors({})
     } else {
       // Redirecionar para 404 ou página principal se projeto não encontrado
       navigate('/')
@@ -33,7 +37,15 @@ const ProjectDetail = () => {
   // Reset imageLoaded quando trocar de imagem
   useEffect(() => {
     setImageLoaded(false)
+    setImageError(false)
   }, [currentImageIndex])
+
+  // Animação suave ao carregar imagem
+  useEffect(() => {
+    if (imageLoaded) {
+      setIsTransitioning(false)
+    }
+  }, [imageLoaded])
 
   // Fechar modal com ESC
   useEffect(() => {
@@ -52,6 +64,18 @@ const ProjectDetail = () => {
   const handleImageClick = (index) => {
     setCurrentImageIndex(index)
     setIsImageModalOpen(true)
+  }
+
+  const handleThumbnailClick = (index) => {
+    if (index !== currentImageIndex) {
+      setIsTransitioning(true)
+      
+      // Pequeno delay para a animação de fade out
+      setTimeout(() => {
+        setCurrentImageIndex(index)
+        setIsTransitioning(false)
+      }, 150)
+    }
   }
 
 
@@ -230,9 +254,7 @@ const ProjectDetail = () => {
             {/* Imagem principal */}
             <div className="mb-6">
               <div 
-                className={`relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden cursor-pointer group ${
-                  imageLoaded ? 'h-auto' : 'h-96'
-                }`}
+                className="relative rounded-lg overflow-hidden cursor-pointer group transition-all duration-300 ease-in-out min-h-[24rem] max-h-[32rem] h-auto flex items-center justify-center"
                 onClick={() => handleImageClick(currentImageIndex)}
               >
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
@@ -241,31 +263,35 @@ const ProjectDetail = () => {
                   </div>
                 </div>
                 {/* Imagem real ou placeholder */}
-                <img 
-                  src={project.images[currentImageIndex]}
-                  alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
-                  className={`w-full object-contain bg-gray-50 dark:bg-gray-800 ${
-                    imageLoaded ? 'h-auto' : 'h-full'
-                  }`}
-                  onLoad={() => setImageLoaded(true)}
-                  onError={(e) => {
-                    // Se a imagem não carregar, mostra o placeholder
-                    e.target.style.display = 'none'
-                    e.target.nextElementSibling.style.display = 'flex'
-                    setImageLoaded(false)
-                  }}
-                />
-                {/* Placeholder para quando a imagem não carrega */}
-                <div className="w-full h-96 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800" style={{ display: 'none' }}>
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gray-300 dark:bg-gray-600 rounded-lg mb-3 mx-auto flex items-center justify-center">
-                      <Lightbulb size={24} className="text-gray-500 dark:text-gray-400" />
+                {!imageError ? (
+                  <img 
+                    key={`main-image-${currentImageIndex}`}
+                    src={project.images[currentImageIndex]}
+                    alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
+                    className={`w-full h-auto max-h-[32rem] object-contain transition-all duration-300 ease-in-out ${
+                      isTransitioning ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    onLoad={() => setImageLoaded(true)}
+                    onError={() => {
+                      setImageError(true)
+                      setImageLoaded(false)
+                    }}
+                  />
+                ) : (
+                  /* Placeholder para quando a imagem não carrega */
+                  <div className={`w-full min-h-[24rem] flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-lg transition-all duration-300 ease-in-out ${
+                    isTransitioning ? 'opacity-0' : 'opacity-100'
+                  }`}>
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-gray-300 dark:bg-gray-600 rounded-lg mb-3 mx-auto flex items-center justify-center">
+                        <Lightbulb size={24} className="text-gray-500 dark:text-gray-400" />
+                      </div>
+                      <p className="text-gray-500 dark:text-gray-400 text-sm">
+                        {project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}
+                      </p>
                     </div>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm">
-                      {project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}
-                    </p>
                   </div>
-                </div>
+                )}
               </div>
             </div>
             
@@ -275,36 +301,31 @@ const ProjectDetail = () => {
                 {project.images.map((image, index) => (
                   <div
                     key={index}
-                    className={`relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300 ${
-                      thumbnailsLoaded[index] ? 'h-auto' : 'h-24'
-                    } ${
+                    className={`relative rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300 min-h-[6rem] max-h-[8rem] h-auto flex items-center justify-center ${
                       index === currentImageIndex 
                         ? 'border-blue-500 ring-2 ring-blue-200 dark:ring-blue-800' 
                         : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600'
                     }`}
-                    onClick={() => setCurrentImageIndex(index)}
+                    onClick={() => handleThumbnailClick(index)}
                   >
                     {/* Imagem miniatura real ou placeholder */}
-                    <img 
-                      src={image}
-                      alt={`${project.title} - ${image.split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
-                      className={`w-full object-contain bg-gray-50 dark:bg-gray-800 ${
-                        thumbnailsLoaded[index] ? 'h-auto' : 'h-full'
-                      }`}
-                      onLoad={() => setThumbnailsLoaded(prev => ({ ...prev, [index]: true }))}
-                      onError={(e) => {
-                        // Se a imagem não carregar, mostra o placeholder
-                        e.target.style.display = 'none'
-                        e.target.nextElementSibling.style.display = 'flex'
-                        setThumbnailsLoaded(prev => ({ ...prev, [index]: false }))
-                      }}
-                    />
-                    {/* Placeholder para quando a imagem não carrega */}
-                    <div className="w-full h-24 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800" style={{ display: 'none' }}>
-                      <p className="text-gray-500 dark:text-gray-400 text-xs text-center px-1">
-                        {image.split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}
-                      </p>
-                    </div>
+                    {!thumbnailErrors[index] ? (
+                      <img 
+                        src={image}
+                        alt={`${project.title} - ${image.split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
+                        className="w-full h-auto max-h-[8rem] object-contain"
+                        onError={() => {
+                          setThumbnailErrors(prev => ({ ...prev, [index]: true }))
+                        }}
+                      />
+                    ) : (
+                      /* Placeholder para quando a imagem não carrega */
+                      <div className="w-full min-h-[6rem] flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-lg">
+                        <p className="text-gray-500 dark:text-gray-400 text-xs text-center px-1">
+                          {image.split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

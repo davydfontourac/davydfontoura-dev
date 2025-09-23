@@ -36,9 +36,9 @@ export const projects = [
         client: "TREIS Tecnologia",
         images: [
             "/my-react-app/images/projects/treis/hero.png",
-            "/my-react-app/images/projects/treis/services.jpg",
-            "/my-react-app/images/projects/treis/about.jpg",
-            "/my-react-app/images/projects/treis/contact.jpg"
+            "/my-react-app/images/projects/treis/services.png",
+            "/my-react-app/images/projects/treis/about.png",
+            "/my-react-app/images/projects/treis/contact.png"
         ],
         links: {
             live: "https://treis.com.br/",

@@ -49,28 +49,41 @@ const Portfolio = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <div key={project.id} className="group cursor-pointer card-hover transform transition-all duration-300 hover:scale-105  active:scale-95 hover:rotate-1">
-              <div className={`bg-gradient-to-br ${project.gradient} h-48 rounded-lg mb-4 relative overflow-hidden shadow-lg  transition-all duration-300 ring-0 group-hover:ring-4 group-hover:ring-blue-200 dark:group-hover:ring-blue-800`}>
+              <div className={`bg-gradient-to-br ${project.gradient} h-48 rounded-lg mb-4 relative overflow-hidden shadow-lg transition-all duration-300 ring-0 group-hover:ring-4 group-hover:ring-blue-200 dark:group-hover:ring-blue-800`}>
+                {/* Imagem de fundo (hero) */}
+                {project.images && project.images.length > 0 && (
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-300"
+                    style={{
+                      backgroundImage: `url('${project.images[0]}')`,
+                    }}
+                  />
+                )}
+                
+                {/* Overlay gradient para manter legibilidade */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-60 group-hover:opacity-40 transition-opacity duration-300`} />
+                
                 {/* Tag de Status */}
                 <div className="absolute top-3 right-3 z-10 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusTag(project.status).classes} shadow-sm`}>
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusTag(project.status).classes} shadow-sm backdrop-blur-sm`}>
                     {getStatusTag(project.status).text}
                   </span>
                 </div>
                 
-                {/* Overlay com hover melhorado */}
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-6">
+                {/* Overlay com hover melhorado - fundo completamente opaco */}
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-95 transition-all duration-300 flex items-center justify-center p-6 z-20">
                   <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                     <h4 className="text-xl font-bold mb-4">{project.title}</h4>
                     {/* Mostra apenas a primeira linha (shortDesc) no hover */}
                     <p className="text-sm mb-6 leading-relaxed">{project.shortDesc}</p>
                     <div className="flex flex-wrap gap-2 justify-center">
                       {project.tech.slice(0, 3).map((tech, index) => (
-                        <span key={index} className="bg-white/25 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/20">
+                        <span key={index} className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/30">
                           {tech}
                         </span>
                       ))}
                       {project.tech.length > 3 && (
-                        <span className="bg-white/25 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/20">
+                        <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/30">
                           +{project.tech.length - 3}
                         </span>
                       )}
