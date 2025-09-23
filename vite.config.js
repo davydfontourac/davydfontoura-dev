@@ -4,15 +4,43 @@ import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-   base: '/davydfontoura-dev/',
-  css: {
-    postcss: {
-      plugins: [
-        tailwindcss,
-        autoprefixer,
-      ]
+export default defineConfig(({ mode }) => {
+  const isProduction = mode === 'production'
+  
+  const base = '/davydfontoura-dev/'
+  
+  return {
+    plugins: [react()],
+    base: base,
+    build: {
+      outDir: 'dist',
+      assetsDir: 'assets',
+      sourcemap: false,
+      minify: isProduction,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+            router: ['react-router-dom']
+          }
+        }
+      }
+    },
+    css: {
+      postcss: {
+        plugins: [
+          tailwindcss,
+          autoprefixer,
+        ]
+      }
+    },
+    server: {
+      port: 3000,
+      host: true
+    },
+    preview: {
+      port: 3000,
+      host: true
     }
   }
 })
