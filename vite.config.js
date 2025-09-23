@@ -6,7 +6,7 @@ import autoprefixer from 'autoprefixer'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-   base: '/my-react-app/',
+   base: '/davydfontoura-dev/',
   css: {
     postcss: {
       plugins: [

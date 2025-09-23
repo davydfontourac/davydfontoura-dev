@@ -41,7 +41,7 @@ const ProjectDetail = () => {
 
   // SEO Configuration
   const currentUrl = window.location.href
-  const baseUrl = 'https://davydfontourac.github.io/my-react-app'
+  const baseUrl = 'https://davydfontourac.github.io/davydfontoura-dev'
   
   useSEO({
     title: project?.seo?.title || `${project?.title} - Davyd Fontoura | Portfolio`,
