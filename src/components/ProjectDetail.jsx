@@ -10,17 +10,30 @@ const ProjectDetail = () => {
   const [relatedProjects, setRelatedProjects] = useState([])
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const [thumbnailsLoaded, setThumbnailsLoaded] = useState({})
 
   useEffect(() => {
     const foundProject = getProjectBySlug(slug)
     if (foundProject) {
       setProject(foundProject)
       setRelatedProjects(getRelatedProjects(foundProject.id))
+      // Reset para a primeira imagem ao trocar de projeto
+      setCurrentImageIndex(0)
+      // Reset do estado de carregamento da imagem
+      setImageLoaded(false)
+      // Reset do estado de carregamento das miniaturas
+      setThumbnailsLoaded({})
     } else {
       // Redirecionar para 404 ou página principal se projeto não encontrado
       navigate('/')
     }
   }, [slug, navigate])
+
+  // Reset imageLoaded quando trocar de imagem
+  useEffect(() => {
+    setImageLoaded(false)
+  }, [currentImageIndex])
 
   // Fechar modal com ESC
   useEffect(() => {
@@ -217,7 +230,9 @@ const ProjectDetail = () => {
             {/* Imagem principal */}
             <div className="mb-6">
               <div 
-                className="relative h-96 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden cursor-pointer group"
+                className={`relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden cursor-pointer group ${
+                  imageLoaded ? 'h-auto' : 'h-96'
+                }`}
                 onClick={() => handleImageClick(currentImageIndex)}
               >
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
@@ -229,15 +244,19 @@ const ProjectDetail = () => {
                 <img 
                   src={project.images[currentImageIndex]}
                   alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
-                  className="w-full h-full object-cover"
+                  className={`w-full object-contain bg-gray-50 dark:bg-gray-800 ${
+                    imageLoaded ? 'h-auto' : 'h-full'
+                  }`}
+                  onLoad={() => setImageLoaded(true)}
                   onError={(e) => {
                     // Se a imagem não carregar, mostra o placeholder
                     e.target.style.display = 'none'
                     e.target.nextElementSibling.style.display = 'flex'
+                    setImageLoaded(false)
                   }}
                 />
                 {/* Placeholder para quando a imagem não carrega */}
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800" style={{ display: 'none' }}>
+                <div className="w-full h-96 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800" style={{ display: 'none' }}>
                   <div className="text-center">
                     <div className="w-16 h-16 bg-gray-300 dark:bg-gray-600 rounded-lg mb-3 mx-auto flex items-center justify-center">
                       <Lightbulb size={24} className="text-gray-500 dark:text-gray-400" />
@@ -256,7 +275,9 @@ const ProjectDetail = () => {
                 {project.images.map((image, index) => (
                   <div
                     key={index}
-                    className={`relative h-24 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300 ${
+                    className={`relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300 ${
+                      thumbnailsLoaded[index] ? 'h-auto' : 'h-24'
+                    } ${
                       index === currentImageIndex 
                         ? 'border-blue-500 ring-2 ring-blue-200 dark:ring-blue-800' 
                         : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600'
@@ -267,15 +288,19 @@ const ProjectDetail = () => {
                     <img 
                       src={image}
                       alt={`${project.title} - ${image.split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
-                      className="w-full h-full object-cover"
+                      className={`w-full object-contain bg-gray-50 dark:bg-gray-800 ${
+                        thumbnailsLoaded[index] ? 'h-auto' : 'h-full'
+                      }`}
+                      onLoad={() => setThumbnailsLoaded(prev => ({ ...prev, [index]: true }))}
                       onError={(e) => {
                         // Se a imagem não carregar, mostra o placeholder
                         e.target.style.display = 'none'
                         e.target.nextElementSibling.style.display = 'flex'
+                        setThumbnailsLoaded(prev => ({ ...prev, [index]: false }))
                       }}
                     />
                     {/* Placeholder para quando a imagem não carrega */}
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800" style={{ display: 'none' }}>
+                    <div className="w-full h-24 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800" style={{ display: 'none' }}>
                       <p className="text-gray-500 dark:text-gray-400 text-xs text-center px-1">
                         {image.split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}
                       </p>
