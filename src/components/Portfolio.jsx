@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ExternalLink } from 'lucide-react'
+import { projects } from '../data/projects'
 
 const Portfolio = () => {
   const [expandedItems, setExpandedItems] = useState({})
@@ -9,62 +12,6 @@ const Portfolio = () => {
       [id]: !prev[id]
     }))
   }
-  const projects = [
-    {
-      id: 1,
-      title: "Página Corporativa - Treis Tecnologia",
-      description: "Desenvolvimento do site institucional da empresa TREIS – Soluções em Tecnologia, com foco em apresentar serviços, reforçar a identidade visual e garantir navegação responsiva. Fui responsável pela implementação do front-end, utilizando HTML, Tailwind CSS e JavaScript.",
-      shortDesc: "Site responsivo desenvolvido com HTML, CSS e JavaScript",
-      tech: ["HTML", "Tailwind CSS", "CSS Modules", "JavaScript"],
-      gradient: "from-blue-400 to-blue-600",
-      status: "concluido"
-    },
-    {
-      id: 2,
-      title: "Klin – Ecommerce infantil",
-      description: "Atuei no desenvolvimento do sistema B2B da marca Klin, com foco em experiência do usuário e responsividade. Atuei na implementação de interfaces e adaptação de componentes para diferentes dispositivos. Tecnologias: HTML, CSS, JavaScript. Projeto realizado em parceria com a empresa TREIS – Soluções em Tecnologia.",
-      shortDesc: "Desenvolvimento de páginas do sistema B2B da marca Klin",
-      tech: ["HTML", "Tailwind CSS", "CSS Modules", "JavaScript"],
-      gradient: "from-purple-400 to-purple-600",
-      status: "concluido"
-    },
-    {
-      id: 3,
-      title: "Capodarte – Moda e estilo",
-      description: "Atuei no desenvolvimento do sistema B2B da marca Capodarte, com foco em performance, usabilidade e fidelidade ao design da marca. Fui responsável pela implementação da interface front-end, utilizando Tailwind CSS, HTML e JavaScript. O projeto foi realizado em parceria com a empresa TREIS – Soluções em Tecnologia.",
-      shortDesc: "Desenvolvimento de páginas do sistema B2B da marca Capodarte",
-      tech: ["HTML", "Tailwind CSS", "CSS Modules", "JavaScript"],
-      gradient: "from-green-400 to-green-600",
-      status: "concluido"
-    },
-    {
-      id: 4,
-     title: "E-commerce Front-end",
-      description: "Interface de loja virtual com carrinho e checkout",
-      shortDesc: "Interface de loja virtual com carrinho e checkout",
-      tech: ["React", "CSS Modules", "JavaScript"],
-      gradient: "from-green-400 to-green-600",
-      status: "em-producao"
-    },
-    {
-      id: 5,
-      title: "Aplicação Web Responsiva",
-      description: "Sistema web com design mobile-first",
-      shortDesc: "Sistema web com design mobile-first",
-      tech: ["React", "Tailwind CSS", "Python"],
-      gradient: "from-indigo-400 to-indigo-600",
-      status: "em-producao"
-    },
-    {
-      id: 6,
-      title: "Interface Interativa",
-      description: "Projeto com animações e efeitos visuais",
-      shortDesc: "Projeto com animações e efeitos visuais",
-      tech: ["JavaScript", "CSS3", "HTML5"],
-      gradient: "from-pink-400 to-pink-600",
-      status: "em-producao"
-    }
-  ]
 
   // Função para obter as classes CSS da tag de status
   const getStatusTag = (status) => {
@@ -113,33 +60,38 @@ const Portfolio = () => {
                 {/* Overlay com hover melhorado */}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-6">
                   <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <h4 className="text-xl font-bold mb-3">{project.title}</h4>
+                    <h4 className="text-xl font-bold mb-4">{project.title}</h4>
                     {/* Mostra apenas a primeira linha (shortDesc) no hover */}
-                    <p className="text-sm mb-4 leading-relaxed">{project.shortDesc}</p>
+                    <p className="text-sm mb-6 leading-relaxed">{project.shortDesc}</p>
                     <div className="flex flex-wrap gap-2 justify-center">
-                      {project.tech.map((tech, index) => (
+                      {project.tech.slice(0, 3).map((tech, index) => (
                         <span key={index} className="bg-white/25 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/20">
                           {tech}
                         </span>
                       ))}
+                      {project.tech.length > 3 && (
+                        <span className="bg-white/25 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/20">
+                          +{project.tech.length - 3}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
               
               {/* Título e descrição abaixo do card */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <div className="flex flex-col flex-grow space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-grow">
                     {project.title}
                   </h3>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusTag(project.status).classes}`}>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ${getStatusTag(project.status).classes}`}>
                     {getStatusTag(project.status).text}
                   </span>
                 </div>
                 
                 {/* Sistema de descrição com "Saiba mais" */}
-                <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed flex-grow">
                   {(() => {
                     const words = project.description.split(' ')
                     const firstTwoLines = words.slice(0, 15).join(' ') // Aproximadamente 2 linhas
@@ -164,6 +116,17 @@ const Portfolio = () => {
                       </div>
                     )
                   })()}
+                </div>
+                
+                {/* Botão Ver Projeto Completo - sempre na parte inferior */}
+                <div className="mt-auto pt-2">
+                  <Link
+                    to={`/projeto/${project.slug}`}
+                    className="inline-flex items-center justify-center w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium text-sm group/btn"
+                  >
+                    <span>Ver Projeto Completo</span>
+                    <ExternalLink size={16} className="ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
               </div>
             </div>
