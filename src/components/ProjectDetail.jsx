@@ -15,6 +15,7 @@ const ProjectDetail = () => {
   const [imageError, setImageError] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [thumbnailErrors, setThumbnailErrors] = useState({})
+  const [relatedProjectImageErrors, setRelatedProjectImageErrors] = useState({})
 
   useEffect(() => {
     const foundProject = getProjectBySlug(slug)
@@ -29,6 +30,8 @@ const ProjectDetail = () => {
       setIsTransitioning(false)
       // Reset do estado de carregamento das miniaturas
       setThumbnailErrors({})
+      // Reset do estado de carregamento das imagens dos projetos relacionados
+      setRelatedProjectImageErrors({})
     } else {
       // Redirecionar para 404 ou página principal se projeto não encontrado
       navigate('/')
@@ -458,7 +461,21 @@ const ProjectDetail = () => {
                     to={`/projeto/${relatedProject.slug}`}
                     className="group cursor-pointer transform transition-all duration-300 hover:scale-105 bg-white dark:bg-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-xl border border-gray-200 dark:border-gray-600"
                   >
-                    <div className={`bg-gradient-to-br ${relatedProject.gradient} h-32 relative overflow-hidden`}>
+                    <div className={`h-36 relative overflow-hidden bg-gray-100 dark:bg-gray-800`}>
+                      {/* Imagem de fundo */}
+                      {relatedProject.images && relatedProject.images.length > 0 && !relatedProjectImageErrors[relatedProject.id] && (
+                        <img 
+                          src={relatedProject.images[0]} 
+                          alt={`${relatedProject.title} - Hero`}
+                          className="absolute inset-0 w-full h-full object-contain"
+                          onError={() => {
+                            setRelatedProjectImageErrors(prev => ({ ...prev, [relatedProject.id]: true }))
+                          }}
+                        />
+                      )}
+                      {/* Gradiente overlay */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${relatedProject.gradient} ${!relatedProjectImageErrors[relatedProject.id] && relatedProject.images && relatedProject.images.length > 0 ? 'opacity-60' : 'opacity-100'}`}></div>
+                      {/* Hover overlay */}
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <span className="text-white font-medium text-sm">Ver projeto</span>
                       </div>
