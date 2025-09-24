@@ -35,10 +35,10 @@ export const projects = [
         role: "Front-end Developer",
         client: "TREIS Tecnologia",
         images: [
-            "/davydfontoura-dev/images/projects/treis/hero.png",
-            "/davydfontoura-dev/images/projects/treis/services.png",
-            "/davydfontoura-dev/images/projects/treis/about.png",
-            "/davydfontoura-dev/images/projects/treis/contact.png"
+            "images/projects/treis/hero.png",
+            "images/projects/treis/services.png",
+            "images/projects/treis/about.png",
+            "images/projects/treis/contact.png"
         ],
         links: {
             live: "https://treis.com.br/",
@@ -55,7 +55,7 @@ export const projects = [
             title: "Página Corporativa TREIS Tecnologia - Davyd Fontoura | Portfolio",
             description: "Desenvolvimento do site institucional da TREIS Tecnologia com design responsivo e moderno. Projeto realizado por Davyd Fontoura usando HTML5, Tailwind CSS e JavaScript.",
             keywords: "treis tecnologia, site institucional, desenvolvimento web, html5, tailwind css, javascript, davyd fontoura, front-end developer",
-            ogImage: "https://davydfontourac.github.io/davydfontoura-dev/images/projects/treis/hero.png"
+            ogImage: "images/projects/treis/hero.png"
         }
     },
     {
@@ -94,14 +94,14 @@ export const projects = [
         role: "Front-end Developer",
         client: "Klin via TREIS Tecnologia",
         images: [
-            "/davydfontoura-dev/images/projects/klin/hero.png",
-            "/davydfontoura-dev/images/projects/klin/login.png",
-            "/davydfontoura-dev/images/projects/klin/grade.png",
-            "/davydfontoura-dev/images/projects/klin/detalhes.png",
-            "/davydfontoura-dev/images/projects/klin/carrinho.png",
-            "/davydfontoura-dev/images/projects/klin/pedido.png",
-            "/davydfontoura-dev/images/projects/klin/posicao.png",
-            "/davydfontoura-dev/images/projects/klin/analise.png"
+            "images/projects/klin/hero.png",
+            "images/projects/klin/login.png",
+            "images/projects/klin/grade.png",
+            "images/projects/klin/detalhes.png",
+            "images/projects/klin/carrinho.png",
+            "images/projects/klin/pedido.png",
+            "images/projects/klin/posicao.png",
+            "images/projects/klin/analise.png"
         ],
         links: {
             live: null,
@@ -119,7 +119,7 @@ export const projects = [
             title: "Sistema B2B Klin - E-commerce Infantil - Davyd Fontoura | Portfolio",
             description: "Desenvolvimento de sistema B2B para a marca Klin, especializada em calçados infantis. Interface responsiva e otimizada desenvolvida por Davyd Fontoura usando React e Tailwind CSS.",
             keywords: "klin ecommerce, sistema b2b, calçados infantis, desenvolvimento web, react, tailwind css, davyd fontoura, front-end developer, interface responsiva",
-            ogImage: "https://davydfontourac.github.io/davydfontoura-dev/images/projects/klin/hero.png"
+            ogImage: "images/projects/klin/hero.png"
         }
     },
     {
@@ -158,12 +158,12 @@ export const projects = [
         role: "Front-end Developer",
         client: "Capodarte via TREIS Tecnologia",
         images: [
-            "/davydfontoura-dev/images/projects/capodarte/hero.png",
-            "/davydfontoura-dev/images/projects/capodarte/login.png",
-            "/davydfontoura-dev/images/projects/capodarte/listagem.png",
-            "/davydfontoura-dev/images/projects/capodarte/detalhes.png",
-            "/davydfontoura-dev/images/projects/capodarte/carrinho.png",
-            "/davydfontoura-dev/images/projects/capodarte/finalizar.png"
+            "images/projects/capodarte/hero.png",
+            "images/projects/capodarte/login.png",
+            "images/projects/capodarte/listagem.png",
+            "images/projects/capodarte/detalhes.png",
+            "images/projects/capodarte/carrinho.png",
+            "images/projects/capodarte/finalizar.png"
         ],
         links: {
             live: null,
@@ -181,7 +181,7 @@ export const projects = [
             title: "Sistema B2B Capodarte - Moda e Estilo - Davyd Fontoura | Portfolio",
             description: "Desenvolvimento de sistema B2B para a marca Capodarte, mantendo a elegância e sofisticação da marca. Projeto realizado por Davyd Fontoura com foco em performance e usabilidade.",
             keywords: "capodarte moda, sistema b2b, desenvolvimento web, interface elegante, tailwind css, davyd fontoura, front-end developer, design system",
-            ogImage: "https://davydfontourac.github.io/davydfontoura-dev/images/projects/capodarte/hero.png"
+            ogImage: "images/projects/capodarte/hero.png"
         }
     },
     {
@@ -218,10 +218,10 @@ export const projects = [
         role: "Full-stack Developer",
         client: "Projeto Pessoal",
         images: [
-            "/davydfontoura-dev/images/projects/ecommerce/homepage.jpg",
-            "/davydfontoura-dev/images/projects/ecommerce/products.jpg",
-            "/davydfontoura-dev/images/projects/ecommerce/cart.jpg",
-            "/davydfontoura-dev/images/projects/ecommerce/checkout.jpg"
+            "images/projects/ecommerce/homepage.jpg",
+            "images/projects/ecommerce/products.jpg",
+            "images/projects/ecommerce/cart.jpg",
+            "images/projects/ecommerce/checkout.jpg"
         ],
         links: {
             live: null,
@@ -241,7 +241,7 @@ export const projects = [
             title: "E-commerce Front-end - Loja Virtual Moderna - Davyd Fontoura | Portfolio",
             description: "Interface de loja virtual moderna com carrinho, checkout e autenticação. Projeto desenvolvido por Davyd Fontoura usando React, CSS Modules e design responsivo.",
             keywords: "ecommerce frontend, loja virtual, react ecommerce, checkout, carrinho compras, davyd fontoura, desenvolvimento web, interface moderna",
-            ogImage: "https://davydfontourac.github.io/davydfontoura-dev/images/projects/ecommerce/homepage.jpg"
+            ogImage: "images/projects/ecommerce/homepage.jpg"
         }
     },
     {
@@ -277,10 +277,10 @@ export const projects = [
         role: "Full-stack Developer",
         client: "Projeto Pessoal",
         images: [
-            "/davydfontoura-dev/images/projects/webapp/mobile-view.jpg",
-            "/davydfontoura-dev/images/projects/webapp/desktop-view.jpg",
-            "/davydfontoura-dev/images/projects/webapp/tablet-view.jpg",
-            "/davydfontoura-dev/images/projects/webapp/dashboard.jpg"
+            "images/projects/webapp/mobile-view.jpg",
+            "images/projects/webapp/desktop-view.jpg",
+            "images/projects/webapp/tablet-view.jpg",
+            "images/projects/webapp/dashboard.jpg"
         ],
         links: {
             live: null,
@@ -330,10 +330,10 @@ export const projects = [
         role: "UI/UX Developer",
         client: "Projeto Experimental",
         images: [
-            "/davydfontoura-dev/images/projects/interactive/hero-animation.jpg",
-            "/davydfontoura-dev/images/projects/interactive/scroll-effects.jpg",
-            "/davydfontoura-dev/images/projects/interactive/micro-interactions.jpg",
-            "/davydfontoura-dev/images/projects/interactive/mobile-gestures.jpg"
+            "images/projects/interactive/hero-animation.jpg",
+            "images/projects/interactive/scroll-effects.jpg",
+            "images/projects/interactive/micro-interactions.jpg",
+            "images/projects/interactive/mobile-gestures.jpg"
         ],
         links: {
             live: null,

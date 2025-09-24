@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, Github, Calendar, User, Clock, Tag, CheckCircl
 import { getProjectBySlug, getRelatedProjects } from '../data/projects'
 import ThemeToggle from './ThemeToggle'
 import useSEO from '../hooks/useSEO'
+import { getImagePath, getBaseUrl } from '../utils/imagePaths'
 
 const ProjectDetail = () => {
   const { slug } = useParams()
@@ -41,7 +42,7 @@ const ProjectDetail = () => {
 
   // SEO Configuration
   const currentUrl = window.location.href
-  const baseUrl = 'https://davydfontourac.github.io/davydfontoura-dev'
+  const baseUrl = getBaseUrl()
   
   useSEO({
     title: project?.seo?.title || `${project?.title} - Davyd Fontoura | Portfolio`,
@@ -49,7 +50,7 @@ const ProjectDetail = () => {
     keywords: project?.seo?.keywords || `${project?.title}, desenvolvimento web, davyd fontoura, front-end developer`,
     ogTitle: project?.seo?.title || `${project?.title} - Davyd Fontoura`,
     ogDescription: project?.seo?.description || project?.description,
-    ogImage: project?.seo?.ogImage || (project?.images?.[0] ? `${baseUrl}${project.images[0]}` : `${baseUrl}/og-image.jpg`),
+    ogImage: project?.seo?.ogImage ? `${baseUrl}${getImagePath(project.seo.ogImage)}` : (project?.images?.[0] ? `${baseUrl}${getImagePath(project.images[0])}` : `${baseUrl}/og-image.jpg`),
     ogUrl: currentUrl,
     canonical: currentUrl,
     structuredData: project ? {
@@ -69,7 +70,7 @@ const ProjectDetail = () => {
       "dateCreated": project.year,
       "inLanguage": "pt-BR",
       "keywords": project.categories.join(", "),
-      "image": project.images?.[0] ? `${baseUrl}${project.images[0]}` : undefined,
+      "image": project.images?.[0] ? `${baseUrl}${getImagePath(project.images[0])}` : undefined,
       "url": currentUrl,
       "workExample": {
         "@type": "WebSite",
@@ -336,7 +337,7 @@ const ProjectDetail = () => {
                 {!imageError ? (
                   <img 
                     key={`main-image-${currentImageIndex}`}
-                    src={project.images[currentImageIndex]}
+                    src={getImagePath(project.images[currentImageIndex])}
                     alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
                     className={`w-full h-auto max-h-[32rem] object-contain transition-all duration-300 ease-in-out ${
                       isTransitioning ? 'opacity-0' : 'opacity-100'
@@ -390,7 +391,7 @@ const ProjectDetail = () => {
                     {/* Imagem miniatura real ou placeholder */}
                     {!thumbnailErrors[index] ? (
                       <img 
-                        src={image}
+                        src={getImagePath(image)}
                         alt={`${project.title} - ${image.split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
                         className="w-full h-auto max-h-[8rem] object-contain"
                         onError={() => {
@@ -526,7 +527,7 @@ const ProjectDetail = () => {
                       {/* Imagem de fundo */}
                       {relatedProject.images && relatedProject.images.length > 0 && !relatedProjectImageErrors[relatedProject.id] && (
                         <img 
-                          src={relatedProject.images[0]} 
+                          src={getImagePath(relatedProject.images[0])} 
                           alt={`${relatedProject.title} - Hero`}
                           className="absolute inset-0 w-full h-full object-contain"
                           onError={() => {
@@ -581,7 +582,7 @@ const ProjectDetail = () => {
             <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
               {!imageError ? (
                 <img 
-                  src={project.images[currentImageIndex]}
+                  src={getImagePath(project.images[currentImageIndex])}
                   alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg)/, '').replace('-', ' ')}`}
                   className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
                   onError={() => setImageError(true)}

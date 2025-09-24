@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ExternalLink } from 'lucide-react'
 import { projects } from '../data/projects'
+import { getImagePath } from '../utils/imagePaths'
 
 const Portfolio = () => {
   const [expandedItems, setExpandedItems] = useState({})
@@ -55,7 +56,7 @@ const Portfolio = () => {
                   <div 
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-300"
                     style={{
-                      backgroundImage: `url('${project.images[0]}')`,
+                      backgroundImage: `url('${getImagePath(project.images[0])}')`,
                     }}
                   />
                 )}
