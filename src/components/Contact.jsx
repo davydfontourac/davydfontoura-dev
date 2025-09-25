@@ -1,4 +1,75 @@
+import { useState } from 'react'
+import emailjs from '@emailjs/browser'
+import { EMAILJS_CONFIG } from '../config/emailjs'
+
 const Contact = () => {
+  // Estado do formulário
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [status, setStatus] = useState({ type: '', message: '' })
+
+  // Função para atualizar os campos do formulário
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  // Função para enviar o email
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    
+    // Validação básica
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setStatus({
+        type: 'error',
+        message: 'Por favor, preencha todos os campos.'
+      })
+      return
+    }
+
+    setIsLoading(true)
+    setStatus({ type: '', message: '' })
+
+    try {
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: 'Davyd Fontoura',
+        },
+        EMAILJS_CONFIG.PUBLIC_KEY
+      )
+
+      console.log('Email enviado com sucesso:', result)
+      setStatus({
+        type: 'success',
+        message: 'Mensagem enviada com sucesso! Entrarei em contato em breve.'
+      })
+      
+      // Limpar formulário
+      setFormData({ name: '', email: '', message: '' })
+      
+    } catch (error) {
+      console.error('Erro ao enviar email:', error)
+      setStatus({
+        type: 'error',
+        message: 'Ocorreu um erro ao enviar a mensagem. Tente novamente ou entre em contato diretamente.'
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const contactInfo = [
     {
       title: 'GitHub',
@@ -73,33 +144,62 @@ const Contact = () => {
             </div>
             <div>
             <h3 className="text-2xl font-bold mb-6">Envie uma Mensagem</h3>
-            <form className="space-y-4">
+            
+            {/* Mensagem de status */}
+            {status.message && (
+              <div className={`mb-6 p-4 rounded-lg ${
+                status.type === 'success' 
+                  ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-700' 
+                  : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 border border-red-200 dark:border-red-700'
+              }`}>
+                {status.message}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   placeholder="Seu Nome"
+                  required
                   className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
                 />
               </div>
               <div>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   placeholder="Seu Email"
+                  required
                   className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
                 />
               </div>
               <div>
                 <textarea
                   rows="5"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   placeholder="Sua Mensagem"
+                  required
                   className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                disabled={isLoading}
+                className={`w-full font-semibold py-3 px-6 rounded-lg transition-colors ${
+                  isLoading 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-blue-600 hover:bg-blue-700'
+                } text-white`}
               >
-                Enviar Mensagem
+                {isLoading ? 'Enviando...' : 'Enviar Mensagem'}
               </button>
             </form>
             </div>
