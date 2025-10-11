@@ -348,6 +348,196 @@ export const projects = [
             "Interactive storytelling",
             "Performance optimized"
         ]
+    },
+    {
+        id: 7,
+        title: "WebApp Confeitaria",
+        slug: "confeitaria-app",
+        description: "Aplicação web completa para gestão de confeitaria com cálculo automático de custos, precificação inteligente e controle de receitas. Sistema completo com autenticação, dashboard analítico e ferramentas de gestão financeira.",
+        shortDesc: "Sistema de gestão para confeitarias com análise de custos",
+        fullDescription: `
+            <p>O WebApp Confeitaria é uma solução completa desenvolvida com React, TypeScript e Firebase para profissionais de confeitaria que precisam de uma ferramenta robusta para gestão de receitas e análise de lucratividade.</p>
+            
+            <br />
+            <h3>Funcionalidades Principais</h3>
+            <ul style="list-style-type: disc; color: black; padding-left: 1.5em;">
+                <li>Cálculo automático de custos de ingredientes, mão de obra e overhead</li>
+                <li>Precificação inteligente com margem de lucro configurável</li>
+                <li>Dashboard com gráficos interativos e análise de lucratividade</li>
+                <li>Sistema completo de autenticação com recuperação de senha</li>
+                <li>Gestão de receitas com categorização e sistema de tags</li>
+                <li>Sistema de rascunhos com salvamento automático</li>
+                <li>Backup e exportação de dados</li>
+            </ul>
+            
+            <br />
+            <h3>Tecnologias e Arquitetura</h3>
+            <p>Desenvolvido com React 19 e TypeScript para máxima confiabilidade, utiliza Firebase para autenticação e Firestore como banco de dados NoSQL. A interface é construída com Tailwind CSS, oferecendo design responsivo e moderno.</p>
+            
+            <br />
+            <h3>Interface e UX</h3>
+            <p>Design mobile-first com animações suaves, validação em tempo real, e feedback visual constante. Sistema de toasts para notificações e loading states otimizados para melhor experiência do usuário.</p>
+        `,
+        tech: ["React 19", "TypeScript", "Firebase", "Firestore", "Tailwind CSS", "Chart.js", "Vite"],
+        categories: ["Web App", "Business Management", "Full-stack"],
+        gradient: "from-orange-400 to-orange-600",
+        status: "em-andamento",
+        year: "2025",
+        duration: "Em desenvolvimento",
+        role: "Full-stack Developer",
+        client: "Projeto Pessoal",
+        images: [
+            "images/projects/confeitaria/dashboard.jpg",
+            "images/projects/confeitaria/receitas.jpg",
+            "images/projects/confeitaria/custos.jpg",
+            "images/projects/confeitaria/analytics.jpg"
+        ],
+        links: {
+            live: "https://confeitaria-app-lime.vercel.app/",
+            github: "https://github.com/davydfontourac/confeitaria-app",
+            case_study: null
+        },
+        features: [
+            "Cálculo automático de custos",
+            "Dashboard com analytics",
+            "Sistema de autenticação",
+            "Backup e exportação",
+            "Interface responsiva",
+            "PWA ready"
+        ],
+        // SEO specific fields
+        seo: {
+            title: "WebApp Confeitaria - Sistema de Gestão - Davyd Fontoura | Portfolio",
+            description: "Sistema completo de gestão para confeitarias com cálculo de custos, precificação inteligente e análise de lucratividade. Desenvolvido por Davyd Fontoura com React, TypeScript e Firebase.",
+            keywords: "webapp confeitaria, gestão confeitaria, cálculo custos, react typescript, firebase, davyd fontoura, sistema gestão, precificação",
+            ogImage: "images/projects/confeitaria/dashboard.jpg"
+        }
+    },
+    {
+        id: 8,
+        title: "Gerador de Números React",
+        slug: "gerador-numeros",
+        description: "Gerador de números aleatórios interativo com dado de 6 lados, animações suaves e design responsivo. Interface moderna construída com React, Vite e Tailwind CSS.",
+        shortDesc: "Gerador de números com dado interativo e animações",
+        fullDescription: `
+            <p>O Gerador de Números React é uma aplicação interativa que simula um dado de 6 lados com animações realistas e interface moderna. Perfeito para jogos, decisões aleatórias ou como demonstração de técnicas de animação em React.</p>
+            
+            <br />
+            <h3>Características Técnicas</h3>
+            <ul style="list-style-type: disc; color: black; padding-left: 1.5em;">
+                <li>Dado interativo com pontos visuais realistas</li>
+                <li>Animações CSS suaves com transições fluidas</li>
+                <li>Design totalmente responsivo para todos os dispositivos</li>
+                <li>Interface moderna com gradientes e efeitos visuais</li>
+                <li>Feedback visual durante o carregamento</li>
+                <li>Experiência de usuário intuitiva e acessível</li>
+            </ul>
+            
+            <br />
+            <h3>Implementação e Performance</h3>
+            <p>Construído com React 19 e Vite para máxima performance, utiliza Tailwind CSS para estilização eficiente. As animações são otimizadas para manter 60fps em todos os dispositivos.</p>
+            
+            <br />
+            <h3>Roadmap Futuro</h3>
+            <p>Planejadas expansões incluem diferentes tipos de dados (D8, D10, D12, D20), gerador com range customizável, histórico de resultados e modo de múltiplos dados simultâneos.</p>
+        `,
+        tech: ["React 19", "Vite", "Tailwind CSS", "PostCSS", "ESLint"],
+        categories: ["Interactive", "Animation", "React"],
+        gradient: "from-cyan-400 to-cyan-600",
+        status: "em-andamento",
+        year: "2025",
+        duration: "Em desenvolvimento",
+        role: "Front-end Developer",
+        client: "Projeto Pessoal",
+        images: [
+            "images/projects/gerador/desktop-view.jpg",
+            "images/projects/gerador/mobile-view.jpg",
+            "images/projects/gerador/animation.jpg",
+            "images/projects/gerador/interface.jpg"
+        ],
+        links: {
+            live: "https://davydfontourac.github.io/gerador-numeros-react",
+            github: "https://github.com/davydfontourac/gerador-numeros",
+            case_study: null
+        },
+        features: [
+            "Dado interativo 3D",
+            "Animações CSS otimizadas",
+            "Design responsivo",
+            "Interface intuitiva",
+            "Performance 60fps",
+            "Experiência mobile otimizada"
+        ],
+        // SEO specific fields
+        seo: {
+            title: "Gerador de Números React - Dado Interativo - Davyd Fontoura | Portfolio",
+            description: "Gerador de números aleatórios com dado interativo e animações suaves. Aplicação React moderna desenvolvida por Davyd Fontoura com Vite e Tailwind CSS.",
+            keywords: "gerador números, dado interativo, react animações, vite, tailwind css, davyd fontoura, números aleatórios, interface moderna",
+            ogImage: "images/projects/gerador/desktop-view.jpg"
+        }
+    },
+    {
+        id: 9,
+        title: "Jogo da Velha React",
+        slug: "jogo-da-velha",
+        description: "Jogo da velha moderno e interativo com design glassmorphism, efeitos sonoros e animações fluidas. Desenvolvido com React, Vite e Tailwind CSS com foco na experiência do usuário.",
+        shortDesc: "Jogo da velha com design moderno e efeitos sonoros",
+        fullDescription: `
+            <p>O Jogo da Velha React é uma implementação moderna do clássico jogo, elevando a experiência com design glassmorphism, efeitos sonoros e animações fluidas. Demonstra técnicas avançadas de React e design responsivo.</p>
+            
+            <br />
+            <h3>Características Visuais e Interativas</h3>
+            <ul style="list-style-type: disc; color: black; padding-left: 1.5em;">
+                <li>Interface moderna com design glassmorphism</li>
+                <li>Efeitos sonoros para jogadas e vitórias usando Web Audio API</li>
+                <li>Animações fluidas e transições suaves</li>
+                <li>Design responsivo que funciona em qualquer dispositivo</li>
+                <li>Indicador visual do jogador atual</li>
+                <li>Placar persistente durante a sessão</li>
+            </ul>
+            
+            <br />
+            <h3>Funcionalidades do Jogo</h3>
+            <p>Detecção automática de vitória em todas as direções (horizontal, vertical e diagonal), alternância automática de jogadores, e reset rápido do jogo. A lógica é otimizada para performance máxima.</p>
+            
+            <br />
+            <h3>Tecnologia e Performance</h3>
+            <p>Utiliza React 19 com hooks modernos, Vite para desenvolvimento ultrarrápido, e Tailwind CSS para estilização eficiente. O Vite oferece início instantâneo e Hot Module Replacement otimizado.</p>
+        `,
+        tech: ["React 19", "Vite", "Tailwind CSS", "Web Audio API", "PostCSS"],
+        categories: ["Game", "Interactive", "React"],
+        gradient: "from-purple-400 to-purple-600",
+        status: "em-andamento",
+        year: "2025",
+        duration: "Em desenvolvimento",
+        role: "Front-end Developer",
+        client: "Projeto Pessoal",
+        images: [
+            "images/projects/jogo-velha/gameplay.jpg",
+            "images/projects/jogo-velha/interface.jpg",
+            "images/projects/jogo-velha/mobile.jpg",
+            "images/projects/jogo-velha/victory.jpg"
+        ],
+        links: {
+            live: null,
+            github: "https://github.com/davydfontourac/projeto_jogo_da_velha",
+            case_study: null
+        },
+        features: [
+            "Design glassmorphism",
+            "Efeitos sonoros",
+            "Detecção automática de vitória",
+            "Interface responsiva",
+            "Animações fluidas",
+            "Performance otimizada"
+        ],
+        // SEO specific fields
+        seo: {
+            title: "Jogo da Velha React - Design Moderno - Davyd Fontoura | Portfolio",
+            description: "Jogo da velha moderno com design glassmorphism, efeitos sonoros e animações fluidas. Desenvolvido por Davyd Fontoura usando React, Vite e Tailwind CSS.",
+            keywords: "jogo da velha, react game, glassmorphism, efeitos sonoros, vite, tailwind css, davyd fontoura, jogo interativo, design moderno",
+            ogImage: "images/projects/jogo-velha/gameplay.jpg"
+        }
     }
 ]
 
