@@ -6,7 +6,7 @@ const Hero = ({ navigateToSection }) => {
   const { theme } = useContext(ThemeContext)
   
   return (
-    <section id="home" className="min-h-screen xl:w-[220vh] xl:mx-auto pt-16 flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 w-full transition-colors duration-300 relative overflow-hidden">
+    <section id="home" className="min-h-screen pt-16 flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 w-full transition-colors duration-300 relative overflow-hidden">
       {/* Partículas apenas no modo claro */}
       <ParticlesBackground isDarkMode={theme === 'dark'} />
       
