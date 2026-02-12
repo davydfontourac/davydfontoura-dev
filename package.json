@@ -4,8 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/optimize-images.js",
     "dev": "vite",
+    "prebuild": "node scripts/optimize-images.js",
     "build": "vite build",
+    "prebuild:vercel": "node scripts/optimize-images.js",
     "build:vercel": "vite build --base=/",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -30,6 +33,7 @@
     "gh-pages": "^6.3.0",
     "globals": "^16.4.0",
     "postcss": "^8.5.6",
+    "sharp": "^0.34.3",
     "tailwindcss": "^3.4.13",
     "vite": "^7.1.6"
   }

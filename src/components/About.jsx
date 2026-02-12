@@ -1,5 +1,5 @@
 import { Code, Palette, Rocket, Users, Award, TrendingUp } from 'lucide-react'
-import profileImage from '../assets/profile.jpg'
+import profileImage from '../assets/profile.webp'
 
 const About = () => {
   const skills = ['JavaScript', 'HTML', 'CSS', 'React', 'Vite', 'Tailwind CSS', 'Python', 'Git', 'GitHub', 'Excel']
