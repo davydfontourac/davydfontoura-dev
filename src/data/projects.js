@@ -35,10 +35,10 @@ export const projects = [
         role: "Front-end Developer",
         client: "TREIS Tecnologia",
         images: [
-            "images/projects/treis/hero.png",
-            "images/projects/treis/services.png",
-            "images/projects/treis/about.png",
-            "images/projects/treis/contact.png"
+            "images/projects/treis/hero.webp",
+            "images/projects/treis/services.webp",
+            "images/projects/treis/about.webp",
+            "images/projects/treis/contact.webp"
         ],
         links: {
             live: "https://treis.com.br/",
@@ -55,7 +55,7 @@ export const projects = [
             title: "Página Corporativa TREIS Tecnologia - Davyd Fontoura | Portfolio",
             description: "Desenvolvimento do site institucional da TREIS Tecnologia com design responsivo e moderno. Projeto realizado por Davyd Fontoura usando HTML5, Tailwind CSS e JavaScript.",
             keywords: "treis tecnologia, site institucional, desenvolvimento web, html5, tailwind css, javascript, davyd fontoura, front-end developer",
-            ogImage: "images/projects/treis/hero.png"
+            ogImage: "images/projects/treis/hero.webp"
         }
     },
     {
@@ -94,14 +94,14 @@ export const projects = [
         role: "Front-end Developer",
         client: "Klin via TREIS Tecnologia",
         images: [
-            "images/projects/klin/hero.png",
-            "images/projects/klin/login.png",
-            "images/projects/klin/grade.png",
-            "images/projects/klin/detalhes.png",
-            "images/projects/klin/carrinho.png",
-            "images/projects/klin/pedido.png",
-            "images/projects/klin/posicao.png",
-            "images/projects/klin/analise.png"
+            "images/projects/klin/hero.webp",
+            "images/projects/klin/login.webp",
+            "images/projects/klin/grade.webp",
+            "images/projects/klin/detalhes.webp",
+            "images/projects/klin/carrinho.webp",
+            "images/projects/klin/pedido.webp",
+            "images/projects/klin/posicao.webp",
+            "images/projects/klin/analise.webp"
         ],
         links: {
             live: null,
@@ -119,7 +119,7 @@ export const projects = [
             title: "Sistema B2B Klin - E-commerce Infantil - Davyd Fontoura | Portfolio",
             description: "Desenvolvimento de sistema B2B para a marca Klin, especializada em calçados infantis. Interface responsiva e otimizada desenvolvida por Davyd Fontoura usando React e Tailwind CSS.",
             keywords: "klin ecommerce, sistema b2b, calçados infantis, desenvolvimento web, react, tailwind css, davyd fontoura, front-end developer, interface responsiva",
-            ogImage: "images/projects/klin/hero.png"
+            ogImage: "images/projects/klin/hero.webp"
         }
     },
     {
@@ -158,12 +158,12 @@ export const projects = [
         role: "Front-end Developer",
         client: "Capodarte via TREIS Tecnologia",
         images: [
-            "images/projects/capodarte/hero.png",
-            "images/projects/capodarte/login.png",
-            "images/projects/capodarte/listagem.png",
-            "images/projects/capodarte/detalhes.png",
-            "images/projects/capodarte/carrinho.png",
-            "images/projects/capodarte/finalizar.png"
+            "images/projects/capodarte/hero.webp",
+            "images/projects/capodarte/login.webp",
+            "images/projects/capodarte/listagem.webp",
+            "images/projects/capodarte/detalhes.webp",
+            "images/projects/capodarte/carrinho.webp",
+            "images/projects/capodarte/finalizar.webp"
         ],
         links: {
             live: null,
@@ -181,7 +181,7 @@ export const projects = [
             title: "Sistema B2B Capodarte - Moda e Estilo - Davyd Fontoura | Portfolio",
             description: "Desenvolvimento de sistema B2B para a marca Capodarte, mantendo a elegância e sofisticação da marca. Projeto realizado por Davyd Fontoura com foco em performance e usabilidade.",
             keywords: "capodarte moda, sistema b2b, desenvolvimento web, interface elegante, tailwind css, davyd fontoura, front-end developer, design system",
-            ogImage: "images/projects/capodarte/hero.png"
+            ogImage: "images/projects/capodarte/hero.webp"
         }
     }, 
         {
@@ -219,10 +219,10 @@ export const projects = [
         role: "Full-stack Developer",
         client: "Projeto Pessoal",
         images: [
-            "images/projects/portal-de-noticias/home.png",
-            "images/projects/portal-de-noticias/category.png",
-            "images/projects/portal-de-noticias/article.png",
-            "images/projects/portal-de-noticias/comments.png",
+            "images/projects/portal-de-noticias/home.webp",
+            "images/projects/portal-de-noticias/category.webp",
+            "images/projects/portal-de-noticias/article.webp",
+            "images/projects/portal-de-noticias/comments.webp",
         ],
         links: {
             live: "https://fofocageral.com.br/",
@@ -240,7 +240,7 @@ export const projects = [
             title: "Portal de Notícias - WordPress - Davyd Fontoura | Portfolio",
             description: "Portal de notícias dinâmico desenvolvido com WordPress, oferecendo uma experiência de leitura envolvente e fácil navegação.",
             keywords: "portal de notícias, WordPress, notícias, SEO, design responsivo, Davyd Fontoura",
-            ogImage: "images/projects/portal-de-noticias/home.png"
+            ogImage: "images/projects/portal-de-noticias/home.webp"
         }
     },
     {
@@ -281,11 +281,11 @@ export const projects = [
         role: "Full-stack Developer",
         client: "Projeto Pessoal",
         images: [
-            "images/projects/confeitaria/login.png",
-            "images/projects/confeitaria/dashboard.png",
-            "images/projects/confeitaria/receitas.png",
-            "images/projects/confeitaria/custos.png",
-            "images/projects/confeitaria/analytics.png"
+            "images/projects/confeitaria/login.webp",
+            "images/projects/confeitaria/dashboard.webp",
+            "images/projects/confeitaria/receitas.webp",
+            "images/projects/confeitaria/custos.webp",
+            "images/projects/confeitaria/analytics.webp"
         ],
         links: {
             live: "https://confeitaria-app-lime.vercel.app/",
@@ -305,7 +305,7 @@ export const projects = [
             title: "WebApp Confeitaria - Sistema de Gestão - Davyd Fontoura | Portfolio",
             description: "Sistema completo de gestão para confeitarias com cálculo de custos, precificação inteligente e análise de lucratividade. Desenvolvido por Davyd Fontoura com React, TypeScript e Firebase.",
             keywords: "webapp confeitaria, gestão confeitaria, cálculo custos, react typescript, firebase, davyd fontoura, sistema gestão, precificação",
-            ogImage: "images/projects/confeitaria/dashboard.png"
+            ogImage: "images/projects/confeitaria/dashboard.webp"
         }
     },
  
