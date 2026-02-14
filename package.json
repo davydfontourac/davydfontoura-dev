@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/optimize-images.js",
+    "optimize-images": "node scripts/optimize-images.js",
     "dev": "vite",
     "prebuild": "node scripts/optimize-images.js",
     "build": "vite build",
