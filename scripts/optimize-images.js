@@ -15,19 +15,27 @@ const targetDirs = [
 const supportedExtensions = new Set(['.png', '.jpg', '.jpeg'])
 
 const walkDir = async (dirPath) => {
-  const entries = await fs.readdir(dirPath, { withFileTypes: true })
-  const files = []
+  try {
+    const entries = await fs.readdir(dirPath, { withFileTypes: true })
+    const files = []
 
-  for (const entry of entries) {
-    const fullPath = path.join(dirPath, entry.name)
-    if (entry.isDirectory()) {
-      files.push(...await walkDir(fullPath))
-    } else {
-      files.push(fullPath)
+    for (const entry of entries) {
+      const fullPath = path.join(dirPath, entry.name)
+      if (entry.isDirectory()) {
+        files.push(...await walkDir(fullPath))
+      } else {
+        files.push(fullPath)
+      }
     }
-  }
 
-  return files
+    return files
+  } catch (error) {
+    // Se o diretório não existe, retorna array vazio ao invés de falhar
+    if (error.code === 'ENOENT') {
+      return []
+    }
+    throw error
+  }
 }
 
 const shouldSkip = async (inputPath, outputPath) => {
@@ -59,19 +67,25 @@ const convertToWebp = async (inputPath) => {
 
 const run = async () => {
   const results = []
+  const errors = []
 
   for (const dir of targetDirs) {
     try {
       const files = await walkDir(dir)
       for (const file of files) {
-        const output = await convertToWebp(file)
-        if (output) {
-          results.push({ input: file, output })
+        try {
+          const output = await convertToWebp(file)
+          if (output) {
+            results.push({ input: file, output })
+          }
+        } catch (error) {
+          errors.push({ file, error: error.message })
+          console.error(`❌ Falha ao converter ${file}:`, error.message)
         }
       }
     } catch (error) {
-      console.error(`Falha ao processar ${dir}:`, error)
-      process.exitCode = 1
+      errors.push({ dir, error: error.message })
+      console.error(`❌ Falha ao processar diretório ${dir}:`, error.message)
     }
   }
 
@@ -79,6 +93,11 @@ const run = async () => {
     console.log(`✅ WebP gerados: ${results.length}`)
   } else {
     console.log('ℹ️ Nenhuma imagem precisou ser convertida')
+  }
+
+  if (errors.length > 0) {
+    console.error(`\n⚠️ Total de erros: ${errors.length}`)
+    process.exitCode = 1
   }
 }
 

@@ -320,7 +320,7 @@ const ProjectDetail = () => {
                 onClick={() => handleImageClick(currentImageIndex)}
                 role="button"
                 tabIndex={0}
-                aria-label={`Ampliar imagem: ${project.images[currentImageIndex]?.split('/').pop().replace(/\.(jpg|png|jpeg|webp)/, '').replace('-', ' ')}`}
+                aria-label={`Ampliar imagem: ${project.images[currentImageIndex]?.split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault()
@@ -338,7 +338,7 @@ const ProjectDetail = () => {
                   <img 
                     key={`main-image-${currentImageIndex}`}
                     src={getImagePath(project.images[currentImageIndex])}
-                    alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)/, '').replace('-', ' ')}`}
+                    alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
                     className={`w-full h-auto max-h-[32rem] object-contain transition-all duration-300 ease-in-out ${
                       isTransitioning ? 'opacity-0' : 'opacity-100'
                     }`}
@@ -358,7 +358,7 @@ const ProjectDetail = () => {
                         <Lightbulb size={24} className="text-gray-500 dark:text-gray-400" />
                       </div>
                       <p className="text-gray-500 dark:text-gray-400 text-sm">
-                        {project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)/, '').replace('-', ' ')}
+                        {project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}
                       </p>
                     </div>
                   </div>
@@ -380,7 +380,7 @@ const ProjectDetail = () => {
                     onClick={() => handleThumbnailClick(index)}
                     role="button"
                     tabIndex={0}
-                    aria-label={`Selecionar imagem ${index + 1}: ${image.split('/').pop().replace(/\.(jpg|png|jpeg|webp)/, '').replace('-', ' ')}`}
+                    aria-label={`Selecionar imagem ${index + 1}: ${image.split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault()
@@ -392,7 +392,7 @@ const ProjectDetail = () => {
                     {!thumbnailErrors[index] ? (
                       <img 
                         src={getImagePath(image)}
-                        alt={`${project.title} - ${image.split('/').pop().replace(/\.(jpg|png|jpeg|webp)/, '').replace('-', ' ')}`}
+                        alt={`${project.title} - ${image.split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
                         className="w-full h-auto max-h-[8rem] object-contain"
                         onError={() => {
                           setThumbnailErrors(prev => ({ ...prev, [index]: true }))
@@ -402,7 +402,7 @@ const ProjectDetail = () => {
                       /* Placeholder para quando a imagem não carrega */
                       <div className="w-full min-h-[6rem] flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-lg">
                         <p className="text-gray-500 dark:text-gray-400 text-xs text-center px-1">
-                          {image.split('/').pop().replace(/\.(jpg|png|jpeg|webp)/, '').replace('-', ' ')}
+                          {image.split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}
                         </p>
                       </div>
                     )}
@@ -583,7 +583,7 @@ const ProjectDetail = () => {
               {!imageError ? (
                 <img 
                   src={getImagePath(project.images[currentImageIndex])}
-                  alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)/, '').replace('-', ' ')}`}
+                  alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
                   className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
                   onError={() => setImageError(true)}
                 />
@@ -598,7 +598,7 @@ const ProjectDetail = () => {
                       Erro ao carregar imagem
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      {project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)/, '').replace('-', ' ')}
+                      {project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       Não foi possível carregar a imagem. Para fechar, clique no X ou pressione ESC.
