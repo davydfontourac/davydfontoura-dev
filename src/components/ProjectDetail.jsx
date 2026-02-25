@@ -1,172 +1,198 @@
-import { useState, useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
-import { ArrowLeft, ExternalLink, Github, Calendar, User, Clock, Tag, CheckCircle, Lightbulb, X } from 'lucide-react'
-import { getProjectBySlug, getRelatedProjects } from '../data/projects'
-import ThemeToggle from './ThemeToggle'
-import useSEO from '../hooks/useSEO'
-import { getImagePath, getBaseUrl } from '../utils/imagePaths'
+import { useState, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  ExternalLink,
+  Github,
+  Calendar,
+  User,
+  Clock,
+  Tag,
+  CheckCircle,
+  Lightbulb,
+  X,
+} from "lucide-react";
+import { getProjectBySlug, getRelatedProjects } from "../data/projects";
+import ThemeToggle from "./ThemeToggle";
+import useSEO from "../hooks/useSEO";
+import { getImagePath, getBaseUrl } from "../utils/imagePaths";
 
 const ProjectDetail = () => {
-  const { slug } = useParams()
-  const navigate = useNavigate()
-  const [project, setProject] = useState(null)
-  const [relatedProjects, setRelatedProjects] = useState([])
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [isImageModalOpen, setIsImageModalOpen] = useState(false)
-  const [imageLoaded, setImageLoaded] = useState(false)
-  const [imageError, setImageError] = useState(false)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [thumbnailErrors, setThumbnailErrors] = useState({})
-  const [relatedProjectImageErrors, setRelatedProjectImageErrors] = useState({})
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const [project, setProject] = useState(null);
+  const [relatedProjects, setRelatedProjects] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [thumbnailErrors, setThumbnailErrors] = useState({});
+  const [relatedProjectImageErrors, setRelatedProjectImageErrors] = useState(
+    {},
+  );
 
   useEffect(() => {
-    const foundProject = getProjectBySlug(slug)
+    const foundProject = getProjectBySlug(slug);
     if (foundProject) {
-      setProject(foundProject)
-      setRelatedProjects(getRelatedProjects(foundProject.id))
+      setProject(foundProject);
+      setRelatedProjects(getRelatedProjects(foundProject.id));
       // Reset para a primeira imagem ao trocar de projeto
-      setCurrentImageIndex(0)
+      setCurrentImageIndex(0);
       // Reset do estado de carregamento da imagem
-      setImageLoaded(false)
-      setImageError(false)
-      setIsTransitioning(false)
+      setImageLoaded(false);
+      setImageError(false);
+      setIsTransitioning(false);
       // Reset do estado de carregamento das miniaturas
-      setThumbnailErrors({})
+      setThumbnailErrors({});
       // Reset do estado de carregamento das imagens dos projetos relacionados
-      setRelatedProjectImageErrors({})
+      setRelatedProjectImageErrors({});
     } else {
       // Redirecionar para 404 ou página principal se projeto não encontrado
-      navigate('/')
+      navigate("/");
     }
-  }, [slug, navigate])
+  }, [slug, navigate]);
 
   // SEO Configuration
-  const currentUrl = window.location.href
-  const baseUrl = getBaseUrl()
-  
+  const currentUrl = window.location.href;
+  const baseUrl = getBaseUrl();
+
   useSEO({
-    title: project?.seo?.title || `${project?.title} - Davyd Fontoura | Portfolio`,
+    title:
+      project?.seo?.title || `${project?.title} - Davyd Fontoura | Portfolio`,
     description: project?.seo?.description || project?.description,
-    keywords: project?.seo?.keywords || `${project?.title}, desenvolvimento web, davyd fontoura, front-end developer`,
+    keywords:
+      project?.seo?.keywords ||
+      `${project?.title}, desenvolvimento web, davyd fontoura, front-end developer`,
     ogTitle: project?.seo?.title || `${project?.title} - Davyd Fontoura`,
     ogDescription: project?.seo?.description || project?.description,
-    ogImage: project?.seo?.ogImage ? `${baseUrl}${getImagePath(project.seo.ogImage)}` : (project?.images?.[0] ? `${baseUrl}${getImagePath(project.images[0])}` : `${baseUrl}/og-image.jpg`),
+    ogImage: project?.seo?.ogImage
+      ? `${baseUrl}${getImagePath(project.seo.ogImage)}`
+      : project?.images?.[0]
+        ? `${baseUrl}${getImagePath(project.images[0])}`
+        : `${baseUrl}/og-image.jpg`,
     ogUrl: currentUrl,
     canonical: currentUrl,
-    structuredData: project ? {
-      "@context": "https://schema.org",
-      "@type": "CreativeWork",
-      "name": project.title,
-      "description": project.description,
-      "author": {
-        "@type": "Person",
-        "name": "Davyd Fontoura",
-        "jobTitle": "Desenvolvedor Front-End"
-      },
-      "creator": {
-        "@type": "Person",
-        "name": "Davyd Fontoura"
-      },
-      "dateCreated": project.year,
-      "inLanguage": "pt-BR",
-      "keywords": project.categories.join(", "),
-      "image": project.images?.[0] ? `${baseUrl}${getImagePath(project.images[0])}` : undefined,
-      "url": currentUrl,
-      "workExample": {
-        "@type": "WebSite",
-        "name": project.title,
-        "description": project.description,
-        "url": project.links?.live || currentUrl
-      }
-    } : null
-  })
+    structuredData: project
+      ? {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          description: project.description,
+          author: {
+            "@type": "Person",
+            name: "Davyd Fontoura",
+            jobTitle: "Desenvolvedor Front-End",
+          },
+          creator: {
+            "@type": "Person",
+            name: "Davyd Fontoura",
+          },
+          dateCreated: project.year,
+          inLanguage: "pt-BR",
+          keywords: project.categories.join(", "),
+          image: project.images?.[0]
+            ? `${baseUrl}${getImagePath(project.images[0])}`
+            : undefined,
+          url: currentUrl,
+          workExample: {
+            "@type": "WebSite",
+            name: project.title,
+            description: project.description,
+            url: project.links?.live || currentUrl,
+          },
+        }
+      : null,
+  });
 
   // Reset imageLoaded quando trocar de imagem
   useEffect(() => {
-    setImageLoaded(false)
-    setImageError(false)
-  }, [currentImageIndex])
+    setImageLoaded(false);
+    setImageError(false);
+  }, [currentImageIndex]);
 
   // Animação suave ao carregar imagem
   useEffect(() => {
     if (imageLoaded) {
-      setIsTransitioning(false)
+      setIsTransitioning(false);
     }
-  }, [imageLoaded])
+  }, [imageLoaded]);
 
   // Fechar modal com ESC
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape' && isImageModalOpen) {
-        setIsImageModalOpen(false)
+      if (event.key === "Escape" && isImageModalOpen) {
+        setIsImageModalOpen(false);
       }
-    }
+    };
 
-    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isImageModalOpen])
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isImageModalOpen]);
 
   const handleImageClick = (index) => {
-    setCurrentImageIndex(index)
-    setImageError(false) // Reset do erro da imagem ao abrir o modal
-    setIsImageModalOpen(true)
-  }
+    setCurrentImageIndex(index);
+    setImageError(false); // Reset do erro da imagem ao abrir o modal
+    setIsImageModalOpen(true);
+  };
 
   const handleBackToPortfolio = () => {
     // Usa hash para navegar diretamente para a seção portfólio
-    window.location.href = '/#portfolio'
-  }
+    window.location.href = "/#portfolio";
+  };
 
   const handleThumbnailClick = (index) => {
     if (index !== currentImageIndex) {
-      setIsTransitioning(true)
-      
+      setIsTransitioning(true);
+
       // Pequeno delay para a animação de fade out
       setTimeout(() => {
-        setCurrentImageIndex(index)
-        setIsTransitioning(false)
-      }, 150)
+        setCurrentImageIndex(index);
+        setIsTransitioning(false);
+      }, 150);
     }
-  }
-
-
+  };
 
   if (!project) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">Carregando projeto...</p>
+          <p className="text-gray-600 dark:text-gray-300">
+            Carregando projeto...
+          </p>
         </div>
       </div>
-    )
+    );
   }
 
   const getStatusTag = (status) => {
     const statusConfig = {
-      'concluido': {
-        text: 'Concluído',
-        classes: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-        icon: CheckCircle
+      concluido: {
+        text: "Concluído",
+        classes:
+          "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+        icon: CheckCircle,
       },
-      'em-producao': {
-        text: 'Em Produção',
-        classes: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-        icon: Clock
+      "em-producao": {
+        text: "Em Produção",
+        classes:
+          "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
+        icon: Clock,
       },
-      'pausado': {
-        text: 'Pausado',
-        classes: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-        icon: Tag
-      }
-    }
-    
-    return statusConfig[status] || statusConfig['em-producao']
-  }
+      pausado: {
+        text: "Pausado",
+        classes: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+        icon: Tag,
+      },
+    };
 
-  const StatusIcon = getStatusTag(project.status).icon
+    return statusConfig[status] || statusConfig["em-producao"];
+  };
+
+  const StatusIcon = getStatusTag(project.status).icon;
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -178,24 +204,29 @@ const ProjectDetail = () => {
               onClick={() => handleBackToPortfolio()}
               className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
             >
-              <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+              <ArrowLeft
+                size={20}
+                className="group-hover:-translate-x-1 transition-transform"
+              />
               <span className="font-medium">Voltar ao portfólio</span>
             </button>
-            
+
             {/* Breadcrumb e Theme Toggle */}
             <div className="flex items-center space-x-6">
               {/* Breadcrumb */}
               <nav className="hidden md:flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                <button 
+                <button
                   onClick={() => handleBackToPortfolio()}
                   className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
                 >
                   Portfólio
                 </button>
                 <span>/</span>
-                <span className="text-gray-900 dark:text-white font-medium">{project.title}</span>
+                <span className="text-gray-900 dark:text-white font-medium">
+                  {project.title}
+                </span>
               </nav>
-              
+
               {/* Theme Toggle */}
               <ThemeToggle />
             </div>
@@ -215,7 +246,7 @@ const ProjectDetail = () => {
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                 {project.description}
               </p>
-              
+
               {/* Tags de categorias */}
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.categories.map((category, index) => (
@@ -234,44 +265,58 @@ const ProjectDetail = () => {
             <div className="lg:w-80 bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Status</span>
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusTag(project.status).classes}`}>
+                  <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                    Status
+                  </span>
+                  <span
+                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusTag(project.status).classes}`}
+                  >
                     <StatusIcon size={12} className="mr-1" />
                     {getStatusTag(project.status).text}
                   </span>
                 </div>
-                
+
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center">
                     <Calendar size={14} className="mr-1" />
                     Ano
                   </span>
-                  <span className="text-sm text-gray-900 dark:text-white font-medium">{project.year}</span>
+                  <span className="text-sm text-gray-900 dark:text-white font-medium">
+                    {project.year}
+                  </span>
                 </div>
-                
+
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center">
                     <Clock size={14} className="mr-1" />
                     Duração
                   </span>
-                  <span className="text-sm text-gray-900 dark:text-white font-medium">{project.duration}</span>
+                  <span className="text-sm text-gray-900 dark:text-white font-medium">
+                    {project.duration}
+                  </span>
                 </div>
-                
+
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center">
                     <User size={14} className="mr-1" />
                     Função
                   </span>
-                  <span className="text-sm text-gray-900 dark:text-white font-medium">{project.role}</span>
+                  <span className="text-sm text-gray-900 dark:text-white font-medium">
+                    {project.role}
+                  </span>
                 </div>
-                
+
                 {project.client && (
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Cliente</span>
-                    <span className="text-sm text-gray-900 dark:text-white font-medium">{project.client}</span>
+                    <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                      Cliente
+                    </span>
+                    <span className="text-sm text-gray-900 dark:text-white font-medium">
+                      {project.client}
+                    </span>
                   </div>
                 )}
-                
+
                 {/* Links do projeto */}
                 <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
                   <div className="space-y-2">
@@ -286,7 +331,7 @@ const ProjectDetail = () => {
                         Ver projeto online
                       </a>
                     )}
-                    
+
                     {project.links.github && (
                       <a
                         href={project.links.github}
@@ -312,19 +357,23 @@ const ProjectDetail = () => {
               <div className="w-1 h-8 bg-orange-600 mr-4 rounded-full"></div>
               Galeria do Projeto
             </h2>
-            
+
             {/* Imagem principal */}
             <div className="mb-6">
-              <div 
+              <div
                 className="relative rounded-lg overflow-hidden cursor-pointer group transition-all duration-300 ease-in-out min-h-[24rem] max-h-[32rem] h-auto flex items-center justify-center"
                 onClick={() => handleImageClick(currentImageIndex)}
                 role="button"
                 tabIndex={0}
-                aria-label={`Ampliar imagem: ${project.images[currentImageIndex]?.split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
+                aria-label={`Ampliar imagem: ${project.images[currentImageIndex]
+                  ?.split("/")
+                  .pop()
+                  .replace(/\.(jpg|png|jpeg|webp)$/i, "")
+                  .replace("-", " ")}`}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    handleImageClick(currentImageIndex)
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleImageClick(currentImageIndex);
                   }
                 }}
               >
@@ -335,37 +384,50 @@ const ProjectDetail = () => {
                 </div>
                 {/* Imagem real ou placeholder */}
                 {!imageError ? (
-                  <img 
+                  <img
                     key={`main-image-${currentImageIndex}`}
                     src={getImagePath(project.images[currentImageIndex])}
-                    alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
+                    alt={`${project.title} - ${project.images[currentImageIndex]
+                      .split("/")
+                      .pop()
+                      .replace(/\.(jpg|png|jpeg|webp)$/i, "")
+                      .replace("-", " ")}`}
                     className={`w-full h-auto max-h-[32rem] object-contain transition-all duration-300 ease-in-out ${
-                      isTransitioning ? 'opacity-0' : 'opacity-100'
+                      isTransitioning ? "opacity-0" : "opacity-100"
                     }`}
                     onLoad={() => setImageLoaded(true)}
                     onError={() => {
-                      setImageError(true)
-                      setImageLoaded(false)
+                      setImageError(true);
+                      setImageLoaded(false);
                     }}
                   />
                 ) : (
                   /* Placeholder para quando a imagem não carrega */
-                  <div className={`w-full min-h-[24rem] flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-lg transition-all duration-300 ease-in-out ${
-                    isTransitioning ? 'opacity-0' : 'opacity-100'
-                  }`}>
+                  <div
+                    className={`w-full min-h-[24rem] flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-lg transition-all duration-300 ease-in-out ${
+                      isTransitioning ? "opacity-0" : "opacity-100"
+                    }`}
+                  >
                     <div className="text-center">
                       <div className="w-16 h-16 bg-gray-300 dark:bg-gray-600 rounded-lg mb-3 mx-auto flex items-center justify-center">
-                        <Lightbulb size={24} className="text-gray-500 dark:text-gray-400" />
+                        <Lightbulb
+                          size={24}
+                          className="text-gray-500 dark:text-gray-400"
+                        />
                       </div>
                       <p className="text-gray-500 dark:text-gray-400 text-sm">
-                        {project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}
+                        {project.images[currentImageIndex]
+                          .split("/")
+                          .pop()
+                          .replace(/\.(jpg|png|jpeg|webp)$/i, "")
+                          .replace("-", " ")}
                       </p>
                     </div>
                   </div>
                 )}
               </div>
             </div>
-            
+
             {/* Miniaturas */}
             {project.images.length > 1 && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -373,36 +435,51 @@ const ProjectDetail = () => {
                   <div
                     key={index}
                     className={`relative rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300 min-h-[6rem] max-h-[8rem] h-auto flex items-center justify-center ${
-                      index === currentImageIndex 
-                        ? 'border-blue-500 ring-2 ring-blue-200 dark:ring-blue-800' 
-                        : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600'
+                      index === currentImageIndex
+                        ? "border-blue-500 ring-2 ring-blue-200 dark:ring-blue-800"
+                        : "border-transparent hover:border-gray-300 dark:hover:border-gray-600"
                     }`}
                     onClick={() => handleThumbnailClick(index)}
                     role="button"
                     tabIndex={0}
-                    aria-label={`Selecionar imagem ${index + 1}: ${image.split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
+                    aria-label={`Selecionar imagem ${index + 1}: ${image
+                      .split("/")
+                      .pop()
+                      .replace(/\.(jpg|png|jpeg|webp)$/i, "")
+                      .replace("-", " ")}`}
                     onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        handleThumbnailClick(index)
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleThumbnailClick(index);
                       }
                     }}
                   >
                     {/* Imagem miniatura real ou placeholder */}
                     {!thumbnailErrors[index] ? (
-                      <img 
+                      <img
                         src={getImagePath(image)}
-                        alt={`${project.title} - ${image.split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
+                        alt={`${project.title} - ${image
+                          .split("/")
+                          .pop()
+                          .replace(/\.(jpg|png|jpeg|webp)$/i, "")
+                          .replace("-", " ")}`}
                         className="w-full h-auto max-h-[8rem] object-contain"
                         onError={() => {
-                          setThumbnailErrors(prev => ({ ...prev, [index]: true }))
+                          setThumbnailErrors((prev) => ({
+                            ...prev,
+                            [index]: true,
+                          }));
                         }}
                       />
                     ) : (
                       /* Placeholder para quando a imagem não carrega */
                       <div className="w-full min-h-[6rem] flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-lg">
                         <p className="text-gray-500 dark:text-gray-400 text-xs text-center px-1">
-                          {image.split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}
+                          {image
+                            .split("/")
+                            .pop()
+                            .replace(/\.(jpg|png|jpeg|webp)$/i, "")
+                            .replace("-", " ")}
                         </p>
                       </div>
                     )}
@@ -420,10 +497,10 @@ const ProjectDetail = () => {
             Sobre o Projeto
           </h2>
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
-            <div 
+            <div
               className="prose prose-lg max-w-none prose-blue"
               style={{
-                colorScheme: 'light dark'
+                colorScheme: "light dark",
               }}
             >
               <style>{`
@@ -456,7 +533,7 @@ const ProjectDetail = () => {
                   line-height: 1.6;
                 }
               `}</style>
-              <div 
+              <div
                 className="project-content"
                 dangerouslySetInnerHTML={{ __html: project.fullDescription }}
               />
@@ -494,7 +571,10 @@ const ProjectDetail = () => {
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {project.features.map((feature, index) => (
-                  <div key={index} className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600 hover:shadow-md transition-shadow duration-300">
+                  <div
+                    key={index}
+                    className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600 hover:shadow-md transition-shadow duration-300"
+                  >
                     <div className="flex-shrink-0 mt-0.5">
                       <CheckCircle size={18} className="text-green-500" />
                     </div>
@@ -523,23 +603,34 @@ const ProjectDetail = () => {
                     to={`/projeto/${relatedProject.slug}`}
                     className="group cursor-pointer transform transition-all duration-300 hover:scale-105 bg-white dark:bg-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-xl border border-gray-200 dark:border-gray-600"
                   >
-                    <div className={`h-36 relative overflow-hidden bg-gray-100 dark:bg-gray-800`}>
+                    <div
+                      className={`h-36 relative overflow-hidden bg-gray-100 dark:bg-gray-800`}
+                    >
                       {/* Imagem de fundo */}
-                      {relatedProject.images && relatedProject.images.length > 0 && !relatedProjectImageErrors[relatedProject.id] && (
-                        <img 
-                          src={getImagePath(relatedProject.images[0])} 
-                          alt={`${relatedProject.title} - Hero`}
-                          className="absolute inset-0 w-full h-full object-contain"
-                          onError={() => {
-                            setRelatedProjectImageErrors(prev => ({ ...prev, [relatedProject.id]: true }))
-                          }}
-                        />
-                      )}
+                      {relatedProject.images &&
+                        relatedProject.images.length > 0 &&
+                        !relatedProjectImageErrors[relatedProject.id] && (
+                          <img
+                            src={getImagePath(relatedProject.images[0])}
+                            alt={`${relatedProject.title} - Hero`}
+                            className="absolute inset-0 w-full h-full object-contain"
+                            onError={() => {
+                              setRelatedProjectImageErrors((prev) => ({
+                                ...prev,
+                                [relatedProject.id]: true,
+                              }));
+                            }}
+                          />
+                        )}
                       {/* Gradiente overlay */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${relatedProject.gradient} ${!relatedProjectImageErrors[relatedProject.id] && relatedProject.images && relatedProject.images.length > 0 ? 'opacity-60' : 'opacity-100'}`}></div>
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${relatedProject.gradient} ${!relatedProjectImageErrors[relatedProject.id] && relatedProject.images && relatedProject.images.length > 0 ? "opacity-60" : "opacity-100"}`}
+                      ></div>
                       {/* Hover overlay */}
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span className="text-white font-medium text-sm">Ver projeto</span>
+                        <span className="text-white font-medium text-sm">
+                          Ver projeto
+                        </span>
                       </div>
                     </div>
                     <div className="p-4">
@@ -560,11 +651,11 @@ const ProjectDetail = () => {
 
       {/* Modal de imagem (se necessário) */}
       {isImageModalOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-2"
           onClick={() => setIsImageModalOpen(false)}
         >
-          <div 
+          <div
             className="relative w-full h-full max-w-[95vw] max-h-[95vh]"
             onClick={(e) => e.stopPropagation()}
           >
@@ -577,13 +668,17 @@ const ProjectDetail = () => {
             >
               <X size={28} />
             </button>
-            
+
             {/* Conteúdo do modal */}
             <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
               {!imageError ? (
-                <img 
+                <img
                   src={getImagePath(project.images[currentImageIndex])}
-                  alt={`${project.title} - ${project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}`}
+                  alt={`${project.title} - ${project.images[currentImageIndex]
+                    .split("/")
+                    .pop()
+                    .replace(/\.(jpg|png|jpeg|webp)$/i, "")
+                    .replace("-", " ")}`}
                   className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
                   onError={() => setImageError(true)}
                 />
@@ -592,16 +687,24 @@ const ProjectDetail = () => {
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center max-w-md">
                   <div className="mb-4">
                     <div className="w-16 h-16 bg-gray-300 dark:bg-gray-600 rounded-lg mx-auto flex items-center justify-center mb-4">
-                      <Lightbulb size={24} className="text-gray-500 dark:text-gray-400" />
+                      <Lightbulb
+                        size={24}
+                        className="text-gray-500 dark:text-gray-400"
+                      />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                       Erro ao carregar imagem
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      {project.images[currentImageIndex].split('/').pop().replace(/\.(jpg|png|jpeg|webp)$/i, '').replace('-', ' ')}
+                      {project.images[currentImageIndex]
+                        .split("/")
+                        .pop()
+                        .replace(/\.(jpg|png|jpeg|webp)$/i, "")
+                        .replace("-", " ")}
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Não foi possível carregar a imagem. Para fechar, clique no X ou pressione ESC.
+                      Não foi possível carregar a imagem. Para fechar, clique no
+                      X ou pressione ESC.
                     </p>
                   </div>
                 </div>
@@ -611,7 +714,7 @@ const ProjectDetail = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ProjectDetail
+export default ProjectDetail;
