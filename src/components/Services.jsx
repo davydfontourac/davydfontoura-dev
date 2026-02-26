@@ -1,33 +1,36 @@
+import { useTranslation } from 'react-i18next'
+
 const Services = () => {
+  const { t } = useTranslation();
   const services = [
     {
-      title: 'Desenvolvimento Web',
-      description: 'Sites responsivos e modernos com HTML, CSS e JavaScript',
+      title: t('services.web_dev.title'),
+      description: t('services.web_dev.desc'),
       icon: '🌐'
     },
     {
-      title: 'Interfaces React',
-      description: 'Aplicações dinâmicas e interativas com React',
+      title: t('services.react.title'),
+      description: t('services.react.desc'),
       icon: '⚛️'
     },
     {
-      title: 'Landing Pages',
-      description: 'Páginas otimizadas para conversão e performance',
+      title: t('services.landing.title'),
+      description: t('services.landing.desc'),
       icon: '🚀'
     },
     {
-      title: 'Redesign de Sites',
-      description: 'Modernização de sites existentes com design atual',
+      title: t('services.ui_ux.title'),
+      description: t('services.ui_ux.desc'),
       icon: '✨'
     },
     {
-      title: 'Freelances',
-      description: 'Projetos personalizados para suas necessidades',
+      title: t('services.opt.title'),
+      description: t('services.opt.desc'),
       icon: '💼'
     },
     {
-      title: 'Manutenção',
-      description: 'Suporte e atualizações para seus projetos web',
+      title: t('services.resp.title'),
+      description: t('services.resp.desc'),
       icon: '🔧'
     }
   ]
@@ -36,9 +39,9 @@ const Services = () => {
     <section id="services" className="min-h-screen pt-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Serviços</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">{t('services.title')}</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Especialista em desenvolvimento front-end com foco em qualidade e inovação
+            {t('services.subtitle')}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

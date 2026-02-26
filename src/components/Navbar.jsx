@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import ThemeToggle from './ThemeToggle'
+import LanguageToggle from './LanguageToggle'
 
 const Navbar = ({ activeSection, navigateToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { t } = useTranslation();
 
   // Fechar menu ao redimensionar para desktop
   useEffect(() => {
@@ -25,11 +28,11 @@ const Navbar = ({ activeSection, navigateToSection }) => {
   }
 
   const navItems = [
-    { id: 'home', label: 'Início' },
-    { id: 'about', label: 'Sobre' },
-    { id: 'services', label: 'Serviços' },
-    { id: 'portfolio', label: 'Portfólio' },
-    { id: 'contact', label: 'Contato' }
+    { id: 'home', label: t('navbar.home') },
+    { id: 'about', label: t('navbar.about') },
+    { id: 'services', label: t('navbar.services') },
+    { id: 'portfolio', label: t('navbar.portfolio') },
+    { id: 'contact', label: t('navbar.contact') }
   ]
 
   return (
@@ -40,7 +43,7 @@ const Navbar = ({ activeSection, navigateToSection }) => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <span className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">Seja Bem-Vindo(a)</span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">{t('navbar.welcome')}</span>
             </div>
 
             {/* Desktop Navigation */}
@@ -60,7 +63,10 @@ const Navbar = ({ activeSection, navigateToSection }) => {
                   </button>
                 ))}
               </div>
-              <ThemeToggle />
+              <div className="flex items-center space-x-2">
+                <LanguageToggle />
+                <ThemeToggle />
+              </div>
             </div>
 
             {/* Mobile menu button */}
@@ -96,7 +102,7 @@ const Navbar = ({ activeSection, navigateToSection }) => {
           
           {/* Header do Menu */}
           <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <span className="text-xl font-bold text-gray-900 dark:text-white">Menu</span>
+            <span className="text-xl font-bold text-gray-900 dark:text-white">{t('navbar.menu')}</span>
             <button
               onClick={toggleMenu}
               className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
@@ -129,12 +135,23 @@ const Navbar = ({ activeSection, navigateToSection }) => {
             {/* Separador */}
             <div className="my-6 border-t border-gray-200 dark:border-gray-700"></div>
             
+            {/* Language Toggle Section */}
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mb-4">
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-base font-medium text-gray-900 dark:text-white">{t('navbar.language')}</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">{t('navbar.toggle_language')}</span>
+                </div>
+                <LanguageToggle />
+              </div>
+            </div>
+
             {/* Theme Toggle Section */}
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
               <div className="flex items-center justify-between">
                 <div className="flex flex-col">
-                  <span className="text-base font-medium text-gray-900 dark:text-white">Tema</span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Alternar modo escuro</span>
+                  <span className="text-base font-medium text-gray-900 dark:text-white">{t('navbar.theme')}</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">{t('navbar.toggle_theme')}</span>
                 </div>
                 <ThemeToggle />
               </div>

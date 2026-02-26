@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./App.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -22,6 +23,7 @@ import {
 
 // Componente para a página principal
 const MainPage = () => {
+  const { t, i18n } = useTranslation();
   const [activeSection, setActiveSection] = useState("home");
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -209,7 +211,9 @@ const MainPage = () => {
                 ),
               )}
             </div>
-            <div className="text-white text-xs ml-2">← Deslize →</div>
+            <div className="text-white text-xs ml-2">
+              {i18n.language === 'pt' ? '← Deslize →' : '← Swipe →'}
+            </div>
           </div>
         </div>
 

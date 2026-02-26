@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import emailjs from '@emailjs/browser'
 import { EMAILJS_CONFIG } from '../config/emailjs'
 
 const Contact = () => {
+  const { t } = useTranslation();
   // Estado do formulário
   const [formData, setFormData] = useState({
     name: '',
@@ -29,7 +31,7 @@ const Contact = () => {
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setStatus({
         type: 'error',
-        message: 'Por favor, preencha todos os campos.'
+        message: t('contact.form.error') // Reutilizando a prop de erro
       })
       return
     }
@@ -53,7 +55,7 @@ const Contact = () => {
       console.log('Email enviado com sucesso:', result)
       setStatus({
         type: 'success',
-        message: 'Mensagem enviada com sucesso! Entrarei em contato em breve.'
+        message: t('contact.form.success')
       })
       
       // Limpar formulário
@@ -63,7 +65,7 @@ const Contact = () => {
       console.error('Erro ao enviar email:', error)
       setStatus({
         type: 'error',
-        message: 'Ocorreu um erro ao enviar a mensagem. Tente novamente ou entre em contato diretamente.'
+        message: t('contact.form.error')
       })
     } finally {
       setIsLoading(false)
@@ -108,15 +110,15 @@ const Contact = () => {
     <section id="contact" className="min-h-screen pt-20 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white w-full transition-colors duration-300">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Entre em Contato</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('contact.title')}</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Vamos conversar sobre seu próximo projeto! Estou sempre aberto a novas oportunidades.
+            {t('contact.subtitle')}
           </p>
         </div>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-            <h3 className="text-2xl font-bold mb-6">Informações de Contato</h3>
+            <h3 className="text-2xl font-bold mb-6">{t('contact.info_title')}</h3>
             <div className="space-y-4">
               {contactInfo.map((contact, index) => (
                 <div key={index} className="flex items-center">
@@ -143,7 +145,7 @@ const Contact = () => {
             </div>
             </div>
             <div>
-            <h3 className="text-2xl font-bold mb-6">Envie uma Mensagem</h3>
+            <h3 className="text-2xl font-bold mb-6">{t('contact.send_title')}</h3>
             
             {/* Mensagem de status */}
             {status.message && (
@@ -163,7 +165,7 @@ const Contact = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="Seu Nome"
+                  placeholder={t('contact.form.name')}
                   required
                   className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
                 />
@@ -174,7 +176,7 @@ const Contact = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="Seu Email"
+                  placeholder={t('contact.form.email')}
                   required
                   className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
                 />
@@ -185,7 +187,7 @@ const Contact = () => {
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  placeholder="Sua Mensagem"
+                  placeholder={t('contact.form.message')}
                   required
                   className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
                 ></textarea>
@@ -199,7 +201,7 @@ const Contact = () => {
                     : 'bg-blue-600 hover:bg-blue-700'
                 } text-white`}
               >
-                {isLoading ? 'Enviando...' : 'Enviar Mensagem'}
+                {isLoading ? t('contact.form.sending') : t('contact.form.send')}
               </button>
             </form>
             </div>
