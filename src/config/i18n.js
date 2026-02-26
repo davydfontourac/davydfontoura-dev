@@ -337,11 +337,16 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'pt', // Idioma padrão 
+    lng: localStorage.getItem('i18nextLng') || 'pt', // Idioma salvo ou padrão 
     fallbackLng: 'en', // Se não encontrar no idioma atual, usa inglês
     interpolation: {
       escapeValue: false // O React já faz o escape seguro por padrão
     }
   });
+
+// Escuta a mudança de idioma e salva no LocalStorage
+i18n.on('languageChanged', (lng) => {
+  localStorage.setItem('i18nextLng', lng);
+});
 
 export default i18n;
