@@ -29,8 +29,12 @@ const extractTags = (multiSelectArray) => {
 // Remove the direct Notion API check since we aren't using the secret in the browser anymore
 export const getProjectsFromNotion = async () => {
   try {
-    // Fetch from our local proxy
-    const response = await fetch('http://localhost:3001/api/projects');
+    // Busca a URL da API do ambiente ou usa fallback dinâmico
+    const API_URL = import.meta.env.VITE_API_URL || 
+                    (import.meta.env.PROD ? '/api/projects' : 'http://localhost:3001/api/projects');
+    
+    // Fetch from our local proxy or production endpoint
+    const response = await fetch(API_URL);
     
     if (!response.ok) {
       throw new Error(`HTTP error status: ${response.status}`);

@@ -56,7 +56,7 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
-const PORT = 3001;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Proxy do Notion rodando na porta ${PORT}`);
 });
