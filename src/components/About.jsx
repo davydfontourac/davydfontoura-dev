@@ -1,31 +1,33 @@
 import { Code, Palette, Rocket, Users, Award, TrendingUp } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import profileImage from '../assets/profile.webp'
 
 const About = () => {
+  const { t } = useTranslation();
   const skills = ['JavaScript', 'HTML', 'CSS', 'React', 'Vite', 'Tailwind CSS', 'Python', 'Git', 'GitHub', 'Excel']
 
   const stats = [
-    { icon: Code, label: 'Projetos Concluídos', value: '15+' },
-    { icon: Users, label: 'Clientes Satisfeitos', value: '8+' },
-    { icon: Award, label: 'Anos de Experiência', value: '2+' },
-    { icon: TrendingUp, label: 'Tecnologias Dominadas', value: '10+' }
+    { icon: Code, label: t('about.stats.projects'), value: '15+' },
+    { icon: Users, label: t('about.stats.clients'), value: '8+' },
+    { icon: Award, label: t('about.stats.experience'), value: '2+' },
+    { icon: TrendingUp, label: t('about.stats.tech'), value: '10+' }
   ]
 
   const highlights = [
     {
       icon: <Palette className="w-6 h-6" />,
-      title: "Design Moderno",
-      description: "Interfaces atrativas e funcionais com foco na experiência do usuário"
+      title: t('about.highlights.design.title'),
+      description: t('about.highlights.design.desc')
     },
     {
       icon: <Code className="w-6 h-6" />,
-      title: "Código Limpo",
-      description: "Desenvolvimento seguindo as melhores práticas e padrões da indústria"
+      title: t('about.highlights.code.title'),
+      description: t('about.highlights.code.desc')
     },
     {
       icon: <Rocket className="w-6 h-6" />,
-      title: "Performance",
-      description: "Sites otimizados para carregamento rápido e boa experiência"
+      title: t('about.highlights.performance.title'),
+      description: t('about.highlights.performance.desc')
     }
   ]
 
@@ -35,10 +37,10 @@ const About = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-            Sobre Mim
+            {t('about.title')}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
-            Conheça um pouco mais sobre minha trajetória e paixão por tecnologia
+            {t('about.subtitle')}
           </p>
         </div>
 
@@ -66,10 +68,10 @@ const About = () => {
                 Davyd Fontoura
               </h3>
               <p className="text-blue-600 dark:text-blue-400 font-medium mb-4">
-                Desenvolvedor Front-End
+                {t('hero.role')}
               </p>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Especialista em criar experiências digitais modernas e funcionais
+                {t('about.profile_desc')}
               </p>
             </div>
           </div>
@@ -78,27 +80,23 @@ const About = () => {
           <div className="lg:col-span-8">
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Minha História
+                {t('about.story_title')}
               </h3>
               
               <div className="prose prose-lg max-w-none">
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                  Sou um profissional formado pelo SENAI em Programação Front-End e atualmente curso Análise e Desenvolvimento de Sistemas, o que me permite unir uma base sólida em fundamentos da tecnologia com a prática constante de desenvolvimento. Tenho grande paixão por criar interfaces modernas, funcionais e acessíveis, sempre buscando alinhar estética, usabilidade e performance.
+                  {t('about.desc1')}
                 </p>
                 
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                  Nos últimos anos, venho me dedicando a projetos pessoais e freelances que me proporcionaram experiência prática no desenvolvimento de sites e aplicações, do planejamento até a entrega final. Minha principal especialidade é a construção de páginas web utilizando HTML, CSS e JavaScript, além de frameworks e ferramentas que potencializam o resultado, como React e Tailwind CSS.
-                </p>
-                
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                  Acredito que a tecnologia deve ser uma ponte para aproximar pessoas e simplificar processos. Por isso, encaro cada projeto como uma oportunidade de criar experiências digitais que tragam impacto real para usuários e empresas. Tenho como objetivo evoluir constantemente, aprender novas tecnologias e colaborar em equipes que compartilhem essa visão de inovação e crescimento.
+                  {t('about.desc2')}
                 </p>
               </div>
 
               {/* Skills */}
               <div>
                 <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Tecnologias que domino
+                  {t('about.skills_title')}
                 </h4>
                 <div className="flex flex-wrap gap-3">
                   {skills.map((skill) => (
@@ -138,10 +136,10 @@ const About = () => {
         <div className="mb-16">
           <div className="text-center mb-12">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Tecnologias & Ferramentas
+              {t('about.tools_title')}
             </h3>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Principais tecnologias que utilizo no desenvolvimento de projetos modernos e eficientes
+              {t('about.tools_subtitle')}
             </p>
           </div>
           
