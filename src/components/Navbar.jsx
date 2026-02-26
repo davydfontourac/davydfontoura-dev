@@ -63,9 +63,19 @@ const Navbar = ({ activeSection, navigateToSection }) => {
                   </button>
                 ))}
               </div>
-              <div className="flex items-center space-x-2">
-                <LanguageToggle />
-                <ThemeToggle />
+              <div className="flex items-center space-x-4 ml-4">
+                <a 
+                  href={t('hero.cv_file')}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hidden lg:flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm"
+                >
+                  {t('navbar.download_cv')}
+                </a>
+                <div className="flex items-center space-x-2 lg:border-l border-gray-200 dark:border-gray-700 lg:pl-4">
+                  <LanguageToggle />
+                  <ThemeToggle />
+                </div>
               </div>
             </div>
 
@@ -130,6 +140,17 @@ const Navbar = ({ activeSection, navigateToSection }) => {
                   {item.label}
                 </button>
               ))}
+              <div className="pt-2">
+                <a
+                  href={t('hero.cv_file')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full text-center px-4 py-3 rounded-xl text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 shadow-lg transition-all duration-200"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t('navbar.download_cv')}
+                </a>
+              </div>
             </div>
             
             {/* Separador */}
