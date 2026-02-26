@@ -37,6 +37,9 @@ const ProjectDetail = () => {
   const [relatedProjectImageErrors, setRelatedProjectImageErrors] = useState(
     {},
   );
+  
+  const mainImageRef = useRef(null);
+  const loadingTimeoutRef = useRef(null);
 
   const { projects, loading: projectsLoading, getProjectBySlug, getRelatedProjects } = useNotionProjects();
 
@@ -132,11 +135,42 @@ const ProjectDetail = () => {
   useEffect(() => {
     setImageLoaded(false);
     setImageError(false);
-  }, [currentImageIndex]);
+
+    // Se a imagem já estiver no cache do navegador, o evento onLoad pode não disparar em alguns casos
+    // ou disparar instantaneamente. Verificamos se já está completa.
+    const checkImageStatus = () => {
+      if (mainImageRef.current && mainImageRef.current.complete) {
+        if (mainImageRef.current.naturalWidth > 0) {
+          setImageLoaded(true);
+        } else {
+          setImageError(true);
+        }
+      }
+    };
+
+    // Pequeno delay para garantir que o src foi atualizado no DOM
+    const rafId = requestAnimationFrame(checkImageStatus);
+
+    // Safety timeout: se não carregar em 10 segundos, mostra erro/fallback
+    // para evitar o shimmer infinito
+    if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
+    loadingTimeoutRef.current = setTimeout(() => {
+      if (!imageLoaded && !imageError) {
+        console.warn("Image load timeout reached");
+        setImageError(true);
+      }
+    }, 10000);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
+    };
+  }, [currentImageIndex, project?.images]);
 
   // Animação suave ao carregar imagem
   useEffect(() => {
     if (imageLoaded) {
+      if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
       setIsTransitioning(false);
     }
   }, [imageLoaded]);
@@ -435,6 +469,7 @@ const ProjectDetail = () => {
                 {!imageError ? (
                   <img
                     key={`main-image-${currentImageIndex}`}
+                    ref={mainImageRef}
                     src={getImagePath(project.images[currentImageIndex])}
                     alt={`${project.title?.[i18n.language] || project.title?.pt} - ${project.images[currentImageIndex]
                       .split("/")
@@ -444,8 +479,12 @@ const ProjectDetail = () => {
                     className={`w-full h-auto max-h-[32rem] object-contain transition-all duration-700 ease-in-out z-0 ${
                       imageLoaded && !isTransitioning ? "opacity-100 scale-100" : "opacity-0 scale-95"
                     }`}
-                    onLoad={() => setImageLoaded(true)}
+                    onLoad={() => {
+                      if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
+                      setImageLoaded(true);
+                    }}
                     onError={() => {
+                      if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
                       setImageError(true);
                       setImageLoaded(false);
                     }}
