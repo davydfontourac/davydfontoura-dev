@@ -4,7 +4,11 @@
   "installCommand": "npm ci",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/api/projects",
+      "destination": "/api/projects.js"
+    },
+    {
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ],
