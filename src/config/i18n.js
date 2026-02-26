@@ -16,14 +16,17 @@ const resources = {
         theme: "Tema",
         toggle_theme: "Alternar modo escuro",
         language: "Idioma",
-        toggle_language: "Mudar idioma"
+        toggle_language: "Mudar idioma",
+        download_cv: "Download CV"
       },
       hero: {
         greeting: "Olá, eu sou",
         role: "Desenvolvedor Front-end",
         description: "Transformando ideias em experiências digitais memoráveis e interativas através de código limpo e design moderno.",
         cta_projects: "Ver Projetos",
-        cta_contact: "Fale Comigo"
+        cta_contact: "Fale Comigo",
+        cta_cv: "Baixar Currículo",
+        cv_file: "/Curriculo_Davyd_Fontoura_PT.pdf"
       },
       about: {
         title: "Sobre Mim",
@@ -34,6 +37,17 @@ const resources = {
         desc2: "Nos últimos anos, venho me dedicando a projetos pessoais e freelances que me proporcionaram experiência prática no desenvolvimento de sites e aplicações, do planejamento até a entrega final. Minha principal especialidade é a construção de páginas web utilizando HTML, CSS e JavaScript, além de frameworks e ferramentas que potencializam o resultado, como React e Tailwind CSS.\n\nAcredito que a tecnologia deve ser uma ponte para aproximar pessoas e simplificar processos. Por isso, encaro cada projeto como uma oportunidade de criar experiências digitais que tragam impacto real para usuários e empresas. Tenho como objetivo evoluir constantemente, aprender novas tecnologias e colaborar em equipes que compartilhem essa visão de inovação e crescimento.",
         skills_title: "Tecnologias que domino",
         experience_title: "Experiência e Formação",
+        education_title: "Formação Acadêmica e Certificações",
+        education: {
+          degree1: {
+            title: "Análise e Desenvolvimento de Sistemas",
+            school: "Unisinos (Universidade do Vale do Rio dos Sinos) • Em andamento"
+          },
+          degree2: {
+            title: "Programação Front-End",
+            school: "SENAI • Concluído"
+          }
+        },
         download_cv: "Download CV",
         stats: {
           projects: "Projetos Concluídos",
@@ -142,14 +156,17 @@ const resources = {
         theme: "Theme",
         toggle_theme: "Toggle dark mode",
         language: "Language",
-        toggle_language: "Change language"
+        toggle_language: "Change language",
+        download_cv: "Resume"
       },
       hero: {
         greeting: "Hi, I am",
         role: "Front-end Developer",
         description: "Bridging the gap between ideas and digital reality through modern design and clean code.",
         cta_projects: "View Projects",
-        cta_contact: "Contact Me"
+        cta_contact: "Contact Me",
+        cta_cv: "Download Resume",
+        cv_file: "/Resume_Davyd_Fontoura_EN.pdf"
       },
       about: {
         title: "About Me",
@@ -160,6 +177,17 @@ const resources = {
         desc2: "In recent years, I have been dedicating myself to personal projects and freelance work that have provided me with practical experience in developing websites and applications, from planning to final delivery. My main specialty is building web pages using HTML, CSS, and JavaScript, as well as frameworks and tools that enhance the result, such as React and Tailwind CSS.\n\nI believe that technology should be a bridge to bring people closer and simplify processes. Therefore, I view each project as an opportunity to create digital experiences that bring real impact to users and companies. My goal is to constantly evolve, learn new technologies, and collaborate in teams that share this vision of innovation and growth.",
         skills_title: "Technologies I master",
         experience_title: "Experience & Education",
+        education_title: "Education & Certifications",
+        education: {
+          degree1: {
+            title: "Systems Analysis and Development",
+            school: "Unisinos (Universidade do Vale do Rio dos Sinos) • In progress"
+          },
+          degree2: {
+            title: "Front-End Programming",
+            school: "SENAI • Completed"
+          }
+        },
         download_cv: "Download Resume",
         stats: {
           projects: "Completed Projects",

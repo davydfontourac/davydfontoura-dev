@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeContext'
 import { useTranslation } from 'react-i18next'
+import { Github, Linkedin, Download } from 'lucide-react'
 import ParticlesBackground from './ParticlesBackground'
 
 const Hero = ({ navigateToSection }) => {
@@ -21,7 +22,16 @@ const Hero = ({ navigateToSection }) => {
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300">
             {t('hero.description')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center sm:flex-wrap mb-8">
+            <a 
+              href={t('hero.cv_file')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-md"
+            >
+              <Download size={20} />
+              {t('hero.cta_cv')}
+            </a>
             <button 
               onClick={() => navigateToSection('portfolio')}
               className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-gray-900 font-semibold py-3 px-8 rounded-lg transition-colors"
@@ -30,10 +40,18 @@ const Hero = ({ navigateToSection }) => {
             </button>
             <button 
               onClick={() => navigateToSection('contact')}
-              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-gray-900 font-semibold py-3 px-8 rounded-lg transition-colors"
+              className="hidden sm:block border-2 border-gray-300 text-gray-600 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800 font-semibold py-3 px-8 rounded-lg transition-colors"
             >
               {t('hero.cta_contact')}
             </button>
+          </div>
+          <div className="flex justify-center gap-4">
+            <a href="https://github.com/davydfontourac" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 rounded-full transition-all shadow-sm" aria-label="GitHub">
+              <Github size={24} />
+            </a>
+            <a href="https://www.linkedin.com/in/davyd-camargo-70a552261/" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 rounded-full transition-all shadow-sm" aria-label="LinkedIn">
+              <Linkedin size={24} />
+            </a>
           </div>
         </div>
       </div>

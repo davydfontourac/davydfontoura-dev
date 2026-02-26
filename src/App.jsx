@@ -198,7 +198,7 @@ const MainPage = () => {
         >
           <div className="bg-black bg-opacity-50 rounded-full px-4 py-2 flex items-center space-x-2">
             <div className="flex space-x-1">
-              {["home", "about", "services", "portfolio", "contact"].map(
+              {["home", "about", "experience", "services", "portfolio", "contact"].map(
                 (sectionId) => (
                   <div
                     key={sectionId}

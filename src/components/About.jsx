@@ -109,6 +109,23 @@ const About = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Education */}
+              <div className="pt-6 mt-8">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  {t('about.education_title')}
+                </h4>
+                <div className="space-y-4">
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <h5 className="font-bold text-gray-900 dark:text-white">{t('about.education.degree1.title')}</h5>
+                    <p className="text-blue-600 dark:text-blue-400 text-sm mt-1">{t('about.education.degree1.school')}</p>
+                  </div>
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <h5 className="font-bold text-gray-900 dark:text-white">{t('about.education.degree2.title')}</h5>
+                    <p className="text-blue-600 dark:text-blue-400 text-sm mt-1">{t('about.education.degree2.school')}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
