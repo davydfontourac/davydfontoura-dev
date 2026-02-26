@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "optimize-images": "node scripts/optimize-images.js",
-    "dev": "vite",
+    "dev": "vite & node scripts/warm-cache.js",
     "prebuild": "node scripts/optimize-images.js",
     "build": "vite build",
     "prebuild:vercel": "node scripts/optimize-images.js",
@@ -16,6 +16,10 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@notionhq/client": "^2.2.14",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
     "i18next": "^25.8.13",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",

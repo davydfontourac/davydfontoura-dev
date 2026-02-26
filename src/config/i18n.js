@@ -9,7 +9,7 @@ const resources = {
         home: "Início",
         about: "Sobre",
         services: "Serviços",
-        portfolio: "Portfólio",
+        portfolio: "Projetos",
         contact: "Contato",
         welcome: "Seja Bem-Vindo(a)",
         menu: "Menu",
@@ -111,6 +111,8 @@ const resources = {
         github_view_repo: "Ver Repositório",
         github_stars: "Estrelas",
         github_forks: "Forks",
+        read_more: "Saiba mais",
+        show_less: "Ver menos",
         status: {
           concluido: "Concluído",
           em_producao: "Em Produção",
@@ -140,6 +142,28 @@ const resources = {
         rights: "Todos os direitos reservados.",
         made_with: "Feito com",
         by: "por"
+      },
+      loading: "Carregando...",
+      projectDetail: {
+        backToPortfolio: "Voltar ao portfólio",
+        portfolio: "Projetos",
+        statusLabel: "Status",
+        year: "Ano",
+        duration: "Duração",
+        role: "Função",
+        client: "Cliente",
+        liveSite: "Ver projeto online",
+        githubCode: "Ver código",
+        aboutProject: "Sobre o Projeto",
+        techUsed: "Tecnologias Utilizadas",
+        features: "Características Principais",
+        relatedProjects: "Projetos Relacionados",
+        projectGallery: "Galeria do Projeto",
+        status: {
+          completed: "Concluído",
+          inProgress: "Em Produção",
+          paused: "Pausado"
+        }
       }
     }
   },
@@ -149,7 +173,7 @@ const resources = {
         home: "Home",
         about: "About",
         services: "Services",
-        portfolio: "Portfolio",
+        portfolio: "Projects",
         contact: "Contact",
         welcome: "Welcome",
         menu: "Menu",
@@ -251,6 +275,8 @@ const resources = {
         github_view_repo: "View Repository",
         github_stars: "Stars",
         github_forks: "Forks",
+        read_more: "Learn more",
+        show_less: "Show less",
         status: {
           concluido: "Completed",
           em_producao: "In Progress",
@@ -280,6 +306,28 @@ const resources = {
         rights: "All rights reserved.",
         made_with: "Made with",
         by: "by"
+      },
+      loading: "Loading...",
+      projectDetail: {
+        backToPortfolio: "Back to portfolio",
+        portfolio: "Projects",
+        statusLabel: "Status",
+        year: "Year",
+        duration: "Duration",
+        role: "Role",
+        client: "Client",
+        liveSite: "View live project",
+        githubCode: "View code",
+        aboutProject: "About the Project",
+        techUsed: "Technologies Used",
+        features: "Key Features",
+        relatedProjects: "Related Projects",
+        projectGallery: "Project Gallery",
+        status: {
+          completed: "Completed",
+          inProgress: "In Progress",
+          paused: "Paused"
+        }
       }
     }
   }

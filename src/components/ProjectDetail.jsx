@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -11,13 +11,19 @@ import {
   CheckCircle,
   Lightbulb,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import { getProjectBySlug, getRelatedProjects } from "../data/projects";
+import { useMemo } from "react";
+import { useNotionProjects } from '../hooks/useNotionProjects';
+import { useTranslation } from 'react-i18next';
 import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
 import useSEO from "../hooks/useSEO";
 import { getImagePath, getBaseUrl } from "../utils/imagePaths";
 
 const ProjectDetail = () => {
+  const { t, i18n } = useTranslation();
   const { slug } = useParams();
   const navigate = useNavigate();
   const [project, setProject] = useState(null);
@@ -32,7 +38,13 @@ const ProjectDetail = () => {
     {},
   );
 
+  const { projects, loading: projectsLoading, getProjectBySlug, getRelatedProjects } = useNotionProjects();
+
+  const prevSlugRef = useRef(slug);
+
   useEffect(() => {
+    if (projectsLoading) return; // Aguardar o carregamento
+
     const foundProject = getProjectBySlug(slug);
     if (foundProject) {
       setProject(foundProject);
@@ -47,38 +59,30 @@ const ProjectDetail = () => {
       setThumbnailErrors({});
       // Reset do estado de carregamento das imagens dos projetos relacionados
       setRelatedProjectImageErrors({});
+      
+      // SÓ rolar suavemente para o topo se o slug mudou (navegação entre projetos relacionados)
+      // Se for a primeira carga vindo de fora, o App.jsx já cuida do scroll instantâneo
+      if (prevSlugRef.current !== slug) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        prevSlugRef.current = slug;
+      }
     } else {
       // Redirecionar para 404 ou página principal se projeto não encontrado
       navigate("/");
     }
-  }, [slug, navigate]);
+  }, [slug, navigate, projectsLoading, getProjectBySlug, getRelatedProjects]);
 
   // SEO Configuration
   const currentUrl = window.location.href;
   const baseUrl = getBaseUrl();
 
-  useSEO({
-    title:
-      project?.seo?.title || `${project?.title} - Davyd Fontoura | Portfolio`,
-    description: project?.seo?.description || project?.description,
-    keywords:
-      project?.seo?.keywords ||
-      `${project?.title}, desenvolvimento web, davyd fontoura, front-end developer`,
-    ogTitle: project?.seo?.title || `${project?.title} - Davyd Fontoura`,
-    ogDescription: project?.seo?.description || project?.description,
-    ogImage: project?.seo?.ogImage
-      ? `${baseUrl}${getImagePath(project.seo.ogImage)}`
-      : project?.images?.[0]
-        ? `${baseUrl}${getImagePath(project.images[0])}`
-        : `${baseUrl}/og-image.jpg`,
-    ogUrl: currentUrl,
-    canonical: currentUrl,
-    structuredData: project
+  const structuredDataObj = useMemo(() => {
+    return project
       ? {
           "@context": "https://schema.org",
           "@type": "CreativeWork",
-          name: project.title,
-          description: project.description,
+          name: project.title?.[i18n.language] || project.title?.pt,
+          description: project.description?.[i18n.language] || project.description?.pt,
           author: {
             "@type": "Person",
             name: "Davyd Fontoura",
@@ -97,12 +101,31 @@ const ProjectDetail = () => {
           url: currentUrl,
           workExample: {
             "@type": "WebSite",
-            name: project.title,
-            description: project.description,
+            name: project.title?.[i18n.language] || project.title?.pt,
+            description: project.description?.[i18n.language] || project.description?.pt,
             url: project.links?.live || currentUrl,
           },
         }
-      : null,
+      : null;
+  }, [project, i18n.language, baseUrl, currentUrl]);
+
+  useSEO({
+    title:
+      project?.seo?.title || `${project?.title?.[i18n.language] || project?.title?.pt} - Davyd Fontoura | Portfolio`,
+    description: project?.seo?.description || project?.description?.[i18n.language] || project?.description?.pt,
+    keywords:
+      project?.seo?.keywords ||
+      `${project?.title?.[i18n.language] || project?.title?.pt}, desenvolvimento web, davyd fontoura, front-end developer`,
+    ogTitle: project?.seo?.title || `${project?.title?.[i18n.language] || project?.title?.pt} - Davyd Fontoura`,
+    ogDescription: project?.seo?.description || project?.description?.[i18n.language] || project?.description?.pt,
+    ogImage: project?.seo?.ogImage
+      ? `${baseUrl}${getImagePath(project.seo.ogImage)}`
+      : project?.images?.[0]
+        ? `${baseUrl}${getImagePath(project.images[0])}`
+        : `${baseUrl}/og-image.jpg`,
+    ogUrl: currentUrl,
+    canonical: currentUrl,
+    structuredData: structuredDataObj,
   });
 
   // Reset imageLoaded quando trocar de imagem
@@ -155,13 +178,27 @@ const ProjectDetail = () => {
     }
   };
 
-  if (!project) {
+  const handleNextImage = (e) => {
+    if (e) e.stopPropagation();
+    if (!project?.images || project.images.length <= 1) return;
+    const nextIndex = (currentImageIndex + 1) % project.images.length;
+    handleThumbnailClick(nextIndex);
+  };
+
+  const handlePrevImage = (e) => {
+    if (e) e.stopPropagation();
+    if (!project?.images || project.images.length <= 1) return;
+    const prevIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
+    handleThumbnailClick(prevIndex);
+  };
+
+  if (projectsLoading || !project) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-300">
-            Carregando projeto...
+            {t('loading', 'Carregando...')}
           </p>
         </div>
       </div>
@@ -171,19 +208,19 @@ const ProjectDetail = () => {
   const getStatusTag = (status) => {
     const statusConfig = {
       concluido: {
-        text: "Concluído",
+        text: t('projectDetail.status.completed', 'Concluído'),
         classes:
           "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
         icon: CheckCircle,
       },
       "em-producao": {
-        text: "Em Produção",
+        text: t('projectDetail.status.inProgress', 'Em Produção'),
         classes:
           "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
         icon: Clock,
       },
       pausado: {
-        text: "Pausado",
+        text: t('projectDetail.status.paused', 'Pausado'),
         classes: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
         icon: Tag,
       },
@@ -196,8 +233,8 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-      {/* Header com botão voltar */}
-      <div className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40">
+      {/* Header com botão voltar - FIXO com Blur moderno */}
+      <header className="fixed top-0 left-0 w-full bg-white/80 dark:bg-gray-900/80 shadow-sm border-b border-gray-200 dark:border-gray-700 backdrop-blur-md z-50 transition-all duration-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             <button
@@ -208,31 +245,37 @@ const ProjectDetail = () => {
                 size={20}
                 className="group-hover:-translate-x-1 transition-transform"
               />
-              <span className="font-medium">Voltar ao portfólio</span>
+              <span className="font-medium text-sm md:text-base">{t('projectDetail.backToPortfolio', 'Voltar ao portfólio')}</span>
             </button>
 
             {/* Breadcrumb e Theme Toggle */}
-            <div className="flex items-center space-x-6">
-              {/* Breadcrumb */}
-              <nav className="hidden md:flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex items-center space-x-4 md:space-x-6">
+              {/* Breadcrumb - Oculto em telas muito pequenas para dar espaço */}
+              <nav className="hidden sm:flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
                 <button
                   onClick={() => handleBackToPortfolio()}
                   className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
                 >
-                  Portfólio
+                  {t('projectDetail.portfolio', 'Portfólio')}
                 </button>
                 <span>/</span>
-                <span className="text-gray-900 dark:text-white font-medium">
-                  {project.title}
+                <span className="text-gray-900 dark:text-white font-medium truncate max-w-[120px] md:max-w-xs">
+                  {project.title?.[i18n.language] || project.title?.pt}
                 </span>
               </nav>
 
-              {/* Theme Toggle */}
-              <ThemeToggle />
+              {/* Toggles */}
+              <div className="flex items-center space-x-1 md:space-x-2">
+                <LanguageToggle />
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </header>
+
+      {/* Espaçador para compensar o header fixo */}
+      <div className="h-[72px]"></div>
 
       {/* Conteúdo principal */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -241,10 +284,10 @@ const ProjectDetail = () => {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8">
             <div className="flex-1">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                {project.title}
+                {project.title?.[i18n.language] || project.title?.pt}
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                {project.description}
+                {project.description?.[i18n.language] || project.description?.pt}
               </p>
 
               {/* Tags de categorias */}
@@ -266,7 +309,7 @@ const ProjectDetail = () => {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                    Status
+                    {t('projectDetail.statusLabel', 'Status')}
                   </span>
                   <span
                     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusTag(project.status).classes}`}
@@ -279,40 +322,40 @@ const ProjectDetail = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center">
                     <Calendar size={14} className="mr-1" />
-                    Ano
+                    {t('projectDetail.year', 'Ano')}
                   </span>
                   <span className="text-sm text-gray-900 dark:text-white font-medium">
                     {project.year}
                   </span>
                 </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center">
-                    <Clock size={14} className="mr-1" />
-                    Duração
-                  </span>
-                  <span className="text-sm text-gray-900 dark:text-white font-medium">
-                    {project.duration}
-                  </span>
-                </div>
-
+                {project.duration && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                      <Clock size={16} className="inline mr-2" />
+                      {t('projectDetail.duration', 'Duração')}
+                    </span>
+                    <span className="text-sm text-gray-900 dark:text-white font-medium">
+                      {typeof project.duration === 'object' ? (project.duration?.[i18n.language] || project.duration?.pt) : project.duration}
+                    </span>
+                  </div>
+                )}
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center">
                     <User size={14} className="mr-1" />
-                    Função
+                    {t('projectDetail.role', 'Função')}
                   </span>
                   <span className="text-sm text-gray-900 dark:text-white font-medium">
-                    {project.role}
+                    {project.role?.[i18n.language] || project.role?.pt}
                   </span>
                 </div>
 
                 {project.client && (
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                      Cliente
+                      {t('projectDetail.client', 'Cliente')}
                     </span>
                     <span className="text-sm text-gray-900 dark:text-white font-medium">
-                      {project.client}
+                      {typeof project.client === 'object' ? (project.client?.[i18n.language] || project.client?.pt) : project.client}
                     </span>
                   </div>
                 )}
@@ -328,7 +371,7 @@ const ProjectDetail = () => {
                         className="flex items-center justify-center w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
                       >
                         <ExternalLink size={14} className="mr-2" />
-                        Ver projeto online
+                        {t('projectDetail.liveSite', 'Ver projeto online')}
                       </a>
                     )}
 
@@ -340,7 +383,7 @@ const ProjectDetail = () => {
                         className="flex items-center justify-center w-full px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-lg transition-colors text-sm font-medium"
                       >
                         <Github size={14} className="mr-2" />
-                        Ver código
+                        {t('projectDetail.githubCode', 'Ver código')}
                       </a>
                     )}
                   </div>
@@ -355,7 +398,7 @@ const ProjectDetail = () => {
           <div className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
               <div className="w-1 h-8 bg-orange-600 mr-4 rounded-full"></div>
-              Galeria do Projeto
+              {t('projectDetail.projectGallery', 'Galeria do Projeto')}
             </h2>
 
             {/* Imagem principal */}
@@ -377,23 +420,29 @@ const ProjectDetail = () => {
                   }
                 }}
               >
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center z-10">
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-full p-2">
                     <ExternalLink size={20} className="text-white" />
                   </div>
                 </div>
+
+                {/* Shimmer Placeholder */}
+                {!imageLoaded && !imageError && (
+                  <div className="absolute inset-0 animate-shimmer z-0" />
+                )}
+
                 {/* Imagem real ou placeholder */}
                 {!imageError ? (
                   <img
                     key={`main-image-${currentImageIndex}`}
                     src={getImagePath(project.images[currentImageIndex])}
-                    alt={`${project.title} - ${project.images[currentImageIndex]
+                    alt={`${project.title?.[i18n.language] || project.title?.pt} - ${project.images[currentImageIndex]
                       .split("/")
                       .pop()
                       .replace(/\.(jpg|png|jpeg|webp)$/i, "")
                       .replace("-", " ")}`}
-                    className={`w-full h-auto max-h-[32rem] object-contain transition-all duration-300 ease-in-out ${
-                      isTransitioning ? "opacity-0" : "opacity-100"
+                    className={`w-full h-auto max-h-[32rem] object-contain transition-all duration-700 ease-in-out z-0 ${
+                      imageLoaded && !isTransitioning ? "opacity-100 scale-100" : "opacity-0 scale-95"
                     }`}
                     onLoad={() => setImageLoaded(true)}
                     onError={() => {
@@ -425,11 +474,31 @@ const ProjectDetail = () => {
                     </div>
                   </div>
                 )}
+                
+                {/* Controles de Navegação da Galeria (se houver mais de 1 imagem) */}
+                {project.images?.length > 1 && (
+                  <>
+                    <button
+                      onClick={handlePrevImage}
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center"
+                      aria-label="Imagem anterior"
+                    >
+                      <ChevronLeft size={24} />
+                    </button>
+                    <button
+                      onClick={handleNextImage}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center"
+                      aria-label="Próxima imagem"
+                    >
+                      <ChevronRight size={24} />
+                    </button>
+                  </>
+                )}
               </div>
             </div>
 
             {/* Miniaturas */}
-            {project.images.length > 1 && (
+            {project.images && project.images.length > 1 && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {project.images.map((image, index) => (
                   <div
@@ -457,8 +526,8 @@ const ProjectDetail = () => {
                     {/* Imagem miniatura real ou placeholder */}
                     {!thumbnailErrors[index] ? (
                       <img
-                        src={getImagePath(image)}
-                        alt={`${project.title} - ${image
+                        src={image.startsWith('http') ? image : getImagePath(image)}
+                        alt={`${project.title?.[i18n.language] || project.title?.pt} - ${image
                           .split("/")
                           .pop()
                           .replace(/\.(jpg|png|jpeg|webp)$/i, "")
@@ -494,7 +563,7 @@ const ProjectDetail = () => {
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
             <div className="w-1 h-8 bg-blue-600 mr-4 rounded-full"></div>
-            Sobre o Projeto
+            {t('projectDetail.aboutProject', 'Sobre o Projeto')}
           </h2>
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
             <div
@@ -535,7 +604,7 @@ const ProjectDetail = () => {
               `}</style>
               <div
                 className="project-content"
-                dangerouslySetInnerHTML={{ __html: project.fullDescription }}
+                dangerouslySetInnerHTML={{ __html: project.fullDescription?.[i18n.language] || project.fullDescription?.pt }}
               />
             </div>
           </div>
@@ -545,7 +614,7 @@ const ProjectDetail = () => {
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
             <div className="w-1 h-8 bg-green-600 mr-4 rounded-full"></div>
-            Tecnologias Utilizadas
+            {t('projectDetail.techUsed', 'Tecnologias Utilizadas')}
           </h2>
           <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex flex-wrap gap-4">
@@ -562,15 +631,15 @@ const ProjectDetail = () => {
         </div>
 
         {/* Características principais */}
-        {project.features && (
+        {(project.features?.[i18n.language]?.length > 0 || project.features?.pt?.length > 0) && (
           <div className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
               <div className="w-1 h-8 bg-purple-600 mr-4 rounded-full"></div>
-              Características Principais
+              {t('projectDetail.features', 'Características Principais')}
             </h2>
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {project.features.map((feature, index) => (
+                {(project.features?.[i18n.language] || project.features?.pt || []).map((feature, index) => (
                   <div
                     key={index}
                     className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600 hover:shadow-md transition-shadow duration-300"
@@ -593,7 +662,7 @@ const ProjectDetail = () => {
           <div className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
               <div className="w-1 h-8 bg-pink-600 mr-4 rounded-full"></div>
-              Projetos Relacionados
+              {t('projectDetail.relatedProjects', 'Projetos Relacionados')}
             </h2>
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -611,8 +680,8 @@ const ProjectDetail = () => {
                         relatedProject.images.length > 0 &&
                         !relatedProjectImageErrors[relatedProject.id] && (
                           <img
-                            src={getImagePath(relatedProject.images[0])}
-                            alt={`${relatedProject.title} - Hero`}
+                            src={relatedProject.images[0].startsWith('http') ? relatedProject.images[0] : getImagePath(relatedProject.images[0])}
+                            alt={`${relatedProject.title?.[i18n.language] || relatedProject.title?.pt} - Hero`}
                             className="absolute inset-0 w-full h-full object-contain"
                             onError={() => {
                               setRelatedProjectImageErrors((prev) => ({
@@ -628,17 +697,17 @@ const ProjectDetail = () => {
                       ></div>
                       {/* Hover overlay */}
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span className="text-white font-medium text-sm">
-                          Ver projeto
+                        <span className="text-white font-medium text-sm text-center px-2">
+                          {t('portfolio.view_project', 'Ver Projeto Completo')}
                         </span>
                       </div>
                     </div>
                     <div className="p-4">
                       <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
-                        {relatedProject.title}
+                        {relatedProject.title?.[i18n.language] || relatedProject.title?.pt}
                       </h3>
                       <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {relatedProject.shortDesc}
+                        {relatedProject.shortDesc?.[i18n.language] || relatedProject.shortDesc?.pt}
                       </p>
                     </div>
                   </Link>
@@ -673,8 +742,8 @@ const ProjectDetail = () => {
             <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
               {!imageError ? (
                 <img
-                  src={getImagePath(project.images[currentImageIndex])}
-                  alt={`${project.title} - ${project.images[currentImageIndex]
+                  src={project.images[currentImageIndex].startsWith('http') ? project.images[currentImageIndex] : getImagePath(project.images[currentImageIndex])}
+                  alt={`${project.title?.[i18n.language] || project.title?.pt} - ${project.images[currentImageIndex]
                     .split("/")
                     .pop()
                     .replace(/\.(jpg|png|jpeg|webp)$/i, "")
@@ -708,6 +777,26 @@ const ProjectDetail = () => {
                     </p>
                   </div>
                 </div>
+              )}
+              
+              {/* Controles de Navegação do Modal (se houver mais de 1 imagem) */}
+              {project.images?.length > 1 && (
+                <>
+                  <button
+                    onClick={handlePrevImage}
+                    className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 md:p-4 rounded-full transition-all duration-300 z-50 flex items-center justify-center"
+                    aria-label="Imagem anterior"
+                  >
+                    <ChevronLeft size={32} />
+                  </button>
+                  <button
+                    onClick={handleNextImage}
+                    className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 md:p-4 rounded-full transition-all duration-300 z-50 flex items-center justify-center"
+                    aria-label="Próxima imagem"
+                  >
+                    <ChevronRight size={32} />
+                  </button>
+                </>
               )}
             </div>
           </div>
