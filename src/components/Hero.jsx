@@ -3,6 +3,7 @@ import { ThemeContext } from '../contexts/ThemeContext'
 import { useTranslation } from 'react-i18next'
 import { Github, Linkedin, Download } from 'lucide-react'
 import ParticlesBackground from './ParticlesBackground'
+import BlurText from './BlurText'
 
 const Hero = ({ navigateToSection }) => {
   const { theme } = useContext(ThemeContext)
@@ -15,13 +16,30 @@ const Hero = ({ navigateToSection }) => {
       
       <div className="w-full px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
-            {t('hero.greeting')}
-            <span className="shine-text"> Davyd Fontoura</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300 flex flex-wrap justify-center">
+            <BlurText
+              text={t('hero.greeting')}
+              delay={100}
+              animateBy="words"
+              direction="top"
+              className="inline-block"
+            />
+            <BlurText
+              text=" Davyd Fontoura"
+              delay={150}
+              animateBy="words"
+              direction="top"
+              className="inline-block"
+              itemClassName="shine-text"
+            />
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300">
-            {t('hero.description')}
-          </p>
+          <BlurText
+            text={t('hero.description')}
+            delay={50}
+            animateBy="words"
+            direction="bottom"
+            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300"
+          />
           <div className="flex flex-col sm:flex-row gap-4 justify-center sm:flex-wrap mb-8">
             <a 
               href={t('hero.cv_file')}
