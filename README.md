@@ -1,5 +1,7 @@
 # 🌟 Portfólio Pessoal - Davyd Fontoura
 
+[
+
 ![Portfólio Preview](./preview.gif)
 
 ](https://www.davydfontoura.com.br)
