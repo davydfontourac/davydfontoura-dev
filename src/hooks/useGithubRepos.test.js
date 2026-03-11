@@ -71,7 +71,7 @@ describe('useGithubRepos hook', () => {
   })
 
   it('does not fetch if username is empty', () => {
-    const { result } = renderHook(() => useGithubRepos(''))
+    renderHook(() => useGithubRepos(''))
     expect(global.fetch).not.toHaveBeenCalled()
   })
 })

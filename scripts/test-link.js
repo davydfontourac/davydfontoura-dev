@@ -1,2 +1,2 @@
-const regex = /to={\`\/projeto\/\$\{relatedProject\.slug\}\`}/g;
+const regex = /to={`\/projeto\/\${relatedProject\.slug}`}/g;
 console.log("Found Link:", regex);

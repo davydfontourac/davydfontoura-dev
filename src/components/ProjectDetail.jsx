@@ -41,7 +41,7 @@ const ProjectDetail = () => {
   const mainImageRef = useRef(null);
   const loadingTimeoutRef = useRef(null);
 
-  const { projects, loading: projectsLoading, getProjectBySlug, getRelatedProjects } = useNotionProjects();
+  const { loading: projectsLoading, getProjectBySlug, getRelatedProjects } = useNotionProjects();
 
   const prevSlugRef = useRef(slug);
 
@@ -165,6 +165,7 @@ const ProjectDetail = () => {
       cancelAnimationFrame(rafId);
       if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentImageIndex, project?.images]);
 
   // Animação suave ao carregar imagem

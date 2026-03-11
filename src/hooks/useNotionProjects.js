@@ -55,6 +55,7 @@ export const useNotionProjects = () => {
     };
 
     fetchProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Filter helpers based on the loaded Notion data
