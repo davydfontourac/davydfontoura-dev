@@ -23,7 +23,7 @@ import {
 
 // Componente para a página principal
 const MainPage = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [activeSection, setActiveSection] = useState("home");
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
