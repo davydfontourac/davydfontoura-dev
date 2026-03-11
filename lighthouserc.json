@@ -2,10 +2,11 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
-      "url": ["/index.html"],
+      "url": ["/davydfontoura-dev/index.html"],
       "numberOfRuns": 3,
       "settings": {
-        "chromeFlags": "--no-sandbox --disable-setuid-sandbox"
+        "chromeFlags": "--no-sandbox --disable-setuid-sandbox --headless --disable-gpu --disable-dev-shm-usage",
+        "throttlingMethod": "simulate"
       }
     },
     "assert": {
