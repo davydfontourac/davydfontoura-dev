@@ -18,7 +18,7 @@ const LanguageToggle = () => {
     >
       <div className="flex items-center gap-2">
         <Languages size={20} />
-        <span className="text-sm font-medium uppercase font-semibold">
+        <span className="text-sm uppercase font-semibold">
           {i18n.language}
         </span>
       </div>
