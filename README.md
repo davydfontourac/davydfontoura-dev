@@ -1,5 +1,12 @@
 # 🌟 Portfólio Pessoal - Davyd Fontoura
 
+[![Portfólio Preview](./preview.gif)](https://www.davydfontoura.com.br)
+
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white&style=flat-square)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white&style=flat-square) ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38BDF8?logo=tailwindcss&logoColor=white&style=flat-square) ![Vercel](https://img.shields.io/badge/Vercel-deployed-black?logo=vercel&logoColor=white&style=flat-square) ![Notion](https://img.shields.io/badge/Notion-CMS-000000?logo=notion&logoColor=white&style=flat-square) ![i18n](https://img.shields.io/badge/i18n-PT%20%7C%20EN-green?style=flat-square) ![Express](https://img.shields.io/badge/Express-Proxy-000000?logo=express&logoColor=white&style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+
 Um portfólio de alta performance, moderno e multilíngue para desenvolvedores, integrado dinamicamente ao Notion como CMS.
 
 ## 📋 Sobre o Projeto
@@ -39,8 +46,9 @@ Este é meu portfólio profissional, reconstruído para oferecer a melhor experi
 
 ### 1. Clonando o repositório
 ```bash
-git clone https://github.com/davydfontourac/my-react-app.git
-cd my-react-app
+git clone https://github.com/davydfontourac/davydfontoura-dev.git
+
+cd davydfontoura-dev
 ```
 
 ### 2. Configurações (.env.local)
