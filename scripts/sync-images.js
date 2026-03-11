@@ -13,15 +13,16 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 
 // Load env - priority to .env.local
-dotenv.config({ path: path.resolve(rootDir, ".env") });
-dotenv.config({ path: path.resolve(rootDir, ".env.local"), override: true });
-
-const notion = new Client({ auth: process.env.VITE_NOTION_API_KEY });
-const databaseId = process.env.VITE_NOTION_DATABASE_ID;
+const envFiles = [".env.local", ".env"];
+for (const file of envFiles) {
+    dotenv.config({ path: path.resolve(rootDir, file), override: true });
+}
 
 const publicDir = path.join(rootDir, "public");
 const imagesDir = path.join(publicDir, "images", "projects");
 const manifestPath = path.join(publicDir, "images", "manifest.json");
+
+// --- Helpers ---
 
 const extractText = (richTextArray) => {
   if (!richTextArray || richTextArray.length === 0) return '';
@@ -67,16 +68,21 @@ async function saveManifest(manifest) {
     await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
 }
 
+// --- Main Sync Logic ---
+
 async function sync() {
-  if (!process.env.VITE_NOTION_API_KEY || !process.env.VITE_NOTION_DATABASE_ID) {
-    if (process.env.NODE_ENV === 'production' && !process.env.GITHUB_ACTIONS) {
-       console.warn("⚠️ Notion API keys missing. Skipping image sync for this build.");
-       return;
-    }
-    console.error("❌ Erro: Chaves do Notion (VITE_NOTION_API_KEY ou VITE_NOTION_DATABASE_ID) não encontradas.");
-    console.error("👉 Certifique-se de que elas estão no seu .env.local ou configuradas no seu ambiente (Vercel/GitHub).");
-    process.exit(1);
+  const apiKey = process.env.VITE_NOTION_API_KEY;
+  const dbId = process.env.VITE_NOTION_DATABASE_ID;
+
+  if (!apiKey || !dbId) {
+    console.warn("\n⚠️  [NOTION-SYNC] Sincronização de imagens ignorada: Chaves faltantes.");
+    console.warn("👉 Se você estiver em desenvolvimento, verifique o seu arquivo .env.local");
+    console.warn("👉 No GitHub/Vercel, verifique as variáveis de ambiente.");
+    return; // Não trava o build, apenas avisa.
   }
+
+  const notion = new Client({ auth: apiKey });
+  const databaseId = dbId;
 
   console.log("🔍 Fetching projects from Notion...");
   const response = await notion.databases.query({ database_id: databaseId });
