@@ -12,8 +12,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 
-// Load env
-dotenv.config({ path: path.resolve(rootDir, ".env.local") });
+// Load env - priority to .env.local
+dotenv.config({ path: path.resolve(rootDir, ".env") });
+dotenv.config({ path: path.resolve(rootDir, ".env.local"), override: true });
 
 const notion = new Client({ auth: process.env.VITE_NOTION_API_KEY });
 const databaseId = process.env.VITE_NOTION_DATABASE_ID;
@@ -68,7 +69,12 @@ async function saveManifest(manifest) {
 
 async function sync() {
   if (!process.env.VITE_NOTION_API_KEY || !process.env.VITE_NOTION_DATABASE_ID) {
-    console.error("❌ Missing Notion API keys in .env.local");
+    if (process.env.NODE_ENV === 'production' && !process.env.GITHUB_ACTIONS) {
+       console.warn("⚠️ Notion API keys missing. Skipping image sync for this build.");
+       return;
+    }
+    console.error("❌ Erro: Chaves do Notion (VITE_NOTION_API_KEY ou VITE_NOTION_DATABASE_ID) não encontradas.");
+    console.error("👉 Certifique-se de que elas estão no seu .env.local ou configuradas no seu ambiente (Vercel/GitHub).");
     process.exit(1);
   }
 
