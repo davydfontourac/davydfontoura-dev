@@ -49,7 +49,7 @@ export const getProjectsFromNotion = async () => {
       if (manifestRes.ok) {
         imageManifest = await manifestRes.json();
       }
-    } catch (e) {
+    } catch {
       console.warn("Manifest not found, falling back to Notion URLs");
     }
 
