@@ -1,0 +1,71 @@
+{
+  "projects": {
+    "Portal de Notícias": {
+      "lastSync": "2026-03-11T00:37:42.247Z",
+      "notionLastEdited": "2026-02-26T20:48:00.000Z",
+      "images": [
+        "hero.webp",
+        "gallery-1.webp",
+        "gallery-2.webp",
+        "gallery-3.webp",
+        "gallery-4.webp"
+      ]
+    },
+    "klin-ecommerce": {
+      "lastSync": "2026-03-11T00:37:45.075Z",
+      "notionLastEdited": "2026-02-26T20:22:00.000Z",
+      "images": [
+        "hero.webp",
+        "gallery-1.webp",
+        "gallery-2.webp",
+        "gallery-3.webp",
+        "gallery-4.webp",
+        "gallery-5.webp",
+        "gallery-6.webp",
+        "gallery-7.webp"
+      ]
+    },
+    "capodarte-moda": {
+      "lastSync": "2026-03-11T00:37:47.296Z",
+      "notionLastEdited": "2026-02-26T20:20:00.000Z",
+      "images": [
+        "hero.webp",
+        "gallery-1.webp",
+        "gallery-2.webp",
+        "gallery-3.webp",
+        "gallery-4.webp",
+        "gallery-5.webp"
+      ]
+    },
+    "confeitaria-app": {
+      "lastSync": "2026-03-11T00:37:49.261Z",
+      "notionLastEdited": "2026-02-28T03:27:00.000Z",
+      "images": [
+        "hero.webp",
+        "gallery-1.webp",
+        "gallery-2.webp",
+        "gallery-3.webp",
+        "gallery-4.webp"
+      ]
+    },
+    "treis-tecnologia": {
+      "lastSync": "2026-03-11T00:37:50.626Z",
+      "notionLastEdited": "2026-02-26T20:22:00.000Z",
+      "images": [
+        "hero.webp",
+        "gallery-1.webp",
+        "gallery-2.webp",
+        "gallery-3.webp"
+      ]
+    },
+    "controle-de-gastos": {
+      "lastSync": "2026-03-11T00:37:51.850Z",
+      "notionLastEdited": "2026-03-10T23:29:00.000Z",
+      "images": [
+        "hero.webp",
+        "gallery-1.webp",
+        "gallery-2.webp"
+      ]
+    }
+  }
+}

@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "optimize-images": "node scripts/optimize-images.js",
+    "sync-images": "node scripts/sync-images.js",
     "dev": "vite & node scripts/warm-cache.js",
-    "prebuild": "node scripts/optimize-images.js",
+    "prebuild": "node scripts/sync-images.js",
     "build": "vite build",
-    "prebuild:vercel": "node scripts/optimize-images.js",
+    "prebuild:vercel": "node scripts/sync-images.js",
     "build:vercel": "vite build --base=/",
     "lint": "eslint .",
     "preview": "vite preview",

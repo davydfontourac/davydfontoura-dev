@@ -42,6 +42,17 @@ export const getProjectsFromNotion = async () => {
     
     const results = await response.json();
 
+    // Fetch image manifest for optimized local images
+    let imageManifest = { projects: {} };
+    try {
+      const manifestRes = await fetch('/images/manifest.json');
+      if (manifestRes.ok) {
+        imageManifest = await manifestRes.json();
+      }
+    } catch (e) {
+      console.warn("Manifest not found, falling back to Notion URLs");
+    }
+
     // Helper para contornar espaços no final do nome das colunas ou variações de case
     const getProp = (props, name) => {
       const key = Object.keys(props).find(k => k.trim().toLowerCase() === name.toLowerCase());
@@ -50,14 +61,15 @@ export const getProjectsFromNotion = async () => {
 
     const projects = results.map((page) => {
       const props = page.properties;
+      const slug = extractText(getProp(props, 'Slug')?.rich_text).trim();
 
       return {
-        id: page.id, // ID interno do Notion
+        id: page.id, 
         title: {
           pt: getProp(props, 'Title')?.title?.[0]?.plain_text || 'Projeto Sem Título',
           en: extractText(getProp(props, 'Title_EN')?.rich_text) || getProp(props, 'Title')?.title?.[0]?.plain_text || 'Untitled Project'
         },
-        slug: extractText(getProp(props, 'Slug')?.rich_text).trim(),
+        slug,
         description: {
           pt: extractText(getProp(props, 'Description')?.rich_text) || '',
           en: extractText(getProp(props, 'Description_EN')?.rich_text) || ''
@@ -72,7 +84,7 @@ export const getProjectsFromNotion = async () => {
         },
         tech: extractTags(getProp(props, 'TechStack')?.multi_select),
         categories: extractTags(getProp(props, 'Categories')?.multi_select),
-        gradient: extractText(getProp(props, 'Gradient')?.rich_text) || 'from-gray-400 to-gray-600', // Degrade de fallback
+        gradient: extractText(getProp(props, 'Gradient')?.rich_text) || 'from-gray-400 to-gray-600', 
         status: getProp(props, 'Status')?.select?.name || 'concluido',
         year: extractText(getProp(props, 'Year')?.rich_text),
         duration: {
@@ -88,26 +100,24 @@ export const getProjectsFromNotion = async () => {
           en: extractText(getProp(props, 'Client_EN')?.rich_text) || extractText(getProp(props, 'Client')?.rich_text) || ''
         },
         images: (() => {
+          // If project exists in manifest, use local optimized images
+          if (slug && imageManifest.projects[slug]) {
+             const proj = imageManifest.projects[slug];
+             return proj.images.map(img => `/images/projects/${slug}/${img}`);
+          }
+
+          // Fallback: Build original Notion URLs if not yet optimized
           const heroImageUrl = getProp(props, 'HeroImage')?.files && getProp(props, 'HeroImage').files.length > 0 ? extractImageUrl(getProp(props, 'HeroImage').files) : null;
           
           let allImages = [];
           if (heroImageUrl) allImages.push(heroImageUrl);
 
-          // Support for a Gallery column with multiple images
           const galleryFiles = getProp(props, 'Gallery')?.files;
           if (galleryFiles && galleryFiles.length > 0) {
             const galleryUrls = extractImageUrls(galleryFiles);
             allImages = [...allImages, ...galleryUrls];
           }
 
-          // Fallback: Read from the legacy 'Images' text column (comma separated URLs like my migrator did)
-          const legacyImagesText = extractText(getProp(props, 'Images')?.rich_text);
-          if (legacyImagesText) {
-             const legacyUrls = legacyImagesText.split(',').map(u => u.trim()).filter(Boolean);
-             allImages = [...allImages, ...legacyUrls];
-          }
-
-          // Deduplicate
           return [...new Set(allImages)];
         })(),
         links: {
