@@ -45,7 +45,15 @@ const resources = {
           },
           degree2: {
             title: "Programação Front-End",
-            school: "SENAI • Concluído"
+            school: "SENAI • Concluído",
+            desc: "Formação técnica focada na construção de aplicações ricas com Javascript, manipulação profunda do DOM, estruturação avançada com HTML5/CSS3 e metodologias ágeis."
+          }
+        },
+        experience: {
+          freelance: {
+            title: "Desenvolvedor Front-end Freelancer",
+            date: "2023 - Presente",
+            desc: "Desenvolvimento de interfaces modernas, landing pages focadas em conversão e sistemas administrativos utilizando React, Vite e Tailwind CSS. Foco em performance web e arquitetura escalável associada a práticas de UI/UX fluídas."
           }
         },
         download_cv: "Download CV",
@@ -56,7 +64,17 @@ const resources = {
           tech: "Tecnologias Dominadas"
         },
         tools_title: "Tecnologias & Ferramentas",
-        tools_subtitle: "Principais tecnologias que utilizo no desenvolvimento de projetos modernos e eficientes",
+        tools_subtitle: "Stacks e bibliotecas monitoradas diretamente do package.json deste portfólio via GitHub API.",
+        skills_subtitle: "As principais tecnologias que utilizo diariamente para construir soluções completas, além daquelas monitoradas ativamente do repositório via API.",
+        tech_categories: {
+           core: "Core",
+           routing: "Roteamento",
+           i18n: "Internacionalização",
+           styling: "Estilização",
+           build: "Build Tool",
+           icons: "Ícones",
+           tools: "Ferramentas"
+        },
         highlights: {
           design: {
             title: "Design Moderno",
@@ -74,31 +92,40 @@ const resources = {
       },
       services: {
         title: "Meus Serviços",
-        subtitle: "Soluções completas para suas necessidades digitais",
+        subtitle: "Soluções digitais premium para necessidades reais",
         web_dev: {
           title: "Desenvolvimento Web",
-          desc: "Criação de sites e aplicações web responsivas usando as tecnologias mais modernas do mercado."
+          desc: "Criação de sites e aplicações web responsivas de alta performance.",
+          items: ["Sites Institucionais", "Sistemas Web", "Arquitetura Escalável", "Código Otimizado"]
         },
         react: {
           title: "Interfaces React",
-          desc: "Aplicações dinâmicas e interativas com React"
+          desc: "Aplicações dinâmicas e interativas com ecossistema React.",
+          items: ["Single Page Applications", "Gerenciamento de Estado", "Integração de APIs", "Componentes Reutilizáveis"]
         },
         landing: {
           title: "Landing Pages",
-          desc: "Páginas otimizadas para conversão e performance"
+          desc: "Páginas otimizadas desenvolvidas com foco total na conversão.",
+          items: ["Design para Conversão", "Alta Velocidade", "Copy Integrada", "Análise de Métricas"]
         },
         ui_ux: {
           title: "Design UI/UX",
-          desc: "Prototipagem e design de interfaces focadas na melhor experiência e usabilidade para o usuário final."
+          desc: "Prototipagem de interfaces focadas na usabilidade e fluidez.",
+          items: ["User Research", "Wireframes", "Prototipagem Alta Fidelidade", "Testes de Usabilidade"]
         },
         opt: {
-          title: "Otimização (SEO)",
-          desc: "Melhoria de performance e ranqueamento em motores de busca para maior visibilidade online."
+          title: "Setup Completo",
+          desc: "Configuração de domínio, deploy contínuo (CI/CD) e hospedagem.",
+          items: ["Deploy Automatizado", "Hospedagem em Nuvem", "Integração Contínua", "Gestão de Domínios"]
         },
         resp: {
-          title: "Design Responsivo",
-          desc: "Interfaces que se adaptam perfeitamente a qualquer tamanho de tela, do mobile ao desktop."
-        }
+          title: "Consultoria Tech",
+          desc: "Análise técnica, auditoria de performance e orientação arquitetural.",
+          items: ["Auditoria de Código", "Performance Web", "Acessibilidade", "Estratégia Tech"]
+        },
+        cta: "Vamos Conversar",
+        featured_badge: "Mais Procurado",
+        new_badge: "Novo"
       },
       portfolio: {
         title: "Portfólio",
@@ -209,7 +236,15 @@ const resources = {
           },
           degree2: {
             title: "Front-End Programming",
-            school: "SENAI • Completed"
+            school: "SENAI • Completed",
+            desc: "Technical training focused on building rich applications with Javascript, deep DOM manipulation, advanced structuring with HTML5/CSS3 and agile methodologies."
+          }
+        },
+        experience: {
+          freelance: {
+            title: "Front-end Freelance Developer",
+            date: "2023 - Present",
+            desc: "Development of modern interfaces, conversion-focused landing pages and administrative systems using React, Vite and Tailwind CSS. Focus on web performance and scalable architecture combined with fluid UI/UX practices."
           }
         },
         download_cv: "Download Resume",
@@ -220,7 +255,17 @@ const resources = {
           tech: "Technologies Mastered"
         },
         tools_title: "Technologies & Tools",
-        tools_subtitle: "Main technologies I use to build modern and efficient projects",
+        tools_subtitle: "Stacks and libraries monitored straight from this portfolio's package.json via GitHub API.",
+        skills_subtitle: "The main technologies I use daily to build complete solutions, in addition to those actively monitored from the repository via API.",
+        tech_categories: {
+           core: "Core",
+           routing: "Routing",
+           i18n: "Internationalization",
+           styling: "Styling",
+           build: "Build Tool",
+           icons: "Icons",
+           tools: "Tools"
+        },
         highlights: {
           design: {
             title: "Modern Design",
@@ -238,31 +283,40 @@ const resources = {
       },
       services: {
         title: "My Services",
-        subtitle: "Complete solutions for your digital needs",
+        subtitle: "Premium digital solutions for real needs",
         web_dev: {
           title: "Web Development",
-          desc: "Building responsive websites and web applications using top-tier modern technologies."
+          desc: "Building high-performance responsive websites and web applications.",
+          items: ["Corporate Websites", "Web Systems", "Scalable Architecture", "Optimized Code"]
         },
         react: {
           title: "React Interfaces",
-          desc: "Dynamic and interactive applications built with React"
+          desc: "Dynamic and interactive applications built with the React ecosystem.",
+          items: ["Single Page Applications", "State Management", "API Integrations", "Reusable Components"]
         },
         landing: {
           title: "Landing Pages",
-          desc: "Optimized pages for conversion and performance"
+          desc: "Optimized pages developed with total focus on conversion.",
+          items: ["Design for Conversion", "High Speed", "Integrated Copy", "Metrics Analysis"]
         },
         ui_ux: {
           title: "UI/UX Design",
-          desc: "Prototyping and designing interfaces focused on the best experience and usability for the end user."
+          desc: "Prototyping interfaces focused on best usability and fluidity.",
+          items: ["User Research", "Wireframes", "High-Fidelity Prototypes", "Usability Testing"]
         },
         opt: {
-          title: "Optimization (SEO)",
-          desc: "Improving performance and search engine ranking to increase your online visibility."
+          title: "Full Setup & Deploy",
+          desc: "Domain configuration, continuous deployment (CI/CD) and hosting.",
+          items: ["Automated Deploy", "Cloud Hosting", "Continuous Integration", "Domain Management"]
         },
         resp: {
-          title: "Responsive Design",
-          desc: "Interfaces that perfectly adapt to any screen size, from mobile devices to desktop monitors."
-        }
+          title: "Tech Consulting",
+          desc: "Technical analysis, performance audits, and architectural guidance.",
+          items: ["Code Audit", "Web Performance", "Accessibility", "Tech Strategy"]
+        },
+        cta: "Let's Talk",
+        featured_badge: "Most Wanted",
+        new_badge: "New"
       },
       portfolio: {
         title: "Portfolio",
