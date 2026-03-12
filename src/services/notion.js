@@ -31,7 +31,7 @@ export const getProjectsFromNotion = async () => {
   try {
     // Busca a URL da API do ambiente ou usa fallback dinâmico
     const API_URL = import.meta.env.VITE_API_URL || 
-                    (import.meta.env.PROD ? '/api/projects' : 'http://localhost:3001/api/projects');
+                    (import.meta.env.PROD ? 'api/projects' : 'http://localhost:3001/api/projects');
     
     // Fetch from our local proxy or production endpoint
     const response = await fetch(API_URL);

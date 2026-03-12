@@ -65,7 +65,7 @@ export const TECH_META = {
   'autoprefixer': {
     name: 'Autoprefixer',
     category: 'about.tech_categories.styling',
-    iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg', // Fallback aproximado
+    iconUrl: '/images/tech/tailwind.svg', // Fallback local para evitar cookies de terceiros
     color: '#DD3A0A'
   },
   'postcss': {
