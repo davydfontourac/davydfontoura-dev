@@ -1,9 +1,11 @@
 import { Code, Palette, Rocket, Users, Award, TrendingUp } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import profileImage from '../assets/profile.webp'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const About = () => {
   const { t } = useTranslation();
+  const { ref, isVisible } = useScrollReveal();
   const skills = ['JavaScript', 'HTML', 'CSS', 'React', 'Vite', 'Tailwind CSS', 'Python', 'Git', 'GitHub', 'Excel']
 
   const stats = [
@@ -32,7 +34,11 @@ const About = () => {
   ]
 
   return (
-    <section id="about" className="min-h-screen pt-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section 
+      id="about" 
+      ref={ref}
+      className={`min-h-screen pt-20 bg-white dark:bg-gray-900 transition-colors duration-300 reveal-hidden ${isVisible ? 'reveal-visible' : ''}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-16">

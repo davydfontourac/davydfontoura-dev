@@ -113,3 +113,32 @@ body {
   background: linear-gradient(to right, #1a1c1e 0%, #2d3135 20%, #1a1c1e 40%, #1a1c1e 100%);
   background-size: 1000px 100%;
 }
+
+/* Utilidades para Navegação e Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animações de Scroll Reveal */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .reveal-hidden {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
