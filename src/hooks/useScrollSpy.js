@@ -6,6 +6,7 @@ export const useScrollSpy = (sectionIds = ['home', 'about', 'services', 'portfol
   useEffect(() => {
     const observers = [];
 
+
     // Ajuste melhor para scroll spy é usar IntersectionObserver dessa forma
     const sectionObserver = new IntersectionObserver((entries) => {
        entries.forEach((entry) => {
