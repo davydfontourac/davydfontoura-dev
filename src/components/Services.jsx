@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const Services = () => {
   const { t } = useTranslation();
+  const { ref, isVisible } = useScrollReveal();
   const services = [
     {
       title: t('services.web_dev.title'),
@@ -36,7 +38,11 @@ const Services = () => {
   ]
 
   return (
-    <section id="services" className="min-h-screen pt-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <section 
+      id="services" 
+      ref={ref}
+      className={`min-h-screen pt-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 reveal-hidden ${isVisible ? 'reveal-visible' : ''}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">{t('services.title')}</h2>

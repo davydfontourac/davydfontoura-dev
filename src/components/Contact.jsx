@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import emailjs from '@emailjs/browser'
 import { EMAILJS_CONFIG } from '../config/emailjs'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const Contact = () => {
   const { t } = useTranslation();
+  const { ref, isVisible } = useScrollReveal();
   // Estado do formulário
   const [formData, setFormData] = useState({
     name: '',
@@ -107,7 +109,11 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="min-h-screen pt-20 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white w-full transition-colors duration-300">
+    <section 
+      id="contact" 
+      ref={ref}
+      className={`min-h-screen pt-20 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white w-full transition-colors duration-300 reveal-hidden ${isVisible ? 'reveal-visible' : ''}`}
+    >
       <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('contact.title')}</h2>

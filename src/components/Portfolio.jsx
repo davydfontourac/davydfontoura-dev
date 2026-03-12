@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { getImagePath } from '../utils/imagePaths'
 import { useNotionProjects } from '../hooks/useNotionProjects'
 import { useGithubRepos } from '../hooks/useGithubRepos'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const ProjectCardImage = ({ project }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,6 +46,7 @@ const ProjectCardImage = ({ project }) => {
 
 const Portfolio = () => {
   const { t, i18n } = useTranslation();
+  const { ref, isVisible } = useScrollReveal();
   const [expandedItems, setExpandedItems] = useState({})
   const { repos, loading: reposLoading, error: reposError } = useGithubRepos('davydfontourac');
   const { projects, loading: projectsLoading, error: projectsError } = useNotionProjects();
@@ -66,7 +68,11 @@ const Portfolio = () => {
   }
 
   return (
-    <section id="portfolio" className="min-h-screen pt-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section 
+      id="portfolio" 
+      ref={ref}
+      className={`min-h-screen pt-20 bg-white dark:bg-gray-900 transition-colors duration-300 reveal-hidden ${isVisible ? 'reveal-visible' : ''}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">{t('portfolio.title')}</h2>
@@ -99,8 +105,12 @@ const Portfolio = () => {
 
         {!projectsLoading && !projectsError && projects.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <div key={project.id} className="group cursor-pointer card-hover transform transition-all duration-300 hover:scale-105 active:scale-95 hover:rotate-1 flex flex-col h-full">
+            {projects.map((project, index) => (
+              <div 
+                key={project.id} 
+                className={`group cursor-pointer card-hover transform transition-all duration-300 hover:scale-105 active:scale-95 hover:rotate-1 flex flex-col h-full reveal-hidden ${isVisible ? 'reveal-visible' : ''}`}
+                style={{ transitionDelay: `${index * 80}ms` }}
+              >
                 <div className={`bg-gradient-to-br ${project.gradient} h-48 rounded-lg mb-4 relative overflow-hidden shadow-lg transition-all duration-300 ring-0 group-hover:ring-4 group-hover:ring-blue-200 dark:group-hover:ring-blue-800 shrink-0`}>
                   
                   {/* Nova implementação de imagem com carregamento suave */}
