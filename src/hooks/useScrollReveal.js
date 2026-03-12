@@ -37,7 +37,7 @@ export const useScrollReveal = (options = { threshold: 0.1, rootMargin: '0px' })
         observer.unobserve(currentRef);
       }
     };
-  }, [options.rootMargin, options.threshold]);
+  }, [options.rootMargin, options.threshold, options]);
 
   return { ref, isVisible };
 };

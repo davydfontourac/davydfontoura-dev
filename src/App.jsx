@@ -25,7 +25,7 @@ const Portfolio = lazy(() => import('./components/Portfolio'));
 
 // Componente para a página principal
 const MainPage = () => {
-  const { i18n } = useTranslation();
+  useTranslation();
   const activeSection = useScrollSpy(['home', 'about', 'services', 'portfolio', 'contact']);
 
   const navigateToSection = (sectionId) => {

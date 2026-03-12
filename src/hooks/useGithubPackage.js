@@ -77,7 +77,6 @@ export const TECH_META = {
 };
 
 export const useGithubPackage = (repoPath = 'davydfontourac/davydfontoura-dev') => {
-  const [techList, setTechList] = [useState, []]; // A ser inicializado com hook useState real.
   // Correção via desestruturação
   const [techs, setTechs] = useState([]);
   const [loading, setLoading] = useState(true);
