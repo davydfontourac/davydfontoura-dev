@@ -7,6 +7,12 @@ const extractText = (richTextArray) => {
   return richTextArray.map(t => t.plain_text).join('');
 };
 
+// Helper to slugify strings
+const slugify = (text) => {
+  if (!text) return '';
+  return text.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
+};
+
 // Helper to extract URL from Notion's file object
 const extractImageUrl = (filesArray) => {
   if (!filesArray || filesArray.length === 0) return null;
@@ -31,7 +37,7 @@ export const getProjectsFromNotion = async () => {
   try {
     // Busca a URL da API do ambiente ou usa fallback dinâmico
     const API_URL = import.meta.env.VITE_API_URL || 
-                    (import.meta.env.PROD ? 'api/projects' : 'http://localhost:3001/api/projects');
+                    (import.meta.env.PROD ? '/api/projects' : 'http://localhost:3001/api/projects');
     
     // Fetch from our local proxy or production endpoint
     const response = await fetch(API_URL);
@@ -61,7 +67,7 @@ export const getProjectsFromNotion = async () => {
 
     const projects = results.map((page) => {
       const props = page.properties;
-      const slug = extractText(getProp(props, 'Slug')?.rich_text).trim();
+      const slug = slugify(extractText(getProp(props, 'Slug')?.rich_text));
 
       return {
         id: page.id, 

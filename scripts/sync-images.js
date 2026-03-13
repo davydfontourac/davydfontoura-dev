@@ -29,6 +29,11 @@ const extractText = (richTextArray) => {
   return richTextArray.map(t => t.plain_text).join('');
 };
 
+const slugify = (text) => {
+  if (!text) return '';
+  return text.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
+};
+
 const extractImageUrl = (filesArray) => {
   if (!filesArray || filesArray.length === 0) return null;
   const file = filesArray[0];
@@ -100,7 +105,7 @@ async function sync() {
     };
 
     const title = getProp('Title')?.title?.[0]?.plain_text || 'untitled';
-    const slug = extractText(getProp('Slug')?.rich_text).trim();
+    const slug = slugify(extractText(getProp('Slug')?.rich_text));
 
     if (!slug) continue;
 
