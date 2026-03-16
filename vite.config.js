@@ -44,10 +44,15 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       host: true
     },
-    test: {
-      globals: true,
-      environment: 'jsdom',
-      setupFiles: './src/setupTests.js',
-    }
+ test: {
+  globals: true,
+  environment: 'jsdom',
+  setupFiles: './src/setupTests.js',
+  coverage: {
+    provider: 'v8',
+    reporter: ['text', 'lcov', 'html'],
+    reportsDirectory: './coverage',
+  }
+}
   }
 })
