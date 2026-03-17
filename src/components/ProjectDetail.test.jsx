@@ -123,11 +123,13 @@ describe('ProjectDetail Component', () => {
 
     // Find and click the main image to open modal using accessible role/aria-label
     const mainImageButton = screen.getByRole('button', { name: /Ampliar imagem: img1\.jpg/i });
-    fireEvent.click(mainImageButton);
-
+    
+    // Test opening with keyboard
+    fireEvent.keyDown(mainImageButton, { key: 'Enter' });
+    
     // Image modal text "1 / 2" should be active
     expect(screen.getByText('1 / 2')).toBeInTheDocument();
-
+    
     // The modal uses ChevronRight icon for next, let's grab the button containing it or just fire keyboard event
     fireEvent.keyDown(window, { key: 'ArrowRight' });
     expect(screen.getByText('2 / 2')).toBeInTheDocument();
@@ -137,5 +139,45 @@ describe('ProjectDetail Component', () => {
     
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(screen.queryByText('1 / 2')).not.toBeInTheDocument();
+  });
+
+  it('should render related projects', () => {
+    const mockProject = {
+      id: '1',
+      slug: 'test-project',
+      title: { pt: 'Título Teste' },
+      categories: ['web'],
+      status: 'concluido',
+      images: [],
+      links: {},
+    };
+
+    const relatedProject = {
+      id: '2',
+      slug: 'related',
+      title: { pt: 'Projeto Relacionado' },
+      shortDesc: { pt: 'Desc relacionado' },
+      images: ['rel1.jpg']
+    };
+
+    useNotionProjects.mockReturnValue({
+      loading: false,
+      getProjectBySlug: () => mockProject,
+      getRelatedProjects: () => [relatedProject],
+    });
+
+    render(
+      <ThemeProvider>
+        <MemoryRouter initialEntries={['/projeto/test-project']}>
+          <Routes>
+            <Route path="/projeto/:slug" element={<ProjectDetail />} />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>
+    );
+
+    expect(screen.getByText('Outros Projetos')).toBeInTheDocument();
+    expect(screen.getByText('Projeto Relacionado')).toBeInTheDocument();
+    expect(screen.getByText('Desc relacionado')).toBeInTheDocument();
   });
 });

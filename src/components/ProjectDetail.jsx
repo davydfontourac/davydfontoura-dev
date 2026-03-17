@@ -278,6 +278,12 @@ const ProjectDetail = () => {
                 <div
                   className="relative rounded-lg overflow-hidden cursor-pointer group transition-all duration-300 ease-in-out min-h-[24rem] max-h-[32rem] h-auto flex items-center justify-center"
                   onClick={() => handleImageClick(currentImageIndex)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleImageClick(currentImageIndex);
+                    }
+                  }}
                   role="button"
                   tabIndex={0}
                   aria-label={`Ampliar imagem: ${project.images[currentImageIndex]}`}
@@ -303,6 +309,14 @@ const ProjectDetail = () => {
                           : 'opacity-60 hover:opacity-100'
                       }`}
                       onClick={() => setCurrentImageIndex(index)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setCurrentImageIndex(index);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
                     >
                       <img
                         src={getImagePath(img)}
