@@ -69,7 +69,7 @@ const Portfolio = () => {
   return (
     <section 
       id="portfolio" 
-      className="min-h-screen pt-32 bg-white dark:bg-gray-900 transition-colors duration-300"
+      className="min-h-screen pt-32 bg-white dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-48">
         <ScrollReveal variant="fade-down" className="text-center mb-16">
@@ -287,6 +287,9 @@ const Portfolio = () => {
             </div>
           )}
         </div>
+
+        {/* Smooth section transition gradient: White -> Gray-100 */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-gray-100 dark:to-gray-900 pointer-events-none z-10"></div>
       </div>
     </section>
   )
