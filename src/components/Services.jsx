@@ -68,9 +68,9 @@ const Services = () => {
   return (
     <section 
       id="services" 
-      className="min-h-screen pt-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+      className="min-h-screen pt-32 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-48 relative z-10">
         <ScrollReveal variant="fade-down" className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 mb-6 pb-2">
              {t('services.title')}

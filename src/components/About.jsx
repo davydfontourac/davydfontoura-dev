@@ -28,37 +28,12 @@ const About = () => {
   // Array provisório para simular skeleton
   const skeletonArray = Array(12).fill(0);
 
-  const stats = [
-    { icon: Code, label: t('about.stats.projects'), value: '15+' },
-    { icon: Users, label: t('about.stats.clients'), value: '8+' },
-    { icon: Award, label: t('about.stats.experience'), value: '2+' },
-    { icon: TrendingUp, label: t('about.stats.tech'), value: '10+' }
-  ]
-
-  const highlights = [
-    {
-      icon: <Palette className="w-6 h-6" />,
-      title: t('about.highlights.design.title'),
-      description: t('about.highlights.design.desc')
-    },
-    {
-      icon: <Code className="w-6 h-6" />,
-      title: t('about.highlights.code.title'),
-      description: t('about.highlights.code.desc')
-    },
-    {
-      icon: <Rocket className="w-6 h-6" />,
-      title: t('about.highlights.performance.title'),
-      description: t('about.highlights.performance.desc')
-    }
-  ]
-
   return (
     <section 
       id="about" 
-      className="min-h-screen pt-20 bg-white dark:bg-gray-900 transition-colors duration-300"
+      className="min-h-screen pt-32 bg-white dark:bg-gray-900 transition-colors duration-300"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-48">
         {/* Header */}
         <ScrollReveal variant="fade-down" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
@@ -254,48 +229,6 @@ const About = () => {
               )}
            </div>
         </ScrollReveal>
-
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {stats.map((stat, index) => (
-            <ScrollReveal key={stat.label} variant="fade-up" delay={`${index * 100}ms`}>
-              <div className="text-center h-full">
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800 hover:shadow-lg transition-all duration-300 h-full">
-                  <div className="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <stat.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-300">
-                    {stat.label}
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-
-        {/* Highlights Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {highlights.map((highlight, index) => (
-            <ScrollReveal key={highlight.title} variant="fade-up" delay={`${index * 150}ms`}>
-              <div className="group h-full">
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-1 h-full">
-                  <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {highlight.icon}
-                  </div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    {highlight.title}
-                  </h4>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                    {highlight.description}
-                  </p>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
       </div>
     </section>
   )
