@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 /**
@@ -40,6 +41,16 @@ const ScrollReveal = ({
       {children}
     </div>
   );
+};
+
+ScrollReveal.propTypes = {
+  children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(['fade', 'fade-up', 'fade-down', 'fade-left', 'fade-right', 'zoom']),
+  delay: PropTypes.string,
+  duration: PropTypes.string,
+  threshold: PropTypes.number,
+  repeat: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default ScrollReveal;

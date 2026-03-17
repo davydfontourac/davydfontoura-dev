@@ -125,8 +125,8 @@ const Contact = () => {
               <ScrollReveal variant="fade-left">
                 <h3 className="text-2xl font-bold mb-6">{t('contact.info_title')}</h3>
                 <div className="space-y-4">
-                  {contactInfo.map((contact, index) => (
-                    <ScrollReveal key={index} variant="fade-left" delay={`${index * 100}ms`}>
+                  {contactInfo.map((contact) => (
+                    <ScrollReveal key={contact.title} variant="fade-left" delay={`${contactInfo.indexOf(contact) * 100}ms`}>
                       <div className="flex items-center">
                         <div className="bg-blue-600 p-3 rounded-lg mr-4">
                           {contact.icon}

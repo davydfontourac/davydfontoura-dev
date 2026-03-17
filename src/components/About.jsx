@@ -253,7 +253,7 @@ const About = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           {stats.map((stat, index) => (
-            <ScrollReveal key={index} variant="fade-up" delay={`${index * 100}ms`}>
+            <ScrollReveal key={stat.label} variant="fade-up" delay={`${index * 100}ms`}>
               <div className="text-center h-full">
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800 hover:shadow-lg transition-all duration-300 h-full">
                   <div className="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
@@ -274,7 +274,7 @@ const About = () => {
         {/* Highlights Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {highlights.map((highlight, index) => (
-            <ScrollReveal key={index} variant="fade-up" delay={`${index * 150}ms`}>
+            <ScrollReveal key={highlight.title} variant="fade-up" delay={`${index * 150}ms`}>
               <div className="group h-full">
                 <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-1 h-full">
                   <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300">

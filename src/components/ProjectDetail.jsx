@@ -329,9 +329,9 @@ const ProjectDetail = () => {
 
                 {/* Tags de categorias */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.categories.map((category, index) => (
+                  {project.categories.map((category) => (
                     <span
-                      key={index}
+                      key={category}
                       className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
                     >
                       <Tag size={12} className="mr-1" />
@@ -546,7 +546,7 @@ const ProjectDetail = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {project.images.map((image, index) => (
                     <div
-                      key={index}
+                      key={image}
                       className={`relative rounded-lg overflow-hidden cursor-pointer border-2 transition-all duration-300 min-h-[6rem] max-h-[8rem] h-auto flex items-center justify-center ${
                         index === currentImageIndex
                           ? "border-blue-500 ring-2 ring-blue-200 dark:ring-blue-800"
@@ -666,8 +666,8 @@ const ProjectDetail = () => {
             </h2>
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
               <div className="flex flex-wrap gap-4">
-                {project.tech.map((tech, index) => (
-                  <ScrollReveal key={index} variant="zoom" delay={`${index * 50}ms`}>
+                {project.tech.map((tech) => (
+                  <ScrollReveal key={tech} variant="zoom" delay={`${project.tech.indexOf(tech) * 50}ms`}>
                     <span
                       className="inline-flex items-center px-5 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm"
                     >
@@ -691,7 +691,7 @@ const ProjectDetail = () => {
               <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {(project.features?.[i18n.language] || project.features?.pt || []).map((feature, index) => (
-                    <ScrollReveal key={index} variant="fade-right" delay={`${index * 100}ms`}>
+                    <ScrollReveal key={feature} variant="fade-right" delay={`${index * 100}ms`}>
                       <div
                         className="flex items-start space-x-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600 hover:shadow-md transition-shadow duration-300"
                       >

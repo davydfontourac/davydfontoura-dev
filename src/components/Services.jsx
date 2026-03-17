@@ -84,7 +84,7 @@ const Services = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
           {services.map((service, index) => (
             <ScrollReveal 
-              key={index} 
+              key={service.id} 
               variant="fade-up" 
               delay={`${index * 100}ms`}
             >
@@ -119,8 +119,8 @@ const Services = () => {
 
                    {/* Lista de Entregáveis */}
                    <ul className="space-y-3 mb-8">
-                      {Array.isArray(service.items) && service.items.map((item, i) => (
-                         <li key={i} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
+                      {Array.isArray(service.items) && service.items.map((item) => (
+                         <li key={item} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
                             <svg className={`w-5 h-5 mr-3 flex-shrink-0 text-${service.color}-500`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>

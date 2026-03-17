@@ -129,8 +129,8 @@ const Portfolio = () => {
                         {/* Mostra apenas a primeira linha (shortDesc) no hover */}
                         <p className="text-sm mb-6 leading-relaxed">{project.shortDesc?.[i18n.language] || project.shortDesc?.pt}</p>
                         <div className="flex flex-wrap gap-2 justify-center">
-                          {project.tech && project.tech.length > 0 && project.tech.slice(0, 3).map((tech, index) => (
-                            <span key={index} className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/30">
+                          {project.tech && project.tech.length > 0 && project.tech.slice(0, 3).map((tech) => (
+                            <span key={tech} className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium border border-white/30">
                               {tech}
                             </span>
                           ))}
