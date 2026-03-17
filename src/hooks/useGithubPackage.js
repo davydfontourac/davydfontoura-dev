@@ -2,21 +2,45 @@ import { useState, useEffect } from 'react';
 
 // Constantes estáticas das tecnologias permitidas e seus meta-dados.
 export const TECH_ALLOWLIST = [
-  'react', 'i18next', 'tailwindcss', 'vite', 'lucide-react', 'eslint', 'postcss'
+  'eslint', 'i18next', 'lucide-react', 'next', 'postcss', 'react', 'tailwindcss', 'vite'
 ];
 
 export const TECH_META = {
-  'react': {
-    name: 'React',
-    category: 'about.tech_categories.core',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    color: '#61DAFB'
+  'eslint': {
+    name: 'ESLint',
+    category: 'about.tech_categories.tools',
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg',
+    color: '#4B32C3'
   },
   'i18next': {
     name: 'i18next',
     category: 'about.tech_categories.i18n',
     iconUrl: 'https://cdn.jsdelivr.net/npm/simple-icons/icons/i18next.svg',
     color: '#009688'
+  },
+  'lucide-react': {
+    name: 'Lucide Icons',
+    category: 'about.tech_categories.icons',
+    iconUrl: 'https://lucide.dev/logo.light.svg',
+    color: '#F05032' 
+  },
+  'next': {
+    name: 'Next.js',
+    category: 'about.tech_categories.core',
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg',
+    color: '#000000'
+  },
+  'postcss': {
+    name: 'PostCSS',
+    category: 'about.tech_categories.styling',
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postcss/postcss-original.svg',
+    color: '#DD3A0A'
+  },
+  'react': {
+    name: 'React',
+    category: 'about.tech_categories.core',
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    color: '#61DAFB'
   },
   'tailwindcss': {
     name: 'Tailwind CSS',
@@ -29,24 +53,6 @@ export const TECH_META = {
     category: 'about.tech_categories.build',
     iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg',
     color: '#646CFF'
-  },
-  'lucide-react': {
-    name: 'Lucide Icons',
-    category: 'about.tech_categories.icons',
-    iconUrl: 'https://lucide.dev/logo.light.svg',
-    color: '#F05032' // Adapte conforme necessário
-  },
-  'eslint': {
-    name: 'ESLint',
-    category: 'about.tech_categories.tools',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg',
-    color: '#4B32C3'
-  },
-  'postcss': {
-    name: 'PostCSS',
-    category: 'about.tech_categories.styling',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postcss/postcss-original.svg',
-    color: '#DD3A0A'
   }
 };
 

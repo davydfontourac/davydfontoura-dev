@@ -17,10 +17,13 @@ const About = () => {
     { id: 'express', name: 'Express', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg', color: '#000000', version: '4.x' },
     { id: 'git', name: 'Git', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg', color: '#F05032', version: 'CLI' },
     { id: 'github_tool', name: 'GitHub', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg', color: '#181717', version: 'Web' },
-    { id: 'vercel', name: 'Vercel', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg', color: '#000000', version: 'Cloud' }
+    { id: 'vercel', name: 'Vercel', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg', color: '#000000', version: 'Cloud' },
+    { id: 'node', name: 'Node.js', category: 'about.tech_categories.backend', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg', color: '#339933', version: 'v20+' },
+    { id: 'next', name: 'Next.js', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', color: '#000000', version: 'v14+' }
   ];
 
-  const allSkills = [...techs, ...additionalSkills.filter(s => !techs.find(t => t.name === s.name))];
+  const allSkills = [...techs, ...additionalSkills.filter(s => !techs.find(t => t.name === s.name))]
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   // Array provisório para simular skeleton
   const skeletonArray = Array(12).fill(0);
