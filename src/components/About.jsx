@@ -12,10 +12,12 @@ const About = () => {
     { id: 'html', name: 'HTML5', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg', color: '#E34F26', version: '5' },
     { id: 'css', name: 'CSS3', category: 'about.tech_categories.styling', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg', color: '#1572B6', version: '3' },
     { id: 'js', name: 'JavaScript', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg', color: '#F7DF1E', version: 'ES6+' },
-    { id: 'python', name: 'Python', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg', color: '#3776AB', version: '3.x' },
+    { id: 'supabase', name: 'Supabase', category: 'about.tech_categories.backend', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg', color: '#3ECF8E', version: 'BaaS' },
+    { id: 'wordpress', name: 'WordPress', category: 'about.tech_categories.cms', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-original.svg', color: '#21759B', version: '6.x' },
+    { id: 'express', name: 'Express', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg', color: '#000000', version: '4.x' },
     { id: 'git', name: 'Git', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg', color: '#F05032', version: 'CLI' },
     { id: 'github_tool', name: 'GitHub', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg', color: '#181717', version: 'Web' },
-    { id: 'excel', name: 'Excel', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.worldvectorlogo.com/logos/excel-4.svg', color: '#217346', version: 'Advanced' }
+    { id: 'vercel', name: 'Vercel', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg', color: '#000000', version: 'Cloud' }
   ];
 
   const allSkills = [...techs, ...additionalSkills.filter(s => !techs.find(t => t.name === s.name))];

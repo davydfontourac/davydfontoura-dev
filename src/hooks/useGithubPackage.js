@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 
 // Constantes estáticas das tecnologias permitidas e seus meta-dados.
 export const TECH_ALLOWLIST = [
-  'react', 'react-dom', 'react-router-dom', 'react-i18next', 
-  'i18next', 'tailwindcss', 'vite', 'lucide-react', 'eslint',
-  'autoprefixer', 'postcss'
+  'react', 'i18next', 'tailwindcss', 'vite', 'lucide-react', 'eslint', 'postcss'
 ];
 
 export const TECH_META = {
@@ -13,24 +11,6 @@ export const TECH_META = {
     category: 'about.tech_categories.core',
     iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
     color: '#61DAFB'
-  },
-  'react-dom': {
-    name: 'React DOM',
-    category: 'about.tech_categories.core',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    color: '#61DAFB'
-  },
-  'react-router-dom': {
-    name: 'React Router',
-    category: 'about.tech_categories.routing',
-    iconUrl: 'https://cdn.jsdelivr.net/npm/simple-icons/icons/reactrouter.svg', 
-    color: '#CA4245'
-  },
-  'react-i18next': {
-    name: 'React i18next',
-    category: 'about.tech_categories.i18n',
-    iconUrl: 'https://cdn.jsdelivr.net/npm/simple-icons/icons/i18next.svg',
-    color: '#009688'
   },
   'i18next': {
     name: 'i18next',
@@ -61,12 +41,6 @@ export const TECH_META = {
     category: 'about.tech_categories.tools',
     iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg',
     color: '#4B32C3'
-  },
-  'autoprefixer': {
-    name: 'Autoprefixer',
-    category: 'about.tech_categories.styling',
-    iconUrl: '/images/tech/tailwind.svg', // Fallback local para evitar cookies de terceiros
-    color: '#DD3A0A'
   },
   'postcss': {
     name: 'PostCSS',

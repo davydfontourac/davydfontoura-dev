@@ -73,7 +73,9 @@ const resources = {
            styling: "Estilização",
            build: "Build Tool",
            icons: "Ícones",
-           tools: "Ferramentas"
+           tools: "Ferramentas",
+           backend: "Backend",
+           cms: "CMS"
         },
         highlights: {
           design: {
@@ -264,7 +266,9 @@ const resources = {
            styling: "Styling",
            build: "Build Tool",
            icons: "Icons",
-           tools: "Tools"
+           tools: "Tools",
+           backend: "Backend",
+           cms: "CMS"
         },
         highlights: {
           design: {
