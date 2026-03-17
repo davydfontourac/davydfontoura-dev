@@ -340,7 +340,7 @@ const ProjectDetail = () => {
                 {t('projectDetail.aboutProject', 'Sobre o Projeto')}
               </h2>
               <div 
-                className="text-gray-700 dark:text-gray-300 leading-relaxed space-y-4"
+                className="project-rich-content text-gray-700 dark:text-gray-300 leading-relaxed space-y-4"
                 dangerouslySetInnerHTML={{ __html: project.fullDescription[i18n.language] || project.fullDescription.pt }}
               />
             </div>
