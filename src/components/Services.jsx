@@ -144,7 +144,7 @@ const Services = () => {
         </div>
 
         {/* Smooth section transition gradient: Gray-50 -> White */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-white dark:to-gray-900 pointer-events-none z-10"></div>
+        <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-b from-transparent via-gray-50/50 to-white dark:to-gray-900 pointer-events-none z-10"></div>
       </div>
     </section>
   )
