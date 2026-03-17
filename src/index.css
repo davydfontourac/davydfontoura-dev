@@ -30,8 +30,8 @@ h1, h2, h3, h4, .font-outfit {
 
 /* Custom Selection */
 ::selection {
-  background: rgba(59, 130, 246, 0.2);
-  color: #3b82f6;
+  background: #3b82f6;
+  color: #ffffff;
 }
 
 /* Modern Minimalist Scrollbar */

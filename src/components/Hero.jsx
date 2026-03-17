@@ -3,7 +3,6 @@ import { ThemeContext } from '../contexts/ThemeContext'
 import { useTranslation } from 'react-i18next'
 import { Github, Linkedin, Download } from 'lucide-react'
 import ParticlesBackground from './ParticlesBackground'
-import BlurText from './BlurText'
 import SectionTransition from './SectionTransition'
 
 const Hero = ({ navigateToSection }) => {
@@ -69,12 +68,16 @@ const Hero = ({ navigateToSection }) => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity" onClick={() => navigateToSection('about')}>
+      <button 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-50 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-2" 
+        onClick={() => navigateToSection('about')}
+        aria-label="Scroll to About section"
+      >
         <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 dark:text-gray-400">Scroll</span>
         <div className="w-5 h-8 border-2 border-gray-400 dark:border-gray-500 rounded-full flex justify-center p-1">
           <div className="w-1 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-scroll"></div>
         </div>
-      </div>
+      </button>
     </section>
   )
 }

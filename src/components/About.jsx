@@ -1,4 +1,4 @@
-import { Code, Palette, Rocket, Users, Award, TrendingUp, Calendar, Briefcase, GraduationCap, ChevronRight, ExternalLink } from 'lucide-react'
+import { Code, Calendar, Briefcase, GraduationCap, ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import profileImage from '../assets/profile.webp'
 import { useGithubPackage } from '../hooks/useGithubPackage'
@@ -23,7 +23,7 @@ const About = () => {
     { id: 'next', name: 'Next.js', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', color: '#000000', version: 'v14+' }
   ];
 
-  const allSkills = [...techs, ...additionalSkills.filter(s => !techs.find(t => t.name === s.name))]
+  const allSkills = [...techs, ...additionalSkills.filter(s => !techs.some(tech => tech.name === s.name))]
     .sort((a, b) => a.name.localeCompare(b.name));
 
   // Array provisório para simular skeleton

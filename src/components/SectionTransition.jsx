@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * SectionTransition
@@ -13,7 +13,13 @@ const SectionTransition = ({
   darkVia = ''
 }) => {
   const viaClass = via ? `via-${via}` : '';
-  const darkViaClass = darkVia ? `dark:via-${darkVia}` : (via ? `dark:via-transparent` : '');
+  
+  let darkViaClass = '';
+  if (darkVia) {
+    darkViaClass = `dark:via-${darkVia}`;
+  } else if (via) {
+    darkViaClass = 'dark:via-transparent';
+  }
   
   return (
     <div 
@@ -21,6 +27,15 @@ const SectionTransition = ({
       aria-hidden="true"
     />
   );
+};
+
+SectionTransition.propTypes = {
+  toColor: PropTypes.string,
+  darkToColor: PropTypes.string,
+  height: PropTypes.string,
+  className: PropTypes.string,
+  via: PropTypes.string,
+  darkVia: PropTypes.string
 };
 
 export default SectionTransition;
