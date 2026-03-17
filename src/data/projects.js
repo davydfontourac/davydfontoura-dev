@@ -69,7 +69,7 @@ export const projects = [
             
             <br />
             <h3>Escopo do Projeto</h3>
-            <ul style="list-style-type: disc; padding-left: 1.5em;">
+            <ul style="list-style-type: disc; color: black; padding-left: 1.5em;">
                 <li>Desenvolvimento de interfaces B2B responsivas</li>
                 <li>Implementação de componentes reutilizáveis</li>
                 <li>Otimização da experiência do usuário</li>
@@ -133,7 +133,7 @@ export const projects = [
             
             <br/>
             <h3>Desafios do Projeto</h3>
-            <ul style="list-style-type: disc; padding-left: 1.5em;">
+            <ul style="list-style-type: disc; color: black; padding-left: 1.5em;">
                 <li>Manter a identidade visual da marca Capodarte</li>
                 <li>Desenvolver interface elegante e sofisticada</li>
                 <li>Otimizar performance para grandes catálogos</li>
@@ -196,7 +196,7 @@ export const projects = [
             
             <br />
             <h3>Funcionalidades Principais</h3>
-            <ul style="list-style-type: disc; padding-left: 1.5em;">
+            <ul style="list-style-type: disc; color: black; padding-left: 1.5em;">
                 <li>Design responsivo para dispositivos móveis e desktops</li>
                 <li>Sistema de categorias para fácil navegação</li>
                 <li>Seção de comentários para engajamento dos leitores</li>
@@ -254,7 +254,7 @@ export const projects = [
             
             <br />
             <h3>Funcionalidades Principais</h3>
-            <ul style="list-style-type: disc; padding-left: 1.5em;">
+            <ul style="list-style-type: disc; color: black; padding-left: 1.5em;">
                 <li>Cálculo automático de custos de ingredientes, mão de obra e overhead</li>
                 <li>Precificação inteligente com margem de lucro configurável</li>
                 <li>Dashboard com gráficos interativos e análise de lucratividade</li>
