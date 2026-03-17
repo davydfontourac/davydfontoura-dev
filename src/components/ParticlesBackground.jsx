@@ -66,37 +66,33 @@ const ParticlesBackground = ({ isDarkMode }) => {
   useEffect(() => {
     if (isDarkMode) return
 
-    const timer = setTimeout(() => {
-      const canvas = canvasRef.current
-      if (!canvas) return
-      const ctx = canvas.getContext('2d')
-      
-      const resizeCanvas = () => {
-        canvas.width = window.innerWidth
-        canvas.height = window.innerHeight
-      }
-      
-      resizeCanvas()
-      window.addEventListener('resize', resizeCanvas)
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+    
+    resizeCanvas()
+    window.addEventListener('resize', resizeCanvas)
 
-      const particles = createParticles(20)
-      particlesRef.current = particles
+    const particles = createParticles(20)
+    particlesRef.current = particles
 
-      const animate = () => {
-        drawParticles(ctx, canvas, particles)
-        connectParticles(ctx, particles)
-        animationRef.current = requestAnimationFrame(animate)
-      }
+    const animate = () => {
+      drawParticles(ctx, canvas, particles)
+      connectParticles(ctx, particles)
+      animationRef.current = requestAnimationFrame(animate)
+    }
 
-      animate()
+    animate()
 
-      return () => {
-        window.removeEventListener('resize', resizeCanvas)
-        if (animationRef.current) cancelAnimationFrame(animationRef.current)
-      }
-    }, 1500);
-
-    return () => clearTimeout(timer);
+    return () => {
+      window.removeEventListener('resize', resizeCanvas)
+      if (animationRef.current) cancelAnimationFrame(animationRef.current)
+    }
   }, [isDarkMode])
 
   if (isDarkMode) return null

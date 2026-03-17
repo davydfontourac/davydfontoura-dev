@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import profileImage from '../assets/profile.webp'
 import { useGithubPackage } from '../hooks/useGithubPackage'
 import ScrollReveal from './ScrollReveal'
-import SectionTransition from './SectionTransition'
 
 const About = () => {
   const { t } = useTranslation();
@@ -28,6 +27,39 @@ const About = () => {
 
   // Array provisório para simular skeleton
   const skeletonArray = Array(12).fill(0);
+
+  const TimelineItem = ({ title, subtitle, date, description, dotColor = 'blue' }) => {
+    const dotClasses = dotColor === 'blue' 
+      ? 'border-blue-500 dark:border-blue-400 group-hover:bg-blue-500' 
+      : 'border-green-500 dark:border-green-400 group-hover:bg-green-500';
+    const badgeClasses = dotColor === 'blue'
+      ? 'text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-900/40'
+      : 'text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/40';
+
+    return (
+      <div className="relative pl-8 group">
+        <span className={`absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-gray-800 border-2 ${dotClasses} group-hover:scale-125 transition-all duration-300`}></span>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+          <h5 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h5>
+          {date && (
+            <span className={`flex items-center text-xs font-bold ${badgeClasses} px-3 py-1 rounded-full w-fit`}>
+              <Calendar className="w-3.5 h-3.5 mr-1" /> {date}
+            </span>
+          )}
+        </div>
+        {subtitle && (
+          <div className="flex flex-col mb-2">
+            <span className={`${dotColor === 'blue' ? 'text-blue-700 dark:text-blue-400' : 'text-green-700 dark:text-green-400'} font-medium`}>{subtitle}</span>
+          </div>
+        )}
+        {description && (
+          <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
+            {description}
+          </p>
+        )}
+      </div>
+    );
+  };
 
   return (
     <section 
@@ -116,19 +148,12 @@ const About = () => {
               </h4>
                
               <div className="relative border-l-2 border-blue-200 dark:border-gray-700 ml-4 space-y-10">
-                 {/* Timeline Item 1 */}
-                 <div className="relative pl-8 group">
-                    <span className="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-gray-800 border-2 border-blue-500 dark:border-blue-400 group-hover:scale-125 group-hover:bg-blue-500 transition-all duration-300"></span>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                       <h5 className="text-lg font-bold text-gray-900 dark:text-white">{t('about.experience.freelance.title')}</h5>
-                       <span className="flex items-center text-xs text-blue-700 dark:text-blue-300 font-bold bg-blue-100 dark:bg-blue-900/40 px-3 py-1 rounded-full w-fit">
-                          <Calendar className="w-3.5 h-3.5 mr-1" /> {t('about.experience.freelance.date')}
-                       </span>
-                    </div>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                       {t('about.experience.freelance.desc')}
-                    </p>
-                 </div>
+                 <TimelineItem 
+                    title={t('about.experience.freelance.title')}
+                    date={t('about.experience.freelance.date')}
+                    description={t('about.experience.freelance.desc')}
+                    dotColor="blue"
+                 />
               </div>
            </ScrollReveal>
 
@@ -142,30 +167,17 @@ const About = () => {
               </h4>
                
               <div className="relative border-l-2 border-green-200 dark:border-gray-700 ml-4 space-y-10">
-                 {/* Timeline Item 1 (University) */}
-                 <div className="relative pl-8 group">
-                    <span className="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-gray-800 border-2 border-green-500 dark:border-green-400 group-hover:scale-125 group-hover:bg-green-500 transition-all duration-300"></span>
-                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
-                       <h5 className="text-lg font-bold text-gray-900 dark:text-white">{t('about.education.degree1.title')}</h5>
-                    </div>
-                    <div className="flex flex-col mb-2">
-                       <span className="text-green-700 dark:text-green-400 font-medium">{t('about.education.degree1.school')}</span>
-                    </div>
-                 </div>
-
-                 {/* Timeline Item 2 (SENAI) */}
-                 <div className="relative pl-8 group">
-                    <span className="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-gray-800 border-2 border-green-500 dark:border-green-400 group-hover:scale-125 group-hover:bg-green-500 transition-all duration-300"></span>
-                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
-                       <h5 className="text-lg font-bold text-gray-900 dark:text-white">{t('about.education.degree2.title')}</h5>
-                    </div>
-                    <div className="flex flex-col mb-2">
-                       <span className="text-green-700 dark:text-green-400 font-medium">{t('about.education.degree2.school')}</span>
-                    </div>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
-                       {t('about.education.degree2.desc')}
-                    </p>
-                 </div>
+                 <TimelineItem 
+                    title={t('about.education.degree1.title')}
+                    subtitle={t('about.education.degree1.school')}
+                    dotColor="green"
+                 />
+                 <TimelineItem 
+                    title={t('about.education.degree2.title')}
+                    subtitle={t('about.education.degree2.school')}
+                    description={t('about.education.degree2.desc')}
+                    dotColor="green"
+                 />
               </div>
            </ScrollReveal>
         </div>
@@ -231,7 +243,7 @@ const About = () => {
            </div>
         </ScrollReveal>
 
-        <SectionTransition toColor="to-gray-50" height="h-32" />
+
       </div>
     </section>
   )
