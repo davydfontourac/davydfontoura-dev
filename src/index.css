@@ -8,7 +8,7 @@
   view-transition-name: root;
 }
 
-/* Reset básico */
+/* Reset básico e Body */
 * {
   margin: 0;
   padding: 0;
@@ -19,6 +19,8 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Efeito Shine Text Suave */
@@ -46,61 +48,27 @@ body {
   }
 }
 
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-
 /* Animação de borda colorida para inputs */
 @keyframes rainbow-border {
-  0% {
-    border-color: #3b82f6; /* Azul */
-  }
-  16.66% {
-    border-color: #8b5cf6; /* Roxo */
-  }
-  33.33% {
-    border-color: #ec4899; /* Rosa */
-  }
-  50% {
-    border-color: #f59e0b; /* Laranja */
-  }
-  66.66% {
-    border-color: #10b981; /* Verde */
-  }
-  83.33% {
-    border-color: #06b6d4; /* Ciano */
-  }
-  100% {
-    border-color: #3b82f6; /* Azul */
-  }
+  0% { border-color: #3b82f6; }
+  16.66% { border-color: #8b5cf6; }
+  33.33% { border-color: #ec4899; }
+  50% { border-color: #f59e0b; }
+  66.66% { border-color: #10b981; }
+  83.33% { border-color: #06b6d4; }
+  100% { border-color: #3b82f6; }
 }
 
-/* Classe para inputs com animação colorida */
 .rainbow-border-focus:focus {
   border-width: 2px;
   animation: rainbow-border 2s linear infinite;
   outline: none;
 }
 
-/* Shimmer Effect for Loading States */
+/* Shimmer Effect */
 @keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
 }
 
 .animate-shimmer {
@@ -111,7 +79,6 @@ body {
 
 .dark .animate-shimmer {
   background: linear-gradient(to right, #1a1c1e 0%, #2d3135 20%, #1a1c1e 40%, #1a1c1e 100%);
-  background-size: 1000px 100%;
 }
 
 /* Utilidades para Navegação e Scroll */
@@ -119,18 +86,45 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Animações de Scroll Reveal */
-.reveal-hidden {
+/* Scroll Reveal Animations */
+.reveal-base {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-property: opacity, transform;
+  transition-duration: 800ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
 }
 
 .reveal-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(0, 0) scale(1) !important;
 }
 
+.variant-fade {
+  transform: none;
+}
+
+.variant-fade-up {
+  transform: translateY(40px);
+}
+
+.variant-fade-down {
+  transform: translateY(-40px);
+}
+
+.variant-fade-left {
+  transform: translateX(40px);
+}
+
+.variant-fade-right {
+  transform: translateX(-40px);
+}
+
+.variant-zoom {
+  transform: scale(0.9);
+}
+
+/* Blobs */
 @keyframes blob {
   0% { transform: translate(0px, 0px) scale(1); }
   33% { transform: translate(30px, -50px) scale(1.1); }
@@ -141,21 +135,14 @@ html {
 .animate-blob {
   animation: blob 7s infinite;
 }
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  
-  .reveal-hidden {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  html { scroll-behavior: auto; }
+  .reveal-base {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

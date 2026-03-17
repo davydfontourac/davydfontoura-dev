@@ -2,11 +2,10 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import emailjs from '@emailjs/browser'
 import { EMAILJS_CONFIG } from '../config/emailjs'
-import { useScrollReveal } from '../hooks/useScrollReveal'
+import ScrollReveal from './ScrollReveal'
 
 const Contact = () => {
   const { t } = useTranslation();
-  const { ref, isVisible } = useScrollReveal();
   // Estado do formulário
   const [formData, setFormData] = useState({
     name: '',
@@ -111,105 +110,118 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      ref={ref}
-      className={`min-h-screen pt-20 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white w-full transition-colors duration-300 reveal-hidden ${isVisible ? 'reveal-visible' : ''}`}
+      className="min-h-screen pt-20 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white w-full transition-colors duration-300"
     >
       <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-16">
+        <ScrollReveal variant="fade-down" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('contact.title')}</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             {t('contact.subtitle')}
           </p>
-        </div>
+        </ScrollReveal>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-            <h3 className="text-2xl font-bold mb-6">{t('contact.info_title')}</h3>
-            <div className="space-y-4">
-              {contactInfo.map((contact, index) => (
-                <div key={index} className="flex items-center">
-                  <div className="bg-blue-600 p-3 rounded-lg mr-4">
-                    {contact.icon}
-                  </div>
-                  <div>
-                    <p className="font-semibold">{contact.title}</p>
-                    {contact.link ? (
-                      <a 
-                        href={contact.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-400 hover:text-blue-300 transition-colors"
-                      >
-                        {contact.info}
-                      </a>
-                    ) : (
-                      <p className="text-gray-300">{contact.info}</p>
-                    )}
-                  </div>
+              <ScrollReveal variant="fade-left">
+                <h3 className="text-2xl font-bold mb-6">{t('contact.info_title')}</h3>
+                <div className="space-y-4">
+                  {contactInfo.map((contact) => (
+                    <ScrollReveal key={contact.title} variant="fade-left" delay={`${contactInfo.indexOf(contact) * 100}ms`}>
+                      <div className="flex items-center">
+                        <div className="bg-blue-600 p-3 rounded-lg mr-4">
+                          {contact.icon}
+                        </div>
+                        <div>
+                          <p className="font-semibold">{contact.title}</p>
+                          {contact.link ? (
+                            <a 
+                              href={contact.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-400 hover:text-blue-300 transition-colors"
+                            >
+                              {contact.info}
+                            </a>
+                          ) : (
+                            <p className="text-gray-300">{contact.info}</p>
+                          )}
+                        </div>
+                      </div>
+                    </ScrollReveal>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </ScrollReveal>
             </div>
             <div>
-            <h3 className="text-2xl font-bold mb-6">{t('contact.send_title')}</h3>
-            
-            {/* Mensagem de status */}
-            {status.message && (
-              <div className={`mb-6 p-4 rounded-lg ${
-                status.type === 'success' 
-                  ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-700' 
-                  : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 border border-red-200 dark:border-red-700'
-              }`}>
-                {status.message}
-              </div>
-            )}
+              <ScrollReveal variant="fade-right">
+                <h3 className="text-2xl font-bold mb-6">{t('contact.send_title')}</h3>
+                
+                {/* Mensagem de status */}
+                {status.message && (
+                  <div className={`mb-6 p-4 rounded-lg ${
+                    status.type === 'success' 
+                      ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-700' 
+                      : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200 border border-red-200 dark:border-red-700'
+                  }`}>
+                    {status.message}
+                  </div>
+                )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder={t('contact.form.name')}
-                  required
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
-                />
-              </div>
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder={t('contact.form.email')}
-                  required
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
-                />
-              </div>
-              <div>
-                <textarea
-                  rows="5"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  placeholder={t('contact.form.message')}
-                  required
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className={`w-full font-semibold py-3 px-6 rounded-lg transition-colors ${
-                  isLoading 
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-blue-600 hover:bg-blue-700'
-                } text-white`}
-              >
-                {isLoading ? t('contact.form.sending') : t('contact.form.send')}
-              </button>
-            </form>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <ScrollReveal variant="fade-up" delay="100ms">
+                    <div>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder={t('contact.form.name')}
+                        required
+                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
+                      />
+                    </div>
+                  </ScrollReveal>
+                  <ScrollReveal variant="fade-up" delay="200ms">
+                    <div>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder={t('contact.form.email')}
+                        required
+                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
+                      />
+                    </div>
+                  </ScrollReveal>
+                  <ScrollReveal variant="fade-up" delay="300ms">
+                    <div>
+                      <textarea
+                        rows="5"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        placeholder={t('contact.form.message')}
+                        required
+                        className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none text-gray-900 dark:text-white transition-colors duration-300 rainbow-border-focus"
+                      ></textarea>
+                    </div>
+                  </ScrollReveal>
+                  <ScrollReveal variant="fade-up" delay="400ms">
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className={`w-full font-semibold py-3 px-6 rounded-lg transition-colors ${
+                        isLoading 
+                          ? 'bg-gray-400 cursor-not-allowed' 
+                          : 'bg-blue-600 hover:bg-blue-700'
+                      } text-white`}
+                    >
+                      {isLoading ? t('contact.form.sending') : t('contact.form.send')}
+                    </button>
+                  </ScrollReveal>
+                </form>
+              </ScrollReveal>
             </div>
           </div>
         </div>

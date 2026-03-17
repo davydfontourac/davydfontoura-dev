@@ -1,12 +1,11 @@
 import { Code, Palette, Rocket, Users, Award, TrendingUp, Calendar, Briefcase, GraduationCap, ChevronRight, ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import profileImage from '../assets/profile.webp'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 import { useGithubPackage } from '../hooks/useGithubPackage'
+import ScrollReveal from './ScrollReveal'
 
 const About = () => {
   const { t } = useTranslation();
-  const { ref, isVisible } = useScrollReveal();
   const { techs, loading: techsLoading } = useGithubPackage();
   
   const additionalSkills = [
@@ -52,25 +51,24 @@ const About = () => {
   return (
     <section 
       id="about" 
-      ref={ref}
-      className={`min-h-screen pt-20 bg-white dark:bg-gray-900 transition-colors duration-300 reveal-hidden ${isVisible ? 'reveal-visible' : ''}`}
+      className="min-h-screen pt-20 bg-white dark:bg-gray-900 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="text-center mb-16">
+        <ScrollReveal variant="fade-down" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
             {t('about.title')}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
             {t('about.subtitle')}
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Main Content */}
         <div className="flex flex-col xl:flex-row gap-12 mb-16">
           
           {/* Left Column: Profile */}
-          <div className="w-full xl:w-4/12">
+          <ScrollReveal variant="fade-right" className="w-full xl:w-4/12">
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 text-center border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group h-full flex flex-col justify-center">
               {/* Decorative Background Elements */}
               <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 dark:opacity-40 animate-blob"></div>
@@ -101,10 +99,10 @@ const About = () => {
                 {t('about.profile_desc')}
               </p>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Right Column: Story Text */}
-          <div className="w-full xl:w-8/12">
+          <ScrollReveal variant="fade-left" className="w-full xl:w-8/12">
             <div className="bg-white dark:bg-gray-800/50 rounded-2xl p-8 lg:p-12 border border-gray-100 dark:border-gray-700 shadow-sm h-full flex flex-col justify-center relative overflow-hidden">
               <div className="absolute -right-10 -bottom-10 opacity-5 dark:opacity-10 pointer-events-none text-blue-500">
                  <Code className="w-64 h-64" />
@@ -122,13 +120,13 @@ const About = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* Middle Section: Timeline (Experience & Education) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
            {/* Experience */}
-           <div className="bg-white dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm backdrop-blur-sm">
+           <ScrollReveal variant="fade-right" className="bg-white dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm backdrop-blur-sm">
               <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
                  <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                     <Briefcase className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -151,10 +149,10 @@ const About = () => {
                     </p>
                  </div>
               </div>
-           </div>
+           </ScrollReveal>
 
            {/* Education */}
-           <div className="bg-white dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm backdrop-blur-sm">
+           <ScrollReveal variant="fade-left" className="bg-white dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm backdrop-blur-sm">
               <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
                  <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
                     <GraduationCap className="w-6 h-6 text-green-600 dark:text-green-400" />
@@ -188,11 +186,11 @@ const About = () => {
                     </p>
                  </div>
               </div>
-           </div>
+           </ScrollReveal>
         </div>
 
         {/* Bottom Section: Dynamic Skills Grid */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm mb-16">
+        <ScrollReveal variant="fade-up" className="bg-white dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm mb-16">
            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
               <div>
                  <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -218,74 +216,79 @@ const About = () => {
                     <div key={i} className="animate-pulse bg-gray-100 dark:bg-gray-800 rounded-xl p-4 h-32 border border-gray-200 dark:border-gray-700"></div>
                  ))
               ) : (
-                 allSkills.map((tech) => (
-                    <div 
-                       key={tech.id} 
-                       className="group relative bg-gray-50 dark:bg-gray-800/80 rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center justify-center gap-4 text-center overflow-hidden"
+                 allSkills.map((tech, idx) => (
+                    <ScrollReveal 
+                      key={tech.id} 
+                      variant="zoom" 
+                      delay={`${idx * 50}ms`}
                     >
-                       {/* Versão Tooltip */}
-                       <div className="absolute -top-4 opacity-0 group-hover:opacity-100 group-hover:top-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold px-2 py-1 rounded shadow-lg transition-all duration-300 z-10 pointer-events-none">
-                          v{tech.version}
-                       </div>
+                      <div className="group relative bg-gray-50 dark:bg-gray-800/80 rounded-xl p-5 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col items-center justify-center gap-4 text-center overflow-hidden h-full">
+                         {/* Versão Tooltip */}
+                         <div className="absolute -top-4 opacity-0 group-hover:opacity-100 group-hover:top-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold px-2 py-1 rounded shadow-lg transition-all duration-300 z-10 pointer-events-none">
+                            v{tech.version}
+                         </div>
 
-                       <div className="w-12 h-12 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                          <img src={tech.iconUrl} alt={tech.name} className="max-w-full max-h-full object-contain filter drop-shadow-sm" />
-                       </div>
-                       <div>
-                          <h5 className="font-bold text-gray-900 dark:text-white text-sm line-clamp-1">{tech.name}</h5>
-                          <span className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mt-1 block">
-                             {t(tech.category)}
-                          </span>
-                       </div>
-                       
-                       {/* Decorative bottom line */}
-                       <div 
-                          className="absolute bottom-0 left-0 h-1 w-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left opacity-80"
-                          style={{ backgroundColor: tech.color }}
-                       ></div>
-                    </div>
+                         <div className="w-12 h-12 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                            <img src={tech.iconUrl} alt={tech.name} className="max-w-full max-h-full object-contain filter drop-shadow-sm" />
+                         </div>
+                         <div>
+                            <h5 className="font-bold text-gray-900 dark:text-white text-sm line-clamp-1">{tech.name}</h5>
+                            <span className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mt-1 block">
+                               {t(tech.category)}
+                            </span>
+                         </div>
+                         
+                         {/* Decorative bottom line */}
+                         <div 
+                            className="absolute bottom-0 left-0 h-1 w-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left opacity-80"
+                            style={{ backgroundColor: tech.color }}
+                         ></div>
+                      </div>
+                    </ScrollReveal>
                  ))
               )}
            </div>
-        </div>
+        </ScrollReveal>
 
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800 hover:shadow-lg transition-all duration-300">
-                <div className="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-300">
-                  {stat.label}
+            <ScrollReveal key={stat.label} variant="fade-up" delay={`${index * 100}ms`}>
+              <div className="text-center h-full">
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800 hover:shadow-lg transition-all duration-300 h-full">
+                  <div className="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <stat.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-300">
+                    {stat.label}
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
-
-
 
         {/* Highlights Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {highlights.map((highlight, index) => (
-            <div key={index} className="group">
-              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-1">
-                <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {highlight.icon}
+            <ScrollReveal key={highlight.title} variant="fade-up" delay={`${index * 150}ms`}>
+              <div className="group h-full">
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-1 h-full">
+                  <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {highlight.icon}
+                  </div>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    {highlight.title}
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    {highlight.description}
+                  </p>
                 </div>
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  {highlight.title}
-                </h4>
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                  {highlight.description}
-                </p>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
