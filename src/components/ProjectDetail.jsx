@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -25,7 +25,6 @@ import ProjectStatRow from './ProjectStatRow'
 const ProjectDetail = () => {
 
   const { slug } = useParams()
-  const navigate = useNavigate()
   const { t, i18n } = useTranslation()
   const { getProjectBySlug, getRelatedProjects, loading } = useNotionProjects()
   

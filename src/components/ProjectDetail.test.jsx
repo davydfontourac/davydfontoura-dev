@@ -111,7 +111,7 @@ describe('ProjectDetail Component', () => {
       getRelatedProjects: () => [],
     });
 
-    const { container } = render(
+    render(
       <ThemeProvider>
         <MemoryRouter initialEntries={['/projeto/test-project']}>
           <Routes>
