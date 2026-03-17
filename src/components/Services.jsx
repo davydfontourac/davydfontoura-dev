@@ -65,12 +65,73 @@ const Services = () => {
      orange: 'before:bg-orange-500',
   }
 
+  const ServiceCard = ({ service, index }) => {
+    return (
+      <ScrollReveal 
+        variant="fade-up" 
+        delay={`${index * 100}ms`}
+      >
+        <div 
+           className={`relative glass p-8 flex flex-col h-full rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 group overflow-hidden before:absolute before:top-0 before:left-0 before:right-0 before:h-1.5 before:content-[''] before:transition-all before:duration-300 ${borderTopMap[service.color]}`}
+        >
+          {/* Número Fantasma Decorativo */}
+          <div className="absolute -right-4 -top-6 text-9xl font-black text-gray-50 dark:text-gray-800/30 select-none z-0 transform group-hover:scale-110 group-hover:-translate-x-2 transition-transform duration-500">
+             0{index + 1}
+          </div>
+
+          <div className="relative z-10 flex flex-col flex-grow">
+             {/* Topo do Card (Icone e Badge) */}
+             <div className="flex justify-between items-start mb-6">
+                <div className={`p-4 rounded-xl transition-colors duration-300 ${colorMap[service.color]}`}>
+                   {service.icon}
+                </div>
+                {service.badge && (
+                   <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                      {service.badge}
+                   </span>
+                )}
+             </div>
+
+             {/* Título e Descrição */}
+             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                {t(`services.${service.id}.title`)}
+             </h3>
+             <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed flex-grow">
+                {t(`services.${service.id}.desc`)}
+             </p>
+
+             {/* Lista de Entregáveis */}
+             <ul className="space-y-3 mb-8">
+                {Array.isArray(service.items) && service.items.map((item) => (
+                   <li key={item} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
+                      <svg className={`w-5 h-5 mr-3 flex-shrink-0 text-${service.color}-500`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {item}
+                   </li>
+                ))}
+             </ul>
+
+             {/* CTA */}
+             <a 
+                href="#contact" 
+                className="inline-flex items-center text-sm font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors mt-auto w-fit group/btn"
+             >
+                {t('services.cta')}
+                <ArrowRight className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" />
+             </a>
+          </div>
+        </div>
+      </ScrollReveal>
+    );
+  };
+
   return (
     <section 
       id="services" 
-      className="min-h-screen pt-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+      className="min-h-screen pt-32 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-48 relative z-10">
         <ScrollReveal variant="fade-down" className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 mb-6 pb-2">
              {t('services.title')}
@@ -83,68 +144,13 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
           {services.map((service, index) => (
-            <ScrollReveal 
-              key={service.id} 
-              variant="fade-up" 
-              delay={`${index * 100}ms`}
-            >
-              <div 
-                 className={`relative bg-white dark:bg-white/5 backdrop-blur-sm p-8 flex flex-col h-full rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700/50 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden before:absolute before:top-0 before:left-0 before:right-0 before:h-1 before:content-[''] before:transition-all before:duration-300 ${borderTopMap[service.color]}`}
-              >
-                {/* Número Fantasma Decorativo */}
-                <div className="absolute -right-4 -top-6 text-9xl font-black text-gray-50 dark:text-gray-800/30 select-none z-0 transform group-hover:scale-110 group-hover:-translate-x-2 transition-transform duration-500">
-                   0{index + 1}
-                </div>
-
-                <div className="relative z-10 flex flex-col flex-grow">
-                   {/* Topo do Card (Icone e Badge) */}
-                   <div className="flex justify-between items-start mb-6">
-                      <div className={`p-4 rounded-xl transition-colors duration-300 ${colorMap[service.color]}`}>
-                         {service.icon}
-                      </div>
-                      {service.badge && (
-                         <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                            {service.badge}
-                         </span>
-                      )}
-                   </div>
-
-                   {/* Título e Descrição */}
-                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                      {t(`services.${service.id}.title`)}
-                   </h3>
-                   <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed flex-grow">
-                      {t(`services.${service.id}.desc`)}
-                   </p>
-
-                   {/* Lista de Entregáveis */}
-                   <ul className="space-y-3 mb-8">
-                      {Array.isArray(service.items) && service.items.map((item) => (
-                         <li key={item} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
-                            <svg className={`w-5 h-5 mr-3 flex-shrink-0 text-${service.color}-500`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
-                            {item}
-                         </li>
-                      ))}
-                   </ul>
-
-                   {/* CTA */}
-                   <a 
-                      href="#contact" 
-                      className="inline-flex items-center text-sm font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors mt-auto w-fit group/btn"
-                   >
-                      {t('services.cta')}
-                      <ArrowRight className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" />
-                   </a>
-                </div>
-              </div>
-            </ScrollReveal>
+            <ServiceCard key={service.id} service={service} index={index} />
           ))}
         </div>
+
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Services

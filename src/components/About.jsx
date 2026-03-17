@@ -1,4 +1,4 @@
-import { Code, Palette, Rocket, Users, Award, TrendingUp, Calendar, Briefcase, GraduationCap, ChevronRight, ExternalLink } from 'lucide-react'
+import { Code, Calendar, Briefcase, GraduationCap, ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import profileImage from '../assets/profile.webp'
 import { useGithubPackage } from '../hooks/useGithubPackage'
@@ -12,48 +12,61 @@ const About = () => {
     { id: 'html', name: 'HTML5', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg', color: '#E34F26', version: '5' },
     { id: 'css', name: 'CSS3', category: 'about.tech_categories.styling', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg', color: '#1572B6', version: '3' },
     { id: 'js', name: 'JavaScript', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg', color: '#F7DF1E', version: 'ES6+' },
-    { id: 'python', name: 'Python', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg', color: '#3776AB', version: '3.x' },
+    { id: 'supabase', name: 'Supabase', category: 'about.tech_categories.backend', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg', color: '#3ECF8E', version: 'BaaS' },
+    { id: 'wordpress', name: 'WordPress', category: 'about.tech_categories.cms', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-original.svg', color: '#21759B', version: '6.x' },
+    { id: 'express', name: 'Express', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg', color: '#000000', version: '4.x' },
     { id: 'git', name: 'Git', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg', color: '#F05032', version: 'CLI' },
     { id: 'github_tool', name: 'GitHub', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg', color: '#181717', version: 'Web' },
-    { id: 'excel', name: 'Excel', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.worldvectorlogo.com/logos/excel-4.svg', color: '#217346', version: 'Advanced' }
+    { id: 'vercel', name: 'Vercel', category: 'about.tech_categories.tools', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg', color: '#000000', version: 'Cloud' },
+    { id: 'node', name: 'Node.js', category: 'about.tech_categories.backend', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg', color: '#339933', version: 'v20+' },
+    { id: 'next', name: 'Next.js', category: 'about.tech_categories.core', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', color: '#000000', version: 'v14+' }
   ];
 
-  const allSkills = [...techs, ...additionalSkills.filter(s => !techs.find(t => t.name === s.name))];
+  const allSkills = [...techs, ...additionalSkills.filter(s => !techs.some(tech => tech.name === s.name))]
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   // Array provisório para simular skeleton
   const skeletonArray = Array(12).fill(0);
 
-  const stats = [
-    { icon: Code, label: t('about.stats.projects'), value: '15+' },
-    { icon: Users, label: t('about.stats.clients'), value: '8+' },
-    { icon: Award, label: t('about.stats.experience'), value: '2+' },
-    { icon: TrendingUp, label: t('about.stats.tech'), value: '10+' }
-  ]
+  const TimelineItem = ({ title, subtitle, date, description, dotColor = 'blue' }) => {
+    const dotClasses = dotColor === 'blue' 
+      ? 'border-blue-500 dark:border-blue-400 group-hover:bg-blue-500' 
+      : 'border-green-500 dark:border-green-400 group-hover:bg-green-500';
+    const badgeClasses = dotColor === 'blue'
+      ? 'text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-900/40'
+      : 'text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/40';
 
-  const highlights = [
-    {
-      icon: <Palette className="w-6 h-6" />,
-      title: t('about.highlights.design.title'),
-      description: t('about.highlights.design.desc')
-    },
-    {
-      icon: <Code className="w-6 h-6" />,
-      title: t('about.highlights.code.title'),
-      description: t('about.highlights.code.desc')
-    },
-    {
-      icon: <Rocket className="w-6 h-6" />,
-      title: t('about.highlights.performance.title'),
-      description: t('about.highlights.performance.desc')
-    }
-  ]
+    return (
+      <div className="relative pl-8 group">
+        <span className={`absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-gray-800 border-2 ${dotClasses} group-hover:scale-125 transition-all duration-300`}></span>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+          <h5 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h5>
+          {date && (
+            <span className={`flex items-center text-xs font-bold ${badgeClasses} px-3 py-1 rounded-full w-fit`}>
+              <Calendar className="w-3.5 h-3.5 mr-1" /> {date}
+            </span>
+          )}
+        </div>
+        {subtitle && (
+          <div className="flex flex-col mb-2">
+            <span className={`${dotColor === 'blue' ? 'text-blue-700 dark:text-blue-400' : 'text-green-700 dark:text-green-400'} font-medium`}>{subtitle}</span>
+          </div>
+        )}
+        {description && (
+          <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
+            {description}
+          </p>
+        )}
+      </div>
+    );
+  };
 
   return (
     <section 
       id="about" 
-      className="min-h-screen pt-20 bg-white dark:bg-gray-900 transition-colors duration-300"
+      className="min-h-screen pt-32 bg-white dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-48">
         {/* Header */}
         <ScrollReveal variant="fade-down" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
@@ -69,10 +82,10 @@ const About = () => {
           
           {/* Left Column: Profile */}
           <ScrollReveal variant="fade-right" className="w-full xl:w-4/12">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 text-center border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group h-full flex flex-col justify-center">
+            <div className="glass rounded-3xl p-8 text-center shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 relative overflow-hidden group h-full flex flex-col justify-center">
               {/* Decorative Background Elements */}
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 dark:opacity-40 animate-blob"></div>
-              <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-indigo-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 dark:opacity-40 animate-blob animation-delay-2000"></div>
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500/20 dark:bg-blue-600/10 rounded-full mix-blend-multiply dark:mix-blend-normal blur-2xl animate-blob"></div>
+              <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-indigo-500/20 dark:bg-indigo-600/10 rounded-full mix-blend-multiply dark:mix-blend-normal blur-2xl animate-blob animation-delay-2000"></div>
 
               <div className="relative mb-6 z-10 block">
                 <div className="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-xl ring-4 ring-blue-50 dark:ring-gray-800 transition-transform duration-500 group-hover:scale-105">
@@ -135,19 +148,12 @@ const About = () => {
               </h4>
                
               <div className="relative border-l-2 border-blue-200 dark:border-gray-700 ml-4 space-y-10">
-                 {/* Timeline Item 1 */}
-                 <div className="relative pl-8 group">
-                    <span className="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-gray-800 border-2 border-blue-500 dark:border-blue-400 group-hover:scale-125 group-hover:bg-blue-500 transition-all duration-300"></span>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                       <h5 className="text-lg font-bold text-gray-900 dark:text-white">{t('about.experience.freelance.title')}</h5>
-                       <span className="flex items-center text-xs text-blue-700 dark:text-blue-300 font-bold bg-blue-100 dark:bg-blue-900/40 px-3 py-1 rounded-full w-fit">
-                          <Calendar className="w-3.5 h-3.5 mr-1" /> {t('about.experience.freelance.date')}
-                       </span>
-                    </div>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                       {t('about.experience.freelance.desc')}
-                    </p>
-                 </div>
+                 <TimelineItem 
+                    title={t('about.experience.freelance.title')}
+                    date={t('about.experience.freelance.date')}
+                    description={t('about.experience.freelance.desc')}
+                    dotColor="blue"
+                 />
               </div>
            </ScrollReveal>
 
@@ -161,30 +167,17 @@ const About = () => {
               </h4>
                
               <div className="relative border-l-2 border-green-200 dark:border-gray-700 ml-4 space-y-10">
-                 {/* Timeline Item 1 (University) */}
-                 <div className="relative pl-8 group">
-                    <span className="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-gray-800 border-2 border-green-500 dark:border-green-400 group-hover:scale-125 group-hover:bg-green-500 transition-all duration-300"></span>
-                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
-                       <h5 className="text-lg font-bold text-gray-900 dark:text-white">{t('about.education.degree1.title')}</h5>
-                    </div>
-                    <div className="flex flex-col mb-2">
-                       <span className="text-green-700 dark:text-green-400 font-medium">{t('about.education.degree1.school')}</span>
-                    </div>
-                 </div>
-
-                 {/* Timeline Item 2 (SENAI) */}
-                 <div className="relative pl-8 group">
-                    <span className="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-gray-800 border-2 border-green-500 dark:border-green-400 group-hover:scale-125 group-hover:bg-green-500 transition-all duration-300"></span>
-                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
-                       <h5 className="text-lg font-bold text-gray-900 dark:text-white">{t('about.education.degree2.title')}</h5>
-                    </div>
-                    <div className="flex flex-col mb-2">
-                       <span className="text-green-700 dark:text-green-400 font-medium">{t('about.education.degree2.school')}</span>
-                    </div>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
-                       {t('about.education.degree2.desc')}
-                    </p>
-                 </div>
+                 <TimelineItem 
+                    title={t('about.education.degree1.title')}
+                    subtitle={t('about.education.degree1.school')}
+                    dotColor="green"
+                 />
+                 <TimelineItem 
+                    title={t('about.education.degree2.title')}
+                    subtitle={t('about.education.degree2.school')}
+                    description={t('about.education.degree2.desc')}
+                    dotColor="green"
+                 />
               </div>
            </ScrollReveal>
         </div>
@@ -250,47 +243,7 @@ const About = () => {
            </div>
         </ScrollReveal>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {stats.map((stat, index) => (
-            <ScrollReveal key={stat.label} variant="fade-up" delay={`${index * 100}ms`}>
-              <div className="text-center h-full">
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800 hover:shadow-lg transition-all duration-300 h-full">
-                  <div className="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <stat.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-300">
-                    {stat.label}
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
 
-        {/* Highlights Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {highlights.map((highlight, index) => (
-            <ScrollReveal key={highlight.title} variant="fade-up" delay={`${index * 150}ms`}>
-              <div className="group h-full">
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:transform hover:-translate-y-1 h-full">
-                  <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {highlight.icon}
-                  </div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    {highlight.title}
-                  </h4>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                    {highlight.description}
-                  </p>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
       </div>
     </section>
   )
