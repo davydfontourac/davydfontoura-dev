@@ -1,6 +1,7 @@
 import { MonitorSmartphone, Code2, Rocket, Paintbrush, Globe, Cpu, ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import ScrollReveal from './ScrollReveal'
+import SectionTransition from './SectionTransition'
 
 const Services = () => {
   const { t } = useTranslation();
@@ -143,8 +144,7 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Smooth section transition gradient: Gray-50 -> White */}
-        <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent via-gray-50/50 to-white dark:via-gray-900/50 dark:to-gray-900 pointer-events-none z-20"></div>
+        <SectionTransition via="gray-50/50" toColor="to-white" height="h-48" className="z-20" />
       </div>
     </section>
   )

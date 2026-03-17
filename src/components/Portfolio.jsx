@@ -6,6 +6,7 @@ import { getImagePath } from '../utils/imagePaths'
 import { useNotionProjects } from '../hooks/useNotionProjects'
 import { useGithubRepos } from '../hooks/useGithubRepos'
 import ScrollReveal from './ScrollReveal'
+import SectionTransition from './SectionTransition'
 
 const ProjectCardImage = ({ project }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -288,8 +289,7 @@ const Portfolio = () => {
           )}
         </div>
 
-        {/* Smooth section transition gradient: White -> Gray-100 */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-gray-100 dark:to-gray-900 pointer-events-none z-10"></div>
+        <SectionTransition toColor="to-gray-100" height="h-32" />
       </div>
     </section>
   )

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import profileImage from '../assets/profile.webp'
 import { useGithubPackage } from '../hooks/useGithubPackage'
 import ScrollReveal from './ScrollReveal'
+import SectionTransition from './SectionTransition'
 
 const About = () => {
   const { t } = useTranslation();
@@ -230,8 +231,7 @@ const About = () => {
            </div>
         </ScrollReveal>
 
-        {/* Smooth section transition gradient: White -> Gray-50 */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-900 pointer-events-none z-10"></div>
+        <SectionTransition toColor="to-gray-50" height="h-32" />
       </div>
     </section>
   )

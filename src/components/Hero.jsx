@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Github, Linkedin, Download } from 'lucide-react'
 import ParticlesBackground from './ParticlesBackground'
 import BlurText from './BlurText'
+import SectionTransition from './SectionTransition'
 
 const Hero = ({ navigateToSection }) => {
   const { theme } = useContext(ThemeContext)
@@ -19,30 +20,16 @@ const Hero = ({ navigateToSection }) => {
       <div className="absolute top-1/3 -right-20 w-80 h-80 bg-purple-400/20 dark:hidden rounded-full blur-2xl animate-blob animation-delay-2000"></div>
       <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-400/10 dark:hidden rounded-full blur-2xl animate-blob animation-delay-4000"></div>
 
-      {/* Smooth section transition gradient */}
-      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-10"></div>
+      <SectionTransition via="transparent" toColor="to-white" height="h-48" />
 
       {/* Partículas apenas no modo claro */}
       <ParticlesBackground isDarkMode={theme === 'dark'} />
       
       <div className="w-full px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300 flex flex-wrap justify-center">
-            <BlurText
-              text={t('hero.greeting')}
-              delay={0}
-              animateBy="words"
-              direction="top"
-              className="inline-block"
-            />
-            <BlurText
-              text=" Davyd Fontoura"
-              delay={50}
-              animateBy="words"
-              direction="top"
-              className="inline-block"
-              itemClassName="shine-text"
-            />
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300 flex flex-wrap justify-center reveal-base reveal-visible variant-fade-down">
+            {t('hero.greeting')}&nbsp;
+            <span className="shine-text">Davyd Fontoura</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300 reveal-base reveal-visible variant-fade-up">
             {t('hero.description')}
