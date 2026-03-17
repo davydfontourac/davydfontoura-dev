@@ -51,8 +51,8 @@ const About = () => {
           <ScrollReveal variant="fade-right" className="w-full xl:w-4/12">
             <div className="glass rounded-3xl p-8 text-center shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 relative overflow-hidden group h-full flex flex-col justify-center">
               {/* Decorative Background Elements */}
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 dark:opacity-40 animate-blob"></div>
-              <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-indigo-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 dark:opacity-40 animate-blob animation-delay-2000"></div>
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500/20 dark:bg-blue-600/10 rounded-full mix-blend-multiply dark:mix-blend-normal blur-2xl animate-blob"></div>
+              <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-indigo-500/20 dark:bg-indigo-600/10 rounded-full mix-blend-multiply dark:mix-blend-normal blur-2xl animate-blob animation-delay-2000"></div>
 
               <div className="relative mb-6 z-10 block">
                 <div className="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-xl ring-4 ring-blue-50 dark:ring-gray-800 transition-transform duration-500 group-hover:scale-105">
