@@ -49,11 +49,11 @@ h1, h2, h3, h4, .font-outfit {
 
 /* Glassmorphism */
 .glass {
-  @apply bg-white/70 dark:bg-gray-900/70 backdrop-blur-md border border-white/20 dark:border-white/10;
+  @apply bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-white/20 dark:border-white/10;
 }
 
 .glass-dark {
-  @apply bg-gray-900/80 backdrop-blur-lg border border-white/5;
+  @apply bg-gray-900/80 backdrop-blur-md border border-white/5;
 }
 
 /* Efeito Shine Text Suave */
@@ -176,6 +176,7 @@ html {
 
 .animate-blob {
   animation: blob 7s infinite;
+  will-change: transform;
 }
 .animation-delay-2000 { animation-delay: 2s; }
 .animation-delay-4000 { animation-delay: 4s; }

@@ -24,7 +24,7 @@ const ParticlesBackground = ({ isDarkMode }) => {
     window.addEventListener('resize', resizeCanvas)
 
     // Configuração das partículas
-    const particleCount = 50
+    const particleCount = 30
     const particles = []
 
     // Cores das partículas (tons de laranja/azul como na imagem)
@@ -36,8 +36,8 @@ const ParticlesBackground = ({ isDarkMode }) => {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 8 + 2,
-        speedX: (Math.random() - 0.5) * 2,
-        speedY: (Math.random() - 0.5) * 2,
+        speedX: (Math.random() - 0.5) * 1.5,
+        speedY: (Math.random() - 0.5) * 1.5,
         color: colors[Math.floor(Math.random() * colors.length)],
         opacity: Math.random() * 0.8 + 0.2
       })
@@ -81,8 +81,8 @@ const ParticlesBackground = ({ isDarkMode }) => {
           const dy = particles[i].y - particles[j].y
           const distance = Math.sqrt(dx * dx + dy * dy)
 
-          if (distance < 150) {
-            ctx.globalAlpha = (150 - distance) / 150 * 0.1
+          if (distance < 120) {
+            ctx.globalAlpha = (120 - distance) / 120 * 0.1
             ctx.strokeStyle = '#3b82f6'
             ctx.lineWidth = 1
             ctx.beginPath()

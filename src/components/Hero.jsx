@@ -15,9 +15,9 @@ const Hero = ({ navigateToSection }) => {
       className="min-h-screen pt-16 flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-blue-900 w-full transition-colors duration-300 relative overflow-hidden"
     >
       {/* Decorative background elements */}
-      <div className="absolute top-1/4 -left-20 w-72 h-72 bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-3xl animate-blob"></div>
-      <div className="absolute top-1/3 -right-20 w-80 h-80 bg-purple-400/20 dark:bg-purple-600/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-400/10 dark:bg-indigo-600/5 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+      <div className="absolute top-1/4 -left-20 w-72 h-72 bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-2xl animate-blob"></div>
+      <div className="absolute top-1/3 -right-20 w-80 h-80 bg-purple-400/20 dark:bg-purple-600/10 rounded-full blur-2xl animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-400/10 dark:bg-indigo-600/5 rounded-full blur-2xl animate-blob animation-delay-4000"></div>
 
       {/* Partículas apenas no modo claro */}
       <ParticlesBackground isDarkMode={theme === 'dark'} />
@@ -27,27 +27,23 @@ const Hero = ({ navigateToSection }) => {
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300 flex flex-wrap justify-center">
             <BlurText
               text={t('hero.greeting')}
-              delay={100}
+              delay={0}
               animateBy="words"
               direction="top"
               className="inline-block"
             />
             <BlurText
               text=" Davyd Fontoura"
-              delay={150}
+              delay={50}
               animateBy="words"
               direction="top"
               className="inline-block"
               itemClassName="shine-text"
             />
           </h1>
-          <BlurText
-            text={t('hero.description')}
-            delay={50}
-            animateBy="words"
-            direction="bottom"
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300"
-          />
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300 reveal-base reveal-visible variant-fade-up">
+            {t('hero.description')}
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center sm:flex-wrap mb-8">
             <a 
               href={t('hero.cv_file')}
