@@ -19,6 +19,9 @@ const Hero = ({ navigateToSection }) => {
       <div className="absolute top-1/3 -right-20 w-80 h-80 bg-purple-400/20 dark:hidden rounded-full blur-2xl animate-blob animation-delay-2000"></div>
       <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-400/10 dark:hidden rounded-full blur-2xl animate-blob animation-delay-4000"></div>
 
+      {/* Smooth section transition gradient */}
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-10"></div>
+
       {/* Partículas apenas no modo claro */}
       <ParticlesBackground isDarkMode={theme === 'dark'} />
       
