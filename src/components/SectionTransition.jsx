@@ -9,13 +9,15 @@ const SectionTransition = ({
   darkToColor = 'dark:to-gray-900', 
   height = 'h-32',
   className = '',
-  via = ''
+  via = '',
+  darkVia = ''
 }) => {
   const viaClass = via ? `via-${via}` : '';
+  const darkViaClass = darkVia ? `dark:via-${darkVia}` : (via ? `dark:via-transparent` : '');
   
   return (
     <div 
-      className={`absolute bottom-0 left-0 w-full ${height} bg-gradient-to-b from-transparent ${viaClass} ${toColor} ${darkToColor} pointer-events-none z-10 ${className}`}
+      className={`absolute bottom-0 left-0 w-full ${height} bg-gradient-to-b from-transparent ${viaClass} ${darkViaClass} ${toColor} ${darkToColor} pointer-events-none z-10 ${className}`}
       aria-hidden="true"
     />
   );

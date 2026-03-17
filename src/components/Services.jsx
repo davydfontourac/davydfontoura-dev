@@ -144,7 +144,7 @@ const Services = () => {
           ))}
         </div>
 
-        <SectionTransition via="gray-50/50" toColor="to-white" height="h-48" className="z-20" />
+        <SectionTransition via="gray-50/50" darkVia="gray-900/50" toColor="to-white" height="h-48" className="z-20" />
       </div>
     </section>
   )
