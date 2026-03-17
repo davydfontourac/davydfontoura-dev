@@ -109,7 +109,7 @@ const Portfolio = () => {
                 variant="fade-up" 
                 delay={`${index * 80}ms`}
               >
-                <div className="group cursor-pointer card-hover transform transition-all duration-300 hover:scale-105 active:scale-95 hover:rotate-1 flex flex-col h-full">
+                <div className="group cursor-pointer transform transition-all duration-500 hover:-translate-y-4 flex flex-col h-full">
                   <div className={`bg-gradient-to-br ${project.gradient} h-48 rounded-lg mb-4 relative overflow-hidden shadow-lg transition-all duration-300 ring-0 group-hover:ring-4 group-hover:ring-blue-200 dark:group-hover:ring-blue-800 shrink-0`}>
                     
                     {/* Nova implementação de imagem com carregamento suave */}

@@ -12,8 +12,13 @@ const Hero = ({ navigateToSection }) => {
   return (
     <section 
       id="home" 
-      className="min-h-screen pt-16 flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 w-full transition-colors duration-300 relative overflow-hidden"
+      className="min-h-screen pt-16 flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-blue-900 w-full transition-colors duration-300 relative overflow-hidden"
     >
+      {/* Decorative background elements */}
+      <div className="absolute top-1/4 -left-20 w-72 h-72 bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-3xl animate-blob"></div>
+      <div className="absolute top-1/3 -right-20 w-80 h-80 bg-purple-400/20 dark:bg-purple-600/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-400/10 dark:bg-indigo-600/5 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+
       {/* Partículas apenas no modo claro */}
       <ParticlesBackground isDarkMode={theme === 'dark'} />
       
@@ -67,13 +72,21 @@ const Hero = ({ navigateToSection }) => {
             </button>
           </div>
           <div className="flex justify-center gap-4">
-            <a href="https://github.com/davydfontourac" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 rounded-full transition-all shadow-sm" aria-label="GitHub">
+            <a href="https://github.com/davydfontourac" target="_blank" rel="noopener noreferrer" className="p-3 text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 glass rounded-full transition-all shadow-sm hover:scale-110 active:scale-95" aria-label="GitHub">
               <Github size={24} />
             </a>
-            <a href="https://www.linkedin.com/in/davyd-camargo-70a552261/" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 rounded-full transition-all shadow-sm" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/davyd-camargo-70a552261/" target="_blank" rel="noopener noreferrer" className="p-3 text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 glass rounded-full transition-all shadow-sm hover:scale-110 active:scale-95" aria-label="LinkedIn">
               <Linkedin size={24} />
             </a>
           </div>
+        </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity" onClick={() => navigateToSection('about')}>
+        <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 dark:text-gray-400">Scroll</span>
+        <div className="w-5 h-8 border-2 border-gray-400 dark:border-gray-500 rounded-full flex justify-center p-1">
+          <div className="w-1 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-scroll"></div>
         </div>
       </div>
     </section>

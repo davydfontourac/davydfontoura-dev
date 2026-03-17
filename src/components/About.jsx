@@ -71,7 +71,7 @@ const About = () => {
           
           {/* Left Column: Profile */}
           <ScrollReveal variant="fade-right" className="w-full xl:w-4/12">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 text-center border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group h-full flex flex-col justify-center">
+            <div className="glass rounded-3xl p-8 text-center shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 relative overflow-hidden group h-full flex flex-col justify-center">
               {/* Decorative Background Elements */}
               <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 dark:opacity-40 animate-blob"></div>
               <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-indigo-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 dark:opacity-40 animate-blob animation-delay-2000"></div>

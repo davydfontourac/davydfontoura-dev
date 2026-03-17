@@ -89,7 +89,7 @@ const Services = () => {
               delay={`${index * 100}ms`}
             >
               <div 
-                 className={`relative bg-white dark:bg-white/5 backdrop-blur-sm p-8 flex flex-col h-full rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700/50 transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden before:absolute before:top-0 before:left-0 before:right-0 before:h-1 before:content-[''] before:transition-all before:duration-300 ${borderTopMap[service.color]}`}
+                 className={`relative glass p-8 flex flex-col h-full rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 group overflow-hidden before:absolute before:top-0 before:left-0 before:right-0 before:h-1.5 before:content-[''] before:transition-all before:duration-300 ${borderTopMap[service.color]}`}
               >
                 {/* Número Fantasma Decorativo */}
                 <div className="absolute -right-4 -top-6 text-9xl font-black text-gray-50 dark:text-gray-800/30 select-none z-0 transform group-hover:scale-110 group-hover:-translate-x-2 transition-transform duration-500">
