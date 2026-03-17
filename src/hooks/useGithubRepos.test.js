@@ -54,7 +54,7 @@ describe('useGithubRepos hook', () => {
       expect(result.current.loading).toBe(false)
     })
 
-    expect(result.current.error).toBe('Falha ao buscar repositórios')
+    expect(result.current.error).toBe('Falha ao buscar dados do GitHub')
     expect(result.current.repos).toEqual([])
   })
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useGithubFetch } from './useGithubFetch';
 
 // Constantes estáticas das tecnologias permitidas e seus meta-dados.
 export const TECH_ALLOWLIST = [
@@ -56,78 +56,36 @@ export const TECH_META = {
   }
 };
 
+const transformPackageData = (rawData) => {
+  const contentDecoded = atob(rawData.content);
+  const pkg = JSON.parse(contentDecoded);
+
+  const allDependencies = {
+    ...(pkg.dependencies || {}),
+    ...(pkg.devDependencies || {})
+  };
+
+  return Object.keys(allDependencies)
+    .filter(dep => TECH_ALLOWLIST.includes(dep))
+    .map(dep => {
+      const meta = TECH_META[dep] || { name: dep, category: 'about.tech_categories.tools', iconUrl: '', color: '#CCC' };
+      return {
+        id: dep,
+        name: meta.name,
+        version: allDependencies[dep].replace(/[\^~]/, ''),
+        category: meta.category,
+        iconUrl: meta.iconUrl,
+        color: meta.color
+      };
+    });
+};
+
 export const useGithubPackage = (repoPath = 'davydfontourac/davydfontoura-dev') => {
-  // Correção via desestruturação
-  const [techs, setTechs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const url = `https://api.github.com/repos/${repoPath}/contents/package.json`;
 
-  useEffect(() => {
-    const fetchPackageJson = async () => {
-      // 1. Tentar pegar do LocalStorage como cache simples (válido por 24h ex: simplificado)
-      const cached = localStorage.getItem(`gh_pkg_v8_${repoPath}`);
-      if (cached) {
-        try {
-          const parsedCache = JSON.parse(cached);
-          // Opcional: checar validade do cache se necessário, aqui usaremos para sempre (ou overwrite no fetch)
-          setTechs(parsedCache);
-          setLoading(false);
-        } catch (e) {
-          console.error("Erro ao ler cache", e);
-        }
-      }
-
-      setLoading(true);
-      try {
-        const response = await fetch(`https://api.github.com/repos/${repoPath}/contents/package.json`);
-        
-        if (!response.ok) {
-           if(response.status === 403) throw new Error("Rate limit excedido da API do Github");
-           throw new Error('Falha ao buscar package.json');
-        }
-
-        const data = await response.json();
-        
-        // O conteúdo vem em Base64
-        const contentDecoded = atob(data.content);
-        const pkg = JSON.parse(contentDecoded);
-        
-        const allDependencies = {
-          ...(pkg.dependencies || {}),
-          ...(pkg.devDependencies || {})
-        };
-
-        const filteredTechs = Object.keys(allDependencies)
-          .filter(dep => TECH_ALLOWLIST.includes(dep))
-          .map(dep => {
-             const meta = TECH_META[dep] || { name: dep, category: 'about.tech_categories.tools', iconUrl: '', color: '#CCC' };
-             return {
-                id: dep,
-                name: meta.name,
-                version: allDependencies[dep].replace(/[\^~]/, ''), // Limpa char especial
-                category: meta.category,
-                iconUrl: meta.iconUrl,
-                color: meta.color
-             };
-          });
-        
-        setTechs(filteredTechs);
-        setError(null);
-        
-        // Atualiza Cache
-        localStorage.setItem(`gh_pkg_v8_${repoPath}`, JSON.stringify(filteredTechs));
-
-      } catch (err) {
-        console.error('Erro na API do GitHub para package.json:', err);
-        setError(err.message);
-        // Se falhou mas tinha cache, usaremos o cache sem sobrescrever error totalmente p/ debug
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPackageJson();
-  }, [repoPath]);
+  const { data: techs, loading, error } = useGithubFetch(url, transformPackageData, {
+    cacheKey: `gh_pkg_v8_${repoPath}`
+  });
 
   return { techs, loading, error };
 };
