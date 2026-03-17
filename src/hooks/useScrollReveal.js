@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useScrollReveal = (options = { threshold: 0.1, rootMargin: '0px' }) => {
+/**
+ * Hook para detectar quando um elemento entra na viewport
+ * @param {Object} options - Opções do IntersectionObserver
+ * @param {boolean} repeat - Se a animação deve repetir ao entrar/sair da viewport
+ */
+export const useScrollReveal = (options = { threshold: 0.1, rootMargin: '0px' }, repeat = true) => {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -22,9 +27,9 @@ export const useScrollReveal = (options = { threshold: 0.1, rootMargin: '0px' })
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsVisible(true);
-        if (currentRef) {
-          observer.unobserve(currentRef);
-        }
+      } else if (repeat) {
+        // Se repeat for true, reseta a visibilidade ao sair da tela
+        setIsVisible(false);
       }
     }, options);
 
@@ -37,7 +42,8 @@ export const useScrollReveal = (options = { threshold: 0.1, rootMargin: '0px' })
         observer.unobserve(currentRef);
       }
     };
-  }, [options.rootMargin, options.threshold, options]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options.rootMargin, options.threshold, repeat]);
 
   return { ref, isVisible };
 };
