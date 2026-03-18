@@ -67,7 +67,7 @@ const Hero = ({ navigateToSection }) => {
 
       {/* Scroll Indicator */}
       <button 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-50 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-2" 
+        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 animate-bounce opacity-50 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-2" 
         onClick={() => navigateToSection('about')}
         aria-label="Scroll to About section"
       >
