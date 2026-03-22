@@ -216,8 +216,8 @@ const About = () => {
   // Item compacto usado dentro do accordion
   const CourseItem = ({ titleKey, schoolKey, tags, certId }) => (
     <div className="py-3 border-b border-gray-100 dark:border-gray-700/60 last:border-0 last:pb-0">
-      <div className="flex items-start justify-between gap-3">
-        <div>
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+        <div className="flex-1">
           <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{t(titleKey)}</p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t(schoolKey)}</p>
           {tags && (
@@ -233,7 +233,7 @@ const About = () => {
         {certId && (
           <button
             onClick={() => setModalCert(certId)}
-            className="shrink-0 flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 hover:border-green-400 dark:hover:border-green-500 hover:text-green-600 dark:hover:text-green-400 px-2.5 py-1 rounded-lg transition-colors bg-transparent"
+            className="sm:shrink-0 flex items-center justify-center gap-1 text-xs text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 hover:border-green-400 dark:hover:border-green-500 hover:text-green-600 dark:hover:text-green-400 px-2.5 py-1.5 rounded-lg transition-colors bg-transparent w-fit"
           >
             <FileText className="w-3 h-3" />
             {t('about.cert_modal.view_btn')}
@@ -366,7 +366,7 @@ const About = () => {
                 </button>
 
                 {/* Body */}
-                <div className={`overflow-hidden transition-all duration-300 ${accordionOpen ? 'max-h-96 mt-2' : 'max-h-0'}`}>
+                <div className={`overflow-hidden transition-all duration-300 ${accordionOpen ? 'max-h-[1000px] mt-2' : 'max-h-0'}`}>
                   <div className="bg-white dark:bg-gray-800/40 rounded-xl border border-gray-100 dark:border-gray-700 px-4 py-1">
                     <CourseItem
                       titleKey="about.courses.terminal.title"

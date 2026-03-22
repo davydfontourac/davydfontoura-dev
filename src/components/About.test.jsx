@@ -58,7 +58,7 @@ describe('About Component', () => {
 
     // Click to open
     fireEvent.click(accordionBtn);
-    expect(accordionContent).toHaveClass('max-h-96');
+    expect(accordionContent).toHaveClass('max-h-[1000px]');
 
     // Click to close
     fireEvent.click(accordionBtn);
