@@ -39,14 +39,17 @@ const CertificateModal = ({ certId, onClose, t }) => {
   if (!cert) return null
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
-      onClick={onClose}
-    >
-      <div
-        className="bg-white dark:bg-gray-900 rounded-2xl p-6 w-full max-w-md mx-4 border border-gray-100 dark:border-gray-700 shadow-2xl"
-        onClick={e => e.stopPropagation()}
-      >
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Overlay - Botão para fechar ao clicar fora */}
+      <button
+        className="absolute inset-0 w-full h-full bg-black/70 backdrop-blur-sm cursor-default"
+        onClick={onClose}
+        aria-label="Fechar modal"
+        title="Fechar modal"
+      />
+      
+      {/* Modal Content */}
+      <div className="relative bg-white dark:bg-gray-900 rounded-2xl p-6 w-full max-w-md border border-gray-100 dark:border-gray-700 shadow-2xl z-10">
         {/* Header */}
         <div className="flex items-start justify-between mb-5">
           <div>
