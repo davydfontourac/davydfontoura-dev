@@ -60,6 +60,7 @@ const CertificateModal = ({ certId, onClose, t }) => {
           </div>
           <button
             onClick={onClose}
+            aria-label="Fechar"
             className="ml-4 p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             <X className="w-5 h-5" />
