@@ -65,6 +65,9 @@ vi.mock('lucide-react', () => {
     Languages: mockComp('Languages'),
     Sun: mockComp('Sun'),
     Moon: mockComp('Moon'),
+    FileText: mockComp('FileText'),
+    ChevronDown: mockComp('ChevronDown'),
+    Lock: mockComp('Lock'),
   };
 });
 
