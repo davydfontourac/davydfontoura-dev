@@ -1,7 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-// Dicionários de Tradução diretamente no arquivo de configuração
 const resources = {
   pt: {
     translation: {
@@ -36,7 +35,7 @@ const resources = {
         desc1: "Sou um profissional formado pelo SENAI em Programação Front-End e atualmente curso Análise e Desenvolvimento de Sistemas, o que me permite unir uma base sólida em fundamentos da tecnologia com a prática constante de desenvolvimento. Tenho grande paixão por criar interfaces modernas, funcionais e acessíveis, sempre buscando alinhar estética, usabilidade e performance.",
         desc2: "Nos últimos anos, venho me dedicando a projetos pessoais e freelances que me proporcionaram experiência prática no desenvolvimento de sites e aplicações, do planejamento até a entrega final. Minha principal especialidade é a construção de páginas web utilizando HTML, CSS e JavaScript, além de frameworks e ferramentas que potencializam o resultado, como React e Tailwind CSS.\n\nAcredito que a tecnologia deve ser uma ponte para aproximar pessoas e simplificar processos. Por isso, encaro cada projeto como uma oportunidade de criar experiências digitais que tragam impacto real para usuários e empresas. Tenho como objetivo evoluir constantemente, aprender novas tecnologias e colaborar em equipes que compartilhem essa visão de inovação e crescimento.",
         skills_title: "Tecnologias que domino",
-        experience_title: "Experiência e Formação",
+        experience_title: "Experiência Profissional",
         education_title: "Formação Acadêmica e Certificações",
         education: {
           degree1: {
@@ -44,9 +43,9 @@ const resources = {
             school: "Unisinos (Universidade do Vale do Rio dos Sinos) • Em andamento"
           },
           degree2: {
-            title: "Programação Front-End",
-            school: "SENAI • Concluído",
-            desc: "Formação técnica focada na construção de aplicações ricas com Javascript, manipulação profunda do DOM, estruturação avançada com HTML5/CSS3 e metodologias ágeis."
+            title: "Programador Front-End",
+            school: "SENAI • dez 2023 • 348h",
+            desc: "Qualificação profissional em desenvolvimento de interfaces web client-side: planejamento, codificação, integração com serviços server-side e testes de qualidade."
           }
         },
         experience: {
@@ -55,6 +54,33 @@ const resources = {
             date: "2023 - Presente",
             desc: "Desenvolvimento de interfaces modernas, landing pages focadas em conversão e sistemas administrativos utilizando React, Vite e Tailwind CSS. Foco em performance web e arquitetura escalável associada a práticas de UI/UX fluídas."
           }
+        },
+        courses: {
+          section_label: "Cursos complementares",
+          accordion_label: "Alura — certificados verificáveis",
+          terminal: {
+            title: "Terminal: aprenda comandos para executar tarefas",
+            school: "Alura • mai 2025",
+            tags: ["Linux", "CLI", "Máquinas virtuais"]
+          },
+          redes: {
+            title: "Redes: dos conceitos iniciais à criação de uma intranet",
+            school: "Alura • mai 2025",
+            tags: ["Roteamento", "Monitoramento", "Intranet"]
+          },
+          chatgpt: {
+            title: "ChatGPT: desvendando a IA em conversas e suas aplicações",
+            school: "Alura • jun 2025",
+            tags: ["IA generativa", "Prompts"]
+          }
+        },
+        cert_modal: {
+          view_btn: "Ver certificado",
+          open: "Abrir certificado original",
+          close: "Fechar",
+          preview_sensitive: "Prévia disponível — dados pessoais ocultados nesta visualização.",
+          sensitive_note: "Dados pessoais ocultados",
+          preview_verifiable: "Certificado verificável. Clique para abrir o original."
         },
         download_cv: "Download CV",
         stats: {
@@ -67,15 +93,15 @@ const resources = {
         tools_subtitle: "Stacks e bibliotecas monitoradas diretamente do package.json deste portfólio via GitHub API.",
         skills_subtitle: "As principais tecnologias que utilizo diariamente para construir soluções completas, além daquelas monitoradas ativamente do repositório via API.",
         tech_categories: {
-           core: "Core",
-           routing: "Roteamento",
-           i18n: "Internacionalização",
-           styling: "Estilização",
-           build: "Build Tool",
-           icons: "Ícones",
-           tools: "Ferramentas",
-           backend: "Backend",
-           cms: "CMS"
+          core: "Core",
+          routing: "Roteamento",
+          i18n: "Internacionalização",
+          styling: "Estilização",
+          build: "Build Tool",
+          icons: "Ícones",
+          tools: "Ferramentas",
+          backend: "Backend",
+          cms: "CMS"
         },
         highlights: {
           design: {
@@ -229,7 +255,7 @@ const resources = {
         desc1: "I'm a professional who graduated from SENAI in Front-End Programming and I'm currently studying Systems Analysis and Development, which allows me to combine a solid foundation in technology fundamentals with constant development practice. I have a great passion for creating modern, functional, and accessible interfaces, always seeking to align aesthetics, usability, and performance.",
         desc2: "In recent years, I have been dedicating myself to personal projects and freelance work that have provided me with practical experience in developing websites and applications, from planning to final delivery. My main specialty is building web pages using HTML, CSS, and JavaScript, as well as frameworks and tools that enhance the result, such as React and Tailwind CSS.\n\nI believe that technology should be a bridge to bring people closer and simplify processes. Therefore, I view each project as an opportunity to create digital experiences that bring real impact to users and companies. My goal is to constantly evolve, learn new technologies, and collaborate in teams that share this vision of innovation and growth.",
         skills_title: "Technologies I master",
-        experience_title: "Experience & Education",
+        experience_title: "Professional Experience",
         education_title: "Education & Certifications",
         education: {
           degree1: {
@@ -237,9 +263,9 @@ const resources = {
             school: "Unisinos (Universidade do Vale do Rio dos Sinos) • In progress"
           },
           degree2: {
-            title: "Front-End Programming",
-            school: "SENAI • Completed",
-            desc: "Technical training focused on building rich applications with Javascript, deep DOM manipulation, advanced structuring with HTML5/CSS3 and agile methodologies."
+            title: "Front-End Programmer",
+            school: "SENAI • Dec 2023 • 348h",
+            desc: "Professional qualification in web client-side interface development: planning, coding, integration with server-side services and quality testing."
           }
         },
         experience: {
@@ -248,6 +274,33 @@ const resources = {
             date: "2023 - Present",
             desc: "Development of modern interfaces, conversion-focused landing pages and administrative systems using React, Vite and Tailwind CSS. Focus on web performance and scalable architecture combined with fluid UI/UX practices."
           }
+        },
+        courses: {
+          section_label: "Additional courses",
+          accordion_label: "Alura — verifiable certificates",
+          terminal: {
+            title: "Terminal: learn commands to run tasks",
+            school: "Alura • May 2025",
+            tags: ["Linux", "CLI", "Virtual machines"]
+          },
+          redes: {
+            title: "Networks: from concepts to creating an intranet",
+            school: "Alura • May 2025",
+            tags: ["Routing", "Monitoring", "Intranet"]
+          },
+          chatgpt: {
+            title: "ChatGPT: exploring AI in conversations and applications",
+            school: "Alura • Jun 2025",
+            tags: ["Generative AI", "Prompts"]
+          }
+        },
+        cert_modal: {
+          view_btn: "View certificate",
+          open: "Open original certificate",
+          close: "Close",
+          preview_sensitive: "Preview available — personal data hidden in this view.",
+          sensitive_note: "Personal data hidden",
+          preview_verifiable: "Verifiable certificate. Click to open the original."
         },
         download_cv: "Download Resume",
         stats: {
@@ -260,15 +313,15 @@ const resources = {
         tools_subtitle: "Stacks and libraries monitored straight from this portfolio's package.json via GitHub API.",
         skills_subtitle: "The main technologies I use daily to build complete solutions, in addition to those actively monitored from the repository via API.",
         tech_categories: {
-           core: "Core",
-           routing: "Routing",
-           i18n: "Internationalization",
-           styling: "Styling",
-           build: "Build Tool",
-           icons: "Icons",
-           tools: "Tools",
-           backend: "Backend",
-           cms: "CMS"
+          core: "Core",
+          routing: "Routing",
+          i18n: "Internationalization",
+          styling: "Styling",
+          build: "Build Tool",
+          icons: "Icons",
+          tools: "Tools",
+          backend: "Backend",
+          cms: "CMS"
         },
         highlights: {
           design: {
@@ -395,14 +448,13 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: localStorage.getItem('i18nextLng') || 'pt', // Idioma salvo ou padrão 
-    fallbackLng: 'en', // Se não encontrar no idioma atual, usa inglês
+    lng: localStorage.getItem('i18nextLng') || 'pt',
+    fallbackLng: 'en',
     interpolation: {
-      escapeValue: false // O React já faz o escape seguro por padrão
+      escapeValue: false
     }
   });
 
-// Escuta a mudança de idioma e salva no LocalStorage
 i18n.on('languageChanged', (lng) => {
   localStorage.setItem('i18nextLng', lng);
 });
